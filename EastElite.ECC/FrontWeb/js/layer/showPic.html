@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="/js/jquery-1.7.2.min.js"></script>
+    <script src="/js/listeditjs.js"></script>
+    <script type="text/javascript">
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURI(r[2]); return null;
+        }
+
+        $(function () {
+            $("#showimg").attr({
+                src: getUrlParam('url'),
+                width: getUrlParam('width'),
+                height: getUrlParam('height')
+            }).show();
+        });
+
+    </script>
+</head>
+<body style="text-align: center;">
+    <img id="showimg" alt="" src="" style="display: none;" />
+</body>
+</html>

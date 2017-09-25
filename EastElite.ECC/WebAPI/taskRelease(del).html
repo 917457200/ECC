@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <!--<link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.min.css" rel="stylesheet" />-->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+    <script src="js/UploadJS.js"></script>
+    <link href="Css/MpTab.css" rel="stylesheet" />
+    <script src="js/PushJS.js"></script>
+    <script src="js/TaskReless.js"></script>
+    <script>
+        $(function () {
+            $('#push').click(function () {
+                var OperateTypeID = $.toInt($('#OperateTypeID').val());//操作类型
+                var DisplayModelID = 0;
+                if (OperateTypeID == 1 || OperateTypeID == 2) {
+                    DisplayModelID = $.toInt($('#DisplayModelID').val());//布局
+                }
+                else if (OperateTypeID == 4) {
+                    DisplayModelID = $.toInt($('#DisplayModelID').val());//布局
+                }
+
+                var MessageTypeID = 1;//消息类型--新闻通知
+                var MessageSourceID = 1;//消息来源电子班牌
+
+
+                var TaskPriorityID = 1;//优先级
+                var ImageSpanSecond = $.toInt($('#ImageSpanSecond').val());//图片显示时间
+                var ImageEffectID = $.toInt($('#ImageEffectID').val());//图片显示效果
+                var TaskStatusID = 1;//任务状态1--正常，2--删除
+                var Title = $.toString($('#MessageTitle').val());//标题
+                var Messagecontent_text = $('#msgContentText').val();//内容
+
+
+
+                var Messagecontent_image;
+                switch ($.toInt($('#DisplayModelID').val())) {
+                    case 1:
+                    case 4: case 9: Messagecontent_image = getAllImage(); break;
+                    default: Messagecontent_image = null; break;
+
+                }
+
+
+                var Messagecontent_video;
+                switch ($.toInt($('#DisplayModelID').val())) {
+                    case 1:
+                    case 5: case 9: Messagecontent_video = getAllVideo(); break;
+                    default: Messagecontent_video = null; break;
+                }
+
+                var Messagecontent_textalias = '';//内容
+                var Messagecontent_imagealias;
+                switch ($.toInt($('#DisplayModelID').val())) {
+                    case 1:
+                    case 4: case 9: Messagecontent_imagealias = getAllImageName(); break;
+                    default: Messagecontent_imagealias = null; break;
+
+                }
+
+                var Messagecontent_videoalias;
+                switch ($.toInt($('#DisplayModelID').val())) {
+                    case 1:
+                    case 5: case 9: Messagecontent_videoalias = getAllVideoName(); break;
+                    default: Messagecontent_videoalias = null; break;
+                }
+
+
+
+                var TaskTypeID = $.toInt($('#TaskTypeID').val());//任务类型1--普通，2--定时
+
+                var TaskBeginTime = $.toString($('#stime').val()) == "" ? $.currentDate().DateTime : $.toString($('#stime').val());
+                var TaskEndTime = $.toString($('#etime').val()) == "" ? $.currentDate().DateTime : $.toString($('#etime').val());
+                var RargetAlias = "";
+                var Note = "";
+                var tag_and = null;
+                var registration_id = null;
+                var Alias = null;//电子班牌
+                var Tag = null;
+                if (loginUser.roleCode != '1072')//班主任
+                {
+                    //需要修改
+                    //如果选中了班级
+                    //if ($(':checkbox[name="class"]').is(":checked")) {
+                    //    if ($.toString($(':checkbox[name="class"]').eq(0).val()) != "") {
+                    //        tag_and = ["SC" + loginUser.schoolCode];
+                    //        Alias = ['U4'];
+                    //        registration_id = [$(':checkbox[name="class"]').eq(0).val()]
+
+
+                    //        RargetAlias += "" + $(':checkbox[name="class"]').eq(0).attr("title");
+                    //    }
+                    //    else {
+
+                    //        layer.msg("该班级设备未初始化");
+                    //        return;
+                    //    }
+                    //}
+                    //else {
+                    //    layer.msg("请选择班级");
+                    //    return;
+                    //}
+
+
+                    if ($(':checkbox[name="class"]:checked').length > 0) {
+                        registration_id = new Array();
+                        var isinitClass = true;
+                        $(':checkbox[name="class"]:checked').each(function (i, o) {
+                            if ($.toString($(o).val()) != "") {
+                                tag_and = ["SC" + loginUser.schoolCode];
+                                Alias = ['U4'];
+                                registration_id.push($.toString($(o).val()));
+                                RargetAlias += "," + $(o).attr("title");
+                            }
+                            else {
+                                isinitClass = false;
+                                layer.msg($.toString($(o).attr("title")) + "设备未初始化");
+
+                            }
+                        });
+
+                        if (!isinitClass) {
+                            return;
+                        }
+
+                    }
+                    else {
+                        layer.msg("请选择班级");
+                        return;
+                    }
+
+
+                }
+                else//管理员
+                {
+
+                    tag_and = ["SC" + loginUser.schoolCode];//--["SC1100009000", "RC1006"]学校+校区+班级类型+学科类型
+                    if ($('#campus').is(":visible"))//校区可见
+                    {
+                        tag_and.push("RC" + $.toString($('#campus').val()).substr(6, 9));
+                        RargetAlias += "," + $("#campus").find("option:selected").text();//校区名称
+                    }
+                    else {
+                        tag_and.push("RC" + $.toString(loginUser.rootCode).substr(6, 9));
+                    }
+                    if ($('#ClassType').is(":visible"))//班级类型可见
+                    {
+                        if ($.toString($('#ClassType').val()) != "") {
+                            tag_and.push("L" + $.toString($('#ClassType').val()));
+                            RargetAlias += "," + $('#ClassType').find("option:selected").text();//班级类型
+                        }
+
+
+                    }
+                    if ($('#SubjectType').is(":visible"))//学科类型可见
+                    {
+                        if ($.toString($('#SubjectType').val()) != "") {
+                            tag_and.push("S" + $.toString($('#SubjectType').val()));
+                            RargetAlias += "," + $('#SubjectType').find("option:selected").text();//班级类型
+                        }
+                    }
+                    //if (OperateTypeID != 13 && OperateTypeID != 4) {
+                    var isclass = 0;//是否按班级发送
+                    if ($(':checkbox[name="class"]:checked').each(function (i, o) {//班级选中
+                        if (!$('#grade_' + $(o).attr("data-grade")).is(":checked")) {//年级未选中
+                        isclass = 1;
+                         return false
+                    }
+                    }))
+
+                        Alias = ['U4'];
+                    //RargetAlias += ",电子班牌";
+                    if (isclass == 1)//班级发送
+                    {
+                        registration_id = new Array();
+                        $(':checkbox[name="class"]:checked').each(function (i, o) {
+                            if ($.toString($(o).val()) != "") {
+                                registration_id.push($.toString($(o).val()));
+                            }
+
+                            RargetAlias += "," + $(o).attr("title");
+                        });
+                    }
+                    else {//不按班级发送，查询是否按年级发送
+                        if ($(':checkbox[name="grade"]:checked').length > 0) {
+                            Tag = new Array();
+                            $(':checkbox[name="grade"]:checked').each(function (i, o) {
+                                Tag.push("G0" + $.toString($(o).val()));
+                                RargetAlias += "," + $(o).attr("title");
+                            });
+                        }
+                    }
+                    //if ($.toString($('#OperateTypeID').val()) != "17") {
+
+                    // }
+                    // else {
+                    //     registration_id = new Array();
+                    //     $(':checkbox[name="class"]:checked').each(function (i, o) {
+                    //         if ($.toString($(o).val()) != "") {
+                    //             registration_id.push($.toString($(o).val()));
+                    //             RargetAlias += "," + $(o).attr("title");
+                    //         }
+                    //     });
+                    // }
+                }
+
+
+                if ($.toString($('#OperateTypeID').val()) == "8") {
+                    if ($.toString($('#Timingstime').val()) != "" && $.toString($('#Timingetime').val()) != "") {
+                        Messagecontent_text = "boot:" + $.toString($('#Timingstime').val()) + ",shutdown:" + $.toString($('#Timingetime').val());
+                    }
+                    else {
+                        layer.msg("请检查开机关机时间");
+                        return;
+                    }
+                }
+                else if ($.toString($('#OperateTypeID').val()) == "9") {
+                    Messagecontent_text = 'navigationshow:' + $.toString($('#Navigationshow').val());
+                }
+                else if ($.toString($('#OperateTypeID').val()) == "16") {
+                    Messagecontent_text = 'startprogramswitchstaus:' + $.toString($('#StartProgramSwitchShow').val());
+                }
+                else if ($.toString($('#OperateTypeID').val()) == "17") {
+                    $(':checkbox[name="class"]:checked').each(function (i, o) {
+                        if ($.toString($(o).val()) != "") {
+                            Messagecontent_text += ",'" + $.toString($(o).val()) + "'";
+                        }
+                    });
+                }
+                Messagecontent_text = $.toTrimComma(Messagecontent_text);
+                var url = "/Service.ashx?actionname=01-09";
+                var par = {
+                    "MessageSourceID": MessageSourceID,
+                    "MessageTypeID": MessageTypeID,
+                    "OperateTypeID": OperateTypeID,
+                    "DisplayModelID": DisplayModelID,
+                    "CreatedID": loginUser.userCode,
+                    "CreatedName": loginUser.userName,
+                    "Rootcode": loginUser.rootCode,
+                    "TaskBeginTime": TaskBeginTime,
+                    "TaskEndTime": TaskEndTime,
+                    "TaskPriorityID": TaskPriorityID,
+                    "ImageSpanSecond": ImageSpanSecond,
+                    "ImageEffectID": ImageEffectID,
+                    "TaskStatusID": TaskStatusID,
+                    "Title": Title,
+                    "Messagecontent_text": Messagecontent_text,
+                    "Messagecontent_image": Messagecontent_image,
+                    "Messagecontent_video": Messagecontent_video,
+                    "Messagecontent_textalias": Messagecontent_textalias,
+                    "Messagecontent_imagealias": Messagecontent_imagealias,
+                    "Messagecontent_videoalias": Messagecontent_videoalias,
+                    "RargetAlias": $.toTrimComma(RargetAlias),
+                    "tag_and": tag_and != null ? JSON.stringify(tag_and) : null,
+                    "Tag": Tag != null ? JSON.stringify(Tag) : null,
+                    "Alias": Alias != null ? JSON.stringify(Alias) : null,
+                    "registration_id": registration_id != null ? JSON.stringify(registration_id) : null,
+                    "TaskTypeID": TaskTypeID
+                }
+                EDUCAjax(par, function () { }, function (res) {
+                    if (res.status == "0") {
+                        layer.msg("发布成功");
+                    }
+                    else {
+                        layer.msg("发布失败");
+                    }
+
+                }, url);
+            });
+            $('#DisplayModelID').change(function () {
+
+                switch ($.toInt($(this).val())) {
+                    case 1: case 9:
+                        $('#resourse').show(); $('.template').show(); $('.template').show(); $('.template').show();
+                        break;
+                        //case 3: $('#resourse').show(); $('#idvideo').show();
+                        //    $('#resourse').hide(); $('#divimageectf').show(); break;
+                    case 4:
+                        $('#resourse').show(); $('#divimage').show(); $('#idvideo').hide(); $('#divimageectf').show();
+                        break;
+                    case 5:
+                        $('#resourse').show(); $('#idvideo').show(); $('#divimage').hide(); $('#divimageectf').hide();
+                        break;
+                    case 2: case 3: case 6: case 7: case 8:
+                    default: $('#resourse').hide(); $('#idvideo').hide(); $('#divimage').hide(); $('#divimageectf').show(); break;
+
+
+                }
+            });
+        })
+    </script>
+</head>
+<!--style="overFlow-x: hidden; overflow-y:auto; word-break: break-all;"-->
+<body class=" pace-done">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+
+                        <!--<li>
+                            <a href="taskmanage.html" data-value="1">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span>任务查询</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="taskrelease.html" data-value="2">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                <span>任务发布</span>
+                            </a>
+                        </li>-->
+
+
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+
+                        <div id="classlist" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                            <!--<div class="clearfix bg-white"></div>-->
+                            <div class="padder" id="classHeadList">
+                                <label for="">校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</label>
+                                <select id="campus">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+                                <label for="" id="lbClassType" style="margin-left: 70px;">班级类型</label>
+                                <select id="ClassType">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+                                <label for="" id="lbSubjectType" style="margin-left: 70px;">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科</label>
+                                <select id="SubjectType">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+
+
+                            </div>
+
+
+                            <!--<div>
+                                <div class="m-t-n pager clearfix">
+                                </div>
+                            </div>-->
+                        </div>
+                        <div id="taskoper" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237); margin-top: 10px;">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <label for="" id="lbTaskTypeID">任务类型</label>
+                                <select id="TaskTypeID">
+
+                                    <!--<option value="1">普通任务</option>
+                                    <option value="2">定时任务</option>-->
+                                </select><span id="taskdatetime" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">开始时间</label>
+                                    <input id="stime" class="inputText" type="text" placeholder="请选择开始时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '%y-%M-#{%d}', maxDate: '#F{$dp.$D(\'etime\')||\'3000-10-01\'}' })" data-model="stime" />
+
+                                    <label for="" style="margin-left: 70px;">结束时间</label>
+                                    <input id="etime" class="inputText" type="text" placeholder="请选择结束时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'stime\')}', maxDate: '3000-10-01' })" data-model="etime" />
+                                </span>
+
+                            </div>
+                            <div class="padder">
+                                <label for="" id="lbOperateTypeID">操作类型</label>
+                                <select id="OperateTypeID"></select>
+                                <span id="Timingtime" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">开机时间</label>
+                                    <input id="Timingstime" class="inputText" type="text" placeholder="请选择开始时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'HH:mm:ss' })" data-model="Timingstime" value="06:30:00" />
+
+                                    <label for="" style="margin-left: 70px;">关机时间</label>
+                                    <input id="Timingetime" class="inputText" type="text" placeholder="请选择结束时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'HH:mm:ss' })" data-model="Timingetime" value="21:30:00" />
+                                </span>
+                                <span id="NavigationSet" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">显示状态</label>
+                                    <select id="Navigationshow">
+
+                                        <option value="1">显示</option>
+                                        <option value="2">隐藏</option>
+                                    </select>
+                                </span>
+                                <span id="StartProgramSwitchSet" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">开关状态</label>
+                                    <select id="StartProgramSwitchShow">
+                                        <option value="1">开启</option>
+                                        <option value="0">关闭</option>
+                                    </select>
+                                </span>
+                                <!--<span id="SelectClassName" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">班级</label>
+                                    <select id="SelectClassCode">
+
+                                    </select>
+                                </span>-->
+                                <span id="CheckReBindClass"><input id="IsCheckReBindClass" style="margin-left: 70px;" type="checkbox">检查绑定班级 </span>
+                            </div>
+                            <div class="padder" id="">
+                                <label for="" id="lbDisplayModelID">布局类型</label>
+                                <select id="DisplayModelID"></select>
+                                <span id="CheckVersion"><input id="IsCheckVersion" style="margin-left: 70px;" type="checkbox">检查终端版本号 </span>
+
+                                <label for="" id="lbMessageTitle" style="margin-left: 70px;display:none;">消息标题</label>
+                                <input type="text" id="MessageTitle" style="width: 400px; display: none;" maxlength="50" placeholder="请输入消息标题" />
+
+                            </div>
+                            <div class="padder">
+                                <label for="" style="float: left;">消息内容</label>
+                                <textarea id="msgContentText" maxlength="500" style=" margin-left: 4px; width: 89.6%; height: 50px;" placeholder="请输入消息文本内容"></textarea>
+                            </div>
+                            <div>
+                                <!--<div class="m-t-n pager clearfix">
+                                </div>-->
+                            </div>
+                        </div>
+                        <div id="resourse" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237); margin-top: 10px;">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder" id="divimageectf">
+
+                                <label for="">图片显示</label>
+                                <input type="text" id="ImageSpanSecond" class="inputText" maxlength="4" onkeyup='this.value=this.value.replace(/\D/gi,"")' value="5" placeholder="请输入时间" />
+                                <span>秒</span>
+                                <label for="" style="margin-left: 50px;">图片效果</label>
+                                <select id="ImageEffectID">
+
+                                    <!--<option value="1">图片显示效果类型</option>
+                                    <option value="2">图片显示效果类型</option>
+                                    <option value="3">图片显示效果类型</option>-->
+                                </select>
+
+                                <span style="color: red; margin-left: 70px;">建议尺寸</span>
+                                <span style="color:red">（1280*960）</span>
+                            </div>
+
+                            <div class="padder"></div>
+                            <div class="resourselist clearfix">
+                                <div id="divimage" style="float: left; width: 350px;">
+                                    <div id="file_uploadImage" style="margin-top: 20px;float:left;"></div>
+                                    <div id="uploadImageQueue" style="margin-top: 0;float:right;width:250px;"></div>
+
+                                    <table id="table_image" style="width: 350px; table-layout: fixed; word-wrap: break-word; ">
+                                        <tr>
+                                            <th class="th3">名称</th>
+                                            <th class="th3">缩略图</th>
+                                            <th class="th3">尺寸大小</th>
+                                            <th class="th5">删除</th>
+                                        </tr>
+                                        <tbody id="id_table_list_image">
+                                            <!--<tr>
+                                                <td class="th3">名称</td>
+                                                <td class="th3">缩略图</td>
+                                                <td class="th3">原图尺寸</td>
+                                                <td class="th5">删除</td>
+                                            </tr>-->
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div id="idvideo" style="float: right; width: 350px;">
+                                    <div id="file_uploadVideo" style="margin-top: 20px;float:left;"></div>
+                                    <div id="uploadVideoQueue" style="margin-top: 0;float:right;width:250px;"></div>
+
+                                    <table id="table_video" style="width: 350px; table-layout: fixed; word-wrap: break-word; ">
+                                        <tr>
+                                            <th class="th3">名称</th>
+                                            <th class="th3">视频大小</th>
+                                            <th class="th5">删除</th>
+                                        </tr>
+                                        <tbody id="id_table_list_video"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div>
+
+                            </div>
+
+                            <!--<div class="m-t-n pager clearfix">
+                            </div>-->
+                        </div>
+
+
+                        <div id="" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237); margin-top: 10px;">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <button class="btn btn-primary btn-sm" type="submit" id="push" style="width:120px;"><span>发布</span></button>
+                                <!-- <button style="background-color:RGB(12,163,210);width:80px;" type="button" id="push" class="btn btn-primary btn-xs active">发布</button>-->
+                                <!--<input type="button" class="inputText" id="push" value="发布" />-->
+                            </div>
+                            <div>
+                                <!--<div class="m-t-n pager clearfix">
+                                </div>-->
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container">
+                <footer class="text-center">
+                    <script src="js/footer.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

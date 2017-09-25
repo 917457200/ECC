@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4A4A6F48-9022-4AF3-959A-CB8CCCE37D53}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EDUC.Common</RootNamespace>
+    <AssemblyName>EDUC.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bll\bllBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bll\bllDataFieldInfo.cs" />
+    <Compile Include="Bll\bllDeviceClassInfo.cs" />
+    <Compile Include="Bll\bllDeviceTaskInfo.cs" />
+    <Compile Include="Bll\bllDict.cs" />
+    <Compile Include="Bll\bllExaminationInfo.cs" />
+    <Compile Include="Bll\blloperatelog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bll\bllPaging.cs" />
+    <Compile Include="Bll\bllStartupProgramTaskInfo.cs" />
+    <Compile Include="Bll\bllUserClassInfo.cs" />
+    <Compile Include="Bll\LoginUniqueness.cs" />
+    <Compile Include="Dal\dalDataFieldInfo.cs" />
+    <Compile Include="Dal\dalDeviceClassInfo.cs" />
+    <Compile Include="Dal\dalDeviceTaskInfo.cs" />
+    <Compile Include="Dal\dalExaminationInfo.cs" />
+    <Compile Include="Dal\daloperatelog.cs" />
+    <Compile Include="Dal\dalStartupProgramTaskInfo.cs" />
+    <Compile Include="EnumDef.cs" />
+    <Compile Include="Model\DataFieldInfoEntity.cs" />
+    <Compile Include="Model\DeviceClassInfoEntity.cs" />
+    <Compile Include="Model\DeviceTaskInfoEntity.cs" />
+    <Compile Include="Model\DeviceTaskNoticeInfo.cs" />
+    <Compile Include="Model\DictEntity.cs" />
+    <Compile Include="Model\ExaminationInfoEntity.cs" />
+    <Compile Include="Model\operatelogEntity.cs" />
+    <Compile Include="Model\StartupProgramTaskInfoEntity.cs" />
+    <Compile Include="Model\UserClassInfoEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\cn.jpush.api\cn.jpush.api.csproj">
+      <Project>{e281d457-f259-4f0b-8608-16c81d8ae97b}</Project>
+      <Name>cn.jpush.api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PublicLib\PublicLib.csproj">
+      <Project>{d7a51455-df25-4830-865c-dde01b343bd1}</Project>
+      <Name>PublicLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

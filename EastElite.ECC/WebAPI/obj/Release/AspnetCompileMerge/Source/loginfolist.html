@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+
+    <script src="js/PushJS.js"></script>
+    <style>
+        select, .inputText {
+            width: 135px;
+        }
+
+        #classlist .padder label {
+            margin-left: 0px;
+        }
+
+        .padder {
+            padding: 4px 0;
+        }
+
+        .pager {
+            background: #e0e0e0;
+        }
+
+        .resourselist {
+            padding: 0 15px;
+        }
+
+            .resourselist table th, .resourselist table td {
+                width: 80px;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+
+            .resourselist table {
+                float: left;
+            }
+
+                .resourselist table th {
+                    background: #e0e0e0;
+                }
+    </style>
+    <script>
+        var currentPage = 1;
+        var isheadteacher = 0;
+        $(function () {
+            if (!loadHead('backmanage', 'loginfolist')) {
+                return;
+            }
+         
+            $('#search').click(function () {
+                currentPage = 1;
+                getDataList(currentPage);
+            });
+     
+            getDataList(currentPage);
+            $('#id_table_list').delegate('tr', 'dblclick', function () {
+                if ($(this).find('td').eq(0).attr("data-switchstatus") == "0") {
+                  
+                    $(this).find('td').eq(0).attr("data-switchstatus", "1");
+                    $(this).find('td').eq(0).html($(this).find('td').eq(0).attr("data-content"));
+                    $(this).find('td').eq(1).html($(this).find('td').eq(1).attr("data-content"));
+                    $(this).find('td').eq(2).html($(this).find('td').eq(2).attr("data-content"));
+                    $(this).find('td').eq(3).html($(this).find('td').eq(3).attr("data-content"));
+                }
+                else {
+                    $(this).find('td').eq(0).attr("data-switchstatus", "0");
+                    $(this).find('td').eq(0).html($(this).find('td').eq(0).attr("data-content").substr(0, 8));
+                    $(this).find('td').eq(1).html($(this).find('td').eq(1).attr("data-content").substr(0, 10));
+                    $(this).find('td').eq(2).html($(this).find('td').eq(2).attr("data-content").substr(0, 20));
+                    $(this).find('td').eq(3).html($(this).find('td').eq(3).attr("data-content").substr(0, 20));
+                }
+            })
+        });
+
+        //获取发送记录
+        function getDataList(currentPage) {
+            var userCode = "";
+            if (loginUser.roleCode != "1072") {//不是管理员
+                layer.confirm('只有管理员才可以维护此页面', function () {
+                    gotourl("login.html")//跳转到首页
+                });
+            }
+            var url = "/Service.ashx?actionname=04-01";
+            var par = {
+                pageSize: 10, currentPage: currentPage,
+                stime: $.toString($('#stime').val()),
+                etime: $.toString($('#etime').val()),
+                isvalid: $.toInt($('#isvalid').val())
+            };
+
+            EDUCAjax(par, function () {
+
+            }, function (rs) {
+
+                var htmlstr = '';
+                $(rs.data).each(function (i, o) {
+                    htmlstr += '<tr>';
+                    //htmlstr += '<td> <input id="' + $.toString(o.ID) + '" name="check" type="checkbox"  /></td>';
+                    htmlstr += '<td data-switchstatus="0" data-content="{0}">{1}</td>';
+                    htmlstr += '<td data-content="{2}">{3}</td>';
+                    htmlstr += '<td  data-content=\'{4}\'>{5}</td>';
+                    htmlstr += '<td  data-content=\'{6}\'>{7}</td>';
+                    htmlstr += '<td>{8}</td>';
+                    htmlstr += '<td><a href="javascript:updatestatus({9},{10});">{11}</a></td>';
+                    htmlstr += '</tr>';
+                    htmlstr = htmlstr.format($.toString(o.module), $.toString(o.module).substr(0, 8), $.toString(o.functionName), $.toString(o.functionName).substr(0, 10), $.toString(o.pageurl), $.toString(o.pageurl).substr(0, 20), $.toString(o.logcontent), $.toString(o.logcontent).substr(0, 20), $.toString(o.CreatedDate), $.toInt(o.id), ($.toString(o.isValid).toUpperCase() == "TRUE" ? "0" : "1"),($.toString(o.isValid).toUpperCase() == "TRUE" ? "关闭" : "开启"));
+                });
+
+                $("#id_table_list").html(htmlstr);
+
+                //数据分页
+                $("#id_pageList").pageList({
+                    cssType: "pagecss",
+                    totalpage: rs.totalPage,
+                    currentPage: rs.currentPage,
+                    recordCount: rs.recordCount,
+                    table: ".warp",
+                    callback: function (index) {
+                        getDataList(index)
+                    }
+                });
+
+
+            }, url);
+
+        }
+
+
+        function updatestatus(oid, oisvalid)
+        {
+            var url = "/Service.ashx?actionname=04-02";
+            var par = {
+                id: oid,
+                isvalid: oisvalid
+            };
+            EDUCAjax(par, function () {
+
+            }, function (rs) {
+                if (rs.status == 0)
+                {
+                    getDataList(currentPage);
+                }
+            }, url);
+        }
+
+
+
+    </script>
+
+
+
+</head>
+<body class=" pace-done" style="overFlow-x: hidden; word-break: break-all">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+                      
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+                        <div id="classlist" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <label for="">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</label>
+                                <select id="isvalid">
+                                    <option value="1">开启</option>
+                                    <option value="0">关闭</option>
+                                </select>
+                                <span id="taskdatetime">
+                                    <label for="" style="margin-left: 70px;">开始时间</label>
+                                    <input id="stime" class="inputText" type="text" placeholder="请选择开始时间" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-#{%d}' })" data-model="stime" />
+
+                                    <label for="" style="margin-left: 70px;">结束时间</label>
+                                    <input id="etime" class="inputText" type="text" placeholder="请选择结束时间" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'stime\')}' })" data-model="etime" />
+                                </span>
+                                <button class="btn btn-primary btn-sm" type="submit" id="search" style="float: right; margin-bottom: 10px; margin-right: 2px;"><span>查询</span></button>
+                            </div>
+                           
+                            <table>
+                                <tr>
+                                    <!--<th class="th1">
+                                        <input id="id_checkAll" type="checkbox" />
+                                    </th>-->
+                                    <th class="td2">模块</th>
+
+                                    <th class="td3">接口名称</th>
+                                    <th class="td3">接口地址</th>
+                                    <th class="td3">内容</th>
+                                    <th class="dateth">创建时间</th>
+                                    <th class="td1">操作</th>
+
+                                </tr>
+                                <tbody id="id_table_list"></tbody>
+                            </table>
+                            <div class="fenye">
+                                <ul id="id_pageList"></ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <footer class="text-center">
+                <p>东方博冠（北京）科技有限公司 版权所有 &copy;2016-2020</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

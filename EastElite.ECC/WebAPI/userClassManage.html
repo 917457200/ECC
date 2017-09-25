@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+
+    <script src="js/PushJS.js"></script>
+    <style>
+        select, .inputText {
+            width: 135px;
+        }
+
+        #classlist .padder label {
+            margin-left: 0px;
+        }
+
+        .padder {
+            padding: 4px 0;
+        }
+
+        .pager {
+            background: #e0e0e0;
+        }
+
+        .resourselist {
+            padding: 0 15px;
+        }
+
+            .resourselist table th, .resourselist table td {
+                width: 80px;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+
+            .resourselist table {
+                float: left;
+            }
+
+                .resourselist table th {
+                    background: #e0e0e0;
+                }
+
+        #classList label {
+            width: 70px;
+        }
+        /*.leftlabel {
+            width: 70px;
+            text-align: center;
+        }*/
+    </style>
+    <script>
+        var isheadteacher = 0;
+        $(function () {
+            if (!loadHead('backmanage', 'userclassmanage')) {
+                return;
+            }
+            if (loginUser.roleCode == "1072") {
+                //加载校区
+                if ($(loginUser.campus).length > 0) {
+                    $('#campus').append('  <option value=""></option>');
+                    $(loginUser.campus).each(function (i, o) {
+                        $('#campus').append('<option value="' + o.code + '">' + o.name + '</option>');
+                    });
+                }
+            }
+
+            //加载所有班级类型
+            getUserClassTypeList(loginUser.userCode, $.toString($('#campus').val()));
+            $('#campus').change(function () {
+                $('#usercode').empty();
+                $('#classList').empty();
+                $('#classList [type="checkbox"][name="class"]').css("color", "");
+                if ($.toString($('#campus').val()) != "") {
+                    getUserRoleInfoList();
+                    getallclassList();
+                }
+
+            })
+            $('#ClassType').change(function () {
+                $('#classList [type="checkbox"][name="class"]').prop("checked", false);
+                $('#classList [type="checkbox"][name="class"]').parent().css("color", "");
+                if ($.toString($('#ClassType').val()) != "") {
+                    $('#classList [type="checkbox"][name="class"][data-classtypeid="' + $.toString($('#ClassType').val()) + '"]').prop("checked", true);
+                    $('#classList [type="checkbox"][name="class"][data-classtypeid="' + $.toString($('#ClassType').val()) + '"]').parent().css("color", "blue");
+                }
+            })
+
+            $('#classList').on('change', '[type="checkbox"][name="grade"]', function () {
+                if ($(this).is(":checked")) {
+                    $(this).parent().next().find('[type="checkbox"]').prop("checked", true);
+                    $(this).parent().next().find('[type="checkbox"]').parent().css("color", "blue");
+                }
+                else {
+                    $(this).parent().next().find('[type="checkbox"]').prop("checked", false);
+                    $(this).parent().next().find('[type="checkbox"]').parent().css("color", "");
+                }
+
+
+
+            })
+            $('#classList').on('change', '[type="checkbox"][name="class"]', function () {
+
+                if ($(this).is(":checked")) {
+                    $(this).parent().css("color", "blue");
+                }
+                else {
+                    $(this).parent().css("color", "");
+                }
+                if ($(this).parent().parent().find('[type="checkbox"]').not("input:checked").length > 0) {//存在未选中的班级
+                    $(this).parent().parent().prev().find('[type="checkbox"]').prop("checked", false);
+                    //$(this).parent().parent().prev().find('[type="checkbox"]').parent().css("color", "");
+                }
+                else {
+                    $(this).parent().parent().prev().find('[type="checkbox"]').prop("checked", true);
+                    //$(this).parent().parent().prev().find('[type="checkbox"]').parent().css("color", "blue");
+                }
+            })
+
+
+            $('#usercode').change(function () {
+                $('#classList :checkbox').prop('checked', false);
+                $('#classList :checkbox').parent().css("color", "");
+                if ($.toString($('#usercode').val()) != "") {
+                    getUserClass();
+                }
+
+            })
+
+            $('#save').click(function () {
+                var url = "/Service.ashx?actionname=01-29";
+                var data = new Array();
+                $('#classList [type="checkbox"][name="class"]:checked').each(function (i, o) {
+                    data[i] = {
+                        UserCode: $.toString($('#usercode').val()),
+                        UserType: 1,
+                        ClassCode: $.toString($(o).attr("data-classcode")),
+                        ClassFullCode: $.toString($(o).attr("data-classfullcode")),
+                        ClassName: $.toString($(o).attr("data-classname")),
+                        RoleType: 2,
+                        IsValid: true,
+                        HandledID: loginUser.userCode,
+                        HandledName: loginUser.userName
+                    };
+                })
+                var par = {
+                    userCode: $.toString($('#usercode').val()),
+                    data: JSON.stringify(data)
+                };
+                EDUCAjax(par, function () { }, function (rs) {
+                    if (rs.status == 0) {
+                        layer.msg("设置成功！");
+                    }
+                    else {
+                        layer.msg("设置失败！");
+                    }
+                }, url);
+            })
+        });
+        function getUserClass() {
+            var url = "/Service.ashx?actionname=01-28";
+            var par = {
+                usercode: $.toString($('#usercode').val())
+            };
+            EDUCAjax(par, function () { }, function (rs) {
+                if (rs.status == 0) {
+                    $(rs.data).each(function (i, o) {
+                        $('#classList').find(':checkbox[data-classcode="' + o.ClassCode + '"]').prop("checked", true);
+                        $('#classList').find(':checkbox[data-classcode="' + o.ClassCode + '"]').parent().css("color", "blue");
+                    })
+                }
+            }, url);
+        }
+        function getUserRoleInfoList() {
+            var url = "/Service.ashx?actionname=03-06";
+            var par = {
+                rootCode: $.toString($('#campus').val())
+
+            };
+            EDUCAjax(par, function () { }, function (rs) {
+                if (rs.UserList.length > 0) {
+                    var strhtml = '  <option value=""></option>';
+                    $(rs.UserList).each(function (i, o) {
+                        strhtml += '  <option value="' + $.toString(o.UserCode) + '">' + $.toString(o.UserName) + '</option>';
+                    });
+                    $('#usercode').html(strhtml);
+                }
+                else {
+                    $('#usercode').empty();
+                }
+            }, url);
+        }
+
+        function getallclassList() {
+            var url = "/Service.ashx?actionname=01-02";
+            var par = {
+                rootCode: $.toString($('#campus').val()), sourceType: 1, order: "SUBSTRING([ClassCode],1,16) DESC,SUBSTRING([ClassCode],17,2)"
+            };
+            EDUCAjax(par, function () { }, function (rs) {
+
+                if (rs.status == 0) {
+
+                    //循环添加年级
+                    $(rs.data).each(function (i, o) {
+                        var htmlstr = '';
+                        if ($('#classList #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + '').length > 0) {
+
+                        }
+                        else {
+                            htmlstr += '<div class="padder" id="div_grade_{0}">';
+                            htmlstr += ' <label class="checkbox-inline" style="width: 90px; ">';
+                            htmlstr += ' <input type="checkbox" name="grade" id="grade_{0}" title="{1}"  value="{0}">{1} </label>';
+                            htmlstr += ' <div id="div_grade_{0}_classlist"></div></div>';
+
+                            htmlstr = htmlstr.format($.toString(o.gradeCode).substr(11, 16), $.toString(o.ClassName).substr(0, 6));
+                            $('#classList').append(htmlstr);
+                        }
+
+                    });
+
+                    $(rs.data).each(function (i, o) {
+                        var strhtml = '<label><input type="checkbox" name="class" data-classcode="{1}" data-classfullcode="{2}" data-classname="{3}" data-classtypeid="{4}" data-subjecttypeid="{5}">{0}</label>';
+                        strhtml = strhtml.format(o.ClassName.substr(6, o.ClassName.length), o.ClassCode, o.ClassFullCode, o.ClassName, $.toString(o.ClassTypeID), $.toString(o.SubjectTypeID));
+                        $('#classList #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + ' #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + '_classlist').append(strhtml);
+                    })
+                }
+            }, url);
+        }
+
+
+
+        //获取用户班级类型
+        function getUserClassTypeList(userCode, rootCode) {
+            var url = "/Service.ashx?actionname=01-07";
+            var par = { "userCode": "", "rootCode": "" };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+                    $('#ClassType').empty();
+                    if (res.data.length > 0) {
+                        $('#ClassType').append('<option value=""></option>');
+                        $(res.data).each(function (i, o) {
+
+                            $('#ClassType').append('<option value="' + $.toString(o.ClassTypeID) + '">' + $.toString(o.ClassTypeIDText) + '</option>');
+                        });
+                        $('#lbClassType').show();
+                        $('#ClassType').show();
+                    }
+                    else {
+                        $('#lbClassType').hide();
+                        $('#ClassType').hide();
+                    }
+
+                }
+            }, url);
+
+        }
+
+
+    </script>
+
+
+
+</head>
+<body class=" pace-done" style="overFlow-x: hidden; word-break: break-all">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+                        <!--<li>
+                            <a href="backManage.html">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span>任务管理</span>
+                            </a>
+                        </li>
+
+                        <li class="active">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-play"></i>
+                                <span>班级授权</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="systemSeting.html">
+                                <i class="glyphicon glyphicon-cog"></i>
+                                <span>系统设置</span>
+                            </a>
+                        </li>-->
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+                        <div style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <label for="" class="leftlabel">校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</label>
+                                <select id="campus"></select>
+                                <label for="" class="leftlabel" style="margin-left: 70px;">教&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;师</label>
+                                <select id="usercode"></select>
+                                <label for="" class="leftlabel" id="lbClassType" style="margin-left: 70px;">班级类型</label>
+                                <select id="ClassType"></select>
+                            </div>
+                            <div id="classList">
+
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-sm" type="submit" id="save" style=""><span>保存</span></button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <footer class="text-center">
+                <p>东方博冠（北京）科技有限公司 版权所有 &copy;2016-2020</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

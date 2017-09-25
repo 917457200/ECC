@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <!--<link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.min.css" rel="stylesheet" />-->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+    <script src="js/UploadJS.js"></script>
+    <script src="js/PushJS.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border: 1px;
+        }
+
+            table .td1 {
+                width: 15%;
+                text-align: center;
+                border: 1px solid #ccc;
+                background: #e0e0e0;
+            }
+
+            table .td2 {
+                width: 35%;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+
+            table input {
+                width: 100%;
+                height: 100%;
+            }
+    </style>
+
+    <script>
+        var currentClassCode;
+        $(function () {
+            if (!loadHead('classmanage', 'classmanage')) {
+                return;
+            }
+            if (loginUser.roleCode != '1072') {
+                var url = "/Service.ashx?actionname=01-04";
+                var par = { "userCode": loginUser.userCode, "rootCode": loginUser.rootCode };
+                EDUCAjax(par, function () { }, function (res) {
+                    if (res.status == 0) {
+                        if (res.data.length == 0) {
+                            layer.confirm('当前用户权限下没有班级', function () {
+                                gotourl("login.html")//跳转到首页
+                            });
+
+                        }
+                        else {//班主任
+                            currentClassCode = $.toString(res.data[0].ClassCode);
+                            loadData(currentClassCode);
+                        }
+                       
+                    }
+                }, url);
+
+            }
+            else {
+                layer.msg("只有班主任才可以维护此页面");
+            }
+           
+            $('#save').click(function () {
+
+                var newpar = {
+                    ID: $.toString($('#ClassName').attr('data-id')),
+                    BanZhuRenPhotoPath: $.toString($('#BanZhuRenPhotoPath img').attr('data-value')),
+                    BanZhuRenQRPath: $.toString($('#BanZhuRenQRPath img').attr('data-value')),
+                    RoomNum: $.toString($('#RoomNum').val()),
+                    ClassNickName: $.toString($('#ClassNickName').val()),
+                    ClassSlogan: $.toString($('#ClassSlogan').val()),
+                    ZuoYouMing: $.toString($('#ZuoYouMing').val()),
+                    Introduction: $.toString($('#Introduction').val()),
+                    Recommended: $.toString($('#Recommended').val()),
+                    ClassLogoPath: $.toString($('#ClassLogoPath img').attr('data-value')),
+                    ClassQRPath: $.toString($('#ClassQRPath img').attr('data-value')),
+                    ModefiedID: $.toString(loginUser.userCode),
+                    ModifiedName: $.toString(loginUser.userName)
+                };
+
+                EDUCAjax(newpar, function () { }, function (res) {
+                    if (res.status == "0") {
+                        layer.msg("成功");
+                    }
+                    else {
+                        layer.msg("失败");
+                    }
+
+                }, '/Service.ashx?actionname=01-17');
+            });
+            $('#cancel').click(function () {
+                if (undefined != currentClassCode)
+                {
+                    loadData(currentClassCode);
+                }
+                else {
+                    $('table input').val('');
+                }
+            });
+         
+        });
+        
+        function loadData(classcode) {
+            EDUCAjax({ classcode: classcode,sourceType:1 }, function () { }, function (res) {
+                if (res.status == 0) {
+                    if (undefined != res.data && res.data.length == 1) {
+
+                        $('#ClassName').attr('data-id', $.toString(res.data[0].ID));
+                        $('#ClassName').html($.toString(res.data[0].ClassName));
+                        $('#DeviceCode').html($.toString(res.data[0].DeviceCode));
+                        $('#DeviceSN').html($.toString(res.data[0].DeviceSN));
+                        $('#IPAddress').html($.toString(res.data[0].IPAddress));
+                        $('#JPushID').html($.toString(res.data[0].JPushID));
+                        $('#BanZhuRenName').html($.toString(res.data[0].BanZhuRenName));
+
+                        if ($.toString(res.data[0].BanZhuRenPhotoPath) != "") {
+                            //原图转换成缩略图地址
+                            var strBanZhuRenPhotoPath = $.toString(res.data[0].BanZhuRenPhotoPath);
+                            var strBanZhuRenPhotoPathimageurl = strBanZhuRenPhotoPath.substr(strBanZhuRenPhotoPath.indexOf("/uploads/") + 18, strBanZhuRenPhotoPath.length);
+                            var strBanZhuRenPhotoPathimageurlthumbnailimageurl = strBanZhuRenPhotoPath.replace(strBanZhuRenPhotoPathimageurl, "thumbnail" + strBanZhuRenPhotoPathimageurl);
+                            $('#BanZhuRenPhotoPath').html('<img   style="cursor:pointer;" data-value="" src="' + strBanZhuRenPhotoPathimageurlthumbnailimageurl + '" />');
+
+                        }
+                        $('#BanZhuRenPhotoPath').append('<div id="file_uploadImage" style="margin-top: 20px;float:right;"></div> <div id="uploadImageQueue" style="margin-top: 0;float:right;width:250px;"></div>');
+
+                        if ($.toString(res.data[0].BanZhuRenQRPath) != "") {
+                            $('#BanZhuRenQRPath').html('<img data-value src="' + $.toString(res.data[0].BanZhuRenQRPath) + '" />');
+                        }
+                        $('#SubjectTypeIDText').html($.toString(res.data[0].SubjectTypeIDText));
+                        $('#ClassTypeIDText').html($.toString(res.data[0].ClassTypeIDText));
+                        $('#RoomNum').val($.toString(res.data[0].RoomNum));
+                        $('#ClassNickName').val($.toString(res.data[0].ClassNickName));
+                        $('#ZuoYouMing').val($.toString(res.data[0].ZuoYouMing));
+                        $('#ClassSlogan').val($.toString(res.data[0].ClassSlogan));
+
+                        $('#Introduction').val($.toString(res.data[0].Introduction));
+
+                        $('#Recommended').val($.toString(res.data[0].Recommended));
+                        if ($.toString(res.data[0].ClassQRPath) != "") {
+                            $('#ClassQRPath').html('<img data-value src="' + $.toString(res.data[0].ClassQRPath) + '" />');
+                        }
+                        if ($.toString(res.data[0].ClassLogoPath) != "") {
+                            $('#ClassLogoPath').html('<img data-value src="' + $.toString(res.data[0].ClassLogoPath) + '" />');
+                        }
+
+                        $.Upload("file_uploadImage", "uploadImageQueue", UploadTypeEnum.image, true, function (data) {
+                            $('#BanZhuRenPhotoPath img').remove();
+                            $('#BanZhuRenPhotoPath').append('<img   style="cursor:pointer;" data-value="' + data.url + '" src="' + data.thumnailUrl + '" />');
+
+                        });
+
+                    }
+
+                }
+            }, '/Service.ashx?actionname=01-02');
+        }
+      
+    </script>
+
+</head>
+<!--style="overFlow-x: hidden; overflow-y:auto; word-break: break-all;"-->
+<body class=" pace-done">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+
+                        <!--<li class="active">
+            <a href="classmanage.html" data-value="1">
+                <i class="glyphicon glyphicon-wrench"></i>
+                <span>班级维护</span>
+            </a>
+        </li>-->
+
+
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+                    <div class="tab-content" id="tab_1">
+                        <div style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                           
+                           
+                            <table>
+                                <caption id="ClassName" data-id="0" style="font-size:large;font-weight:600;text-align:center;"></caption>
+                                <tr><td class="td1">设备编号</td><td class="td2" id="DeviceCode"></td><td class="td1">设备序列号</td><td id="DeviceSN" class="td2"></td></tr>
+
+                                <tr><td class="td1">网络IP</td><td id="IPAddress" class="td2"></td><td class="td1">JPushID</td><td id="JPushID" class="td2"></td></tr>
+                                <tr><td class="td1">班主任姓名</td><td id="BanZhuRenName" class="td2" colspan="3"></td></tr>
+                                <tr><td class="td1">班主任照片</td><td id="BanZhuRenPhotoPath" class="td2" colspan="3"></td></tr>
+
+                                <tr><td class="td1">班主任二维码</td><td id="BanZhuRenQRPath" class="td2" colspan="3"></td></tr>
+
+                                <tr><td class="td1">学科类型</td><td id="SubjectTypeIDText" class="td2"></td><td class="td1">班级类型</td><td id="ClassTypeIDText" class="td2"></td></tr>
+                                <tr><td class="td1">房间号</td><td class="td2" colspan="3"><input id="RoomNum" type="text" placeholder="请输入房间号" /></td></tr>
+                                <tr><td class="td1">班级昵称</td><td class="td2" colspan="3"><input id="ClassNickName" type="text" placeholder="请输入班级昵称" /></td></tr>
+                                <tr><td class="td1">班级口号</td><td class="td2" colspan="3"><input id="ClassSlogan" type="text" placeholder="请输入班级口号" /></td></tr>
+
+                                <tr><td class="td1">座右铭</td><td class="td2" colspan="3"><input id="ZuoYouMing" type="text" placeholder="请输入座右铭" /></td></tr>
+                                <tr><td class="td1">班级介绍</td><td class="td2" colspan="3"><input id="Introduction" type="text" placeholder="请输入班级介绍" /></td></tr>
+                                <tr><td class="td1">推荐词</td><td class="td2" colspan="3"><input id="Recommended" type="text" placeholder="请输入推荐词" /></td></tr>
+
+                                <tr><td class="td1">班级照片</td><td id="ClassLogoPath" class="td2" colspan="3"></td></tr>
+                                <tr><td class="td1">班级二维码</td><td id="ClassQRPath" class="td2" colspan="3"></td></tr>
+                            
+
+                                <tr><td class="td2" colspan="4">
+                                        <button class="btn btn-primary btn-sm" type="submit" id="save" style="margin-right: 20px;"><span>保存</span></button> 
+                                        <button class="btn btn-primary btn-sm" type="submit" id="cancel"><span>取消</span></button> 
+                                    <!--<button style="background-color:RGB(12,163,210);margin-right:20px;" type="button" id="save" class="btn btn-primary btn-xs active">保存</button>
+                                    <button style="background-color:RGB(12,163,210)" type="button" id="cancel" class="btn btn-primary btn-xs active">取消</button></td></tr>-->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <footer class="text-center">
+                    <script src="js/footer.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

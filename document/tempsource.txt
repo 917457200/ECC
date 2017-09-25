@@ -1,0 +1,6 @@
+                    sb.Append( "MessageSourceID=3&MessageTypeID=3&OperateTypeID=2&DisplayModelID=1&TaskPriorityID=1&TaskStatusID=1&RootCode=6101051006&CreatedID=090002&CreatedName=张三"  );
+                    sb.Append( "&Title=常规检查提醒&Alert=学校卫生检查" );
+                    sb.Append( "&RargetAlias=高2016级(7)班" );
+                    sb.Append( "&tag_and=[\"SC1100009000\",\"RC1006\"]" );
+                    sb.Append( "&alias=[\"U4\"]" );
+                    sb.Append( "&registration_id=[\"1104a89792a814dbfd2\"]" );

@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+
+    <script src="js/PushJS.js"></script>
+    <style>
+        select, .inputText {
+            width: 135px;
+        }
+
+        #classlist .padder label {
+            margin-left: 0px;
+        }
+
+        .padder {
+            padding: 4px 0;
+        }
+
+        .pager {
+            background: #e0e0e0;
+        }
+
+        .resourselist {
+            padding: 0 15px;
+        }
+
+            .resourselist table th, .resourselist table td {
+                width: 80px;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+
+            .resourselist table {
+                float: left;
+            }
+
+                .resourselist table th {
+                    background: #e0e0e0;
+                }
+    </style>
+    <script>
+        var isheadteacher = 0;
+        $(function () {
+            if (!loadHead('backmanage', 'spbackmanage')) {
+                return;
+            }
+            //消息来源
+            GetDictsByType("MessageSourceID", "MessageSourceID", true);
+        
+            //操作类型
+            GetDictsByType("OperateTypeID", "StartupProgramOperateTypeID", true);
+          
+            $('#search').click(function () {
+                getDataList(1);
+            });
+            $('#delete').click(function () {
+                var url = "/Service.ashx?actionname=06-07";
+                if ($('#id_table_list :checkbox:checked').not("#id_checkAll").length > 0) {
+
+                    var strs = "";
+                    $('#id_table_list :checkbox:checked').not("#id_checkAll").each(function (i, o) {
+
+                        strs += $.toString($(o).attr("id")) + ",";
+                    });
+                    strs = $.toTrimComma(strs);
+                    var par = { ids: strs };
+                    layer.confirm("确定删除数据！", {
+                        btn: ['确定', '取消'] //按钮
+                    }, function () {
+                        EDUCAjax(par, function () { }, function (res) {
+                            if (res.status == 0) {
+                                layer.msg("删除成功");
+                                getDataList(1);
+                            }
+                            else {
+                                layer.msg("删除失败");
+
+                            }
+                        }, url)
+
+                    });
+
+                }
+                else {
+                    layer.msg("请选择数据");
+                }
+
+            });
+            getDataList(1);
+        });
+
+        //获取发送记录
+        function getDataList(currentPage) {
+            var userCode = "";
+            if (loginUser.roleCode != "1072") {//不是管理员
+                layer.confirm('只有管理员才可以维护此页面', function () {
+                    gotourl("login.html")//跳转到首页
+                });
+            }
+            var url = "/Service.ashx?actionname=06-02";
+            var par = {
+                pageSize: 10, currentPage: currentPage,
+                messageSourceID: $.toInt($('#MessageSourceID').val()),
+                OperateTypeID: $.toInt($('#OperateTypeID').val()),
+                stime: $.toString($('#stime').val()),
+                etime: $.toString($('#etime').val()),
+                createdid: userCode
+            };
+
+            EDUCAjax(par, function () {
+
+            }, function (rs) {
+
+                var htmlstr = '';
+                $(rs.data).each(function (i, o) {
+                    htmlstr += '<tr>';
+                    htmlstr += '<td> <input id="' + $.toString(o.ID) + '" name="check" type="checkbox"  /></td>';
+                    htmlstr += '<td>{0}</td>';
+                    htmlstr += '<td>{1}</td>';
+                    htmlstr += '<td >{2}</td>';
+                    htmlstr += '<td title="{5}">{3}</td>';
+                    htmlstr += '<td>{4}</td>';
+                    htmlstr += '</tr>';
+                    htmlstr = htmlstr.format($.toString(o.ID), $.toString(o.MessageSourceIDName), $.toString(o.OperateTypeIDName), $.toString(o.RargetAlias).length > 50 ? $.toString(o.RargetAlias).substr(0, 50) : $.toString(o.RargetAlias),$.toString(o.CreatedDate), $.toString(o.RargetAlias));
+                });
+
+                $("#id_table_list").html(htmlstr);
+
+                //数据分页
+                $("#id_pageList").pageList({
+                    cssType: "pagecss",
+                    totalpage: rs.totalPage,
+                    currentPage: rs.currentPage,
+                    recordCount: rs.recordCount,
+                    table: ".warp",
+                    callback: function (index) {
+                        getDataList(index)
+                    }
+                });
+
+
+            }, url);
+
+        }
+
+
+
+
+
+
+    </script>
+
+
+
+</head>
+<body class=" pace-done" style="overFlow-x: hidden; word-break: break-all">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+                        <!--<li class="active">
+                            <a href="#" >
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span>任务管理</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="userClassManage.html">
+                                <i class="glyphicon glyphicon-play"></i>
+                                <span>班级授权</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="systemSeting.html">
+                                <i class="glyphicon glyphicon-cog"></i>
+                                <span>系统设置</span>
+                            </a>
+                        </li>-->
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+                        <div id="classlist" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <label for="">消息来源</label>
+                                <select id="MessageSourceID"></select>
+                              
+                                <label for="" style="margin-left: 70px;">操作类型</label>
+                                <select id="OperateTypeID"></select>
+
+                            </div>
+
+                            <div class="padder">
+                             
+                                <span id="taskdatetime">
+                                    <label for="" style="">开始时间</label>
+                                    <input id="stime" class="inputText" type="text" placeholder="请选择开始时间" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-#{%d}' })" data-model="stime" />
+
+                                    <label for="" style="margin-left: 70px;">结束时间</label>
+                                    <input id="etime" class="inputText" type="text" placeholder="请选择结束时间" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'stime\')}' })" data-model="etime" />
+                                </span>
+                                <button class="btn btn-primary btn-sm" type="submit" id="delete" style="float: right; margin-bottom: 10px; margin-right: 5px;"><span>删除</span></button>
+                                <button class="btn btn-primary btn-sm" type="submit" id="search" style="float: right; margin-bottom: 10px; margin-right: 15px;"><span>查询</span></button>
+                            </div>
+                        
+                            <table>
+                                <tr>
+                                    <th class="th1">
+                                        <input id="id_checkAll" type="checkbox" />
+                                    </th>
+                                    <th class="snth">序号</th>
+                                    <th>任务来源</th>
+                                    <th>操作类型</th>
+                                    <th class="contentth">接收终端别名</th>
+
+                                    <th class="dateth">创建时间</th>
+
+
+                                </tr>
+                                <tbody id="id_table_list"></tbody>
+                            </table>
+                            <div class="fenye">
+                                <ul id="id_pageList"></ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <footer class="text-center">
+                <p>东方博冠（北京）科技有限公司 版权所有 &copy;2016-2020</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

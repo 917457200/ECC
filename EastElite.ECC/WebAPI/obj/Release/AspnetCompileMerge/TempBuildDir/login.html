@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+    <title>壹键通电子班牌管理系统</title>
+
+  
+    <script src="js/WebJS.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#usertype :button").click(function () {
+                $('#usertype .btn-primary').removeClass('btn-primary');
+                $(this).addClass("btn-primary");
+
+            });
+
+            $('#login').click(function () {
+              
+                // $.toString($('#inputUserCode').val())//"090001"   a1s1d1.bg-danger
+                var usercode = $.toString($('#inputUserCode').val());
+
+                var userType = $.toString($("#usertype").find('.btn-primary').eq(0).val());
+
+                var password = $.toString($('#inputPassword').val());
+                login(usercode, userType, password);
+            });
+        });
+
+
+
+    </script>
+
+</head>
+<body>
+    <div style="padding-left: 15%; padding-right: 15%; ">
+        <div class="text-center info-wrapper">
+            <div class="bg-danger" style="display:none;">
+                <span class="text-danger"></span>
+            </div>
+        </div>
+        <div id="loginForm">
+            <div class="login-wrapper">
+                <h3>登录</h3>
+                <div>
+
+                    <div class="form-group">
+                        <div class="clearfix">
+                            <label for="inputUserName" class="control-label">用户名（姓名或代码）</label>
+                            <span id="usertype" class="pull-right">
+                                <button type="button" class="btn btn-primary btn-xs active" value="1">教师</button>
+                                <button type="button" class="btn btn-default btn-xs active" value="2">学生</button>
+                                <button type="button" class="btn btn-default btn-xs active" value="3">家长</button>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" id="inputUserCode" placeholder="姓名或代码">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="control-label">密码</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="密码">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary" id="login">登录</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <hr>
+        <p style="text-align: center;">东方博冠（北京）科技有限公司 版权所有 ©2016-2020</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+   <!--/ <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this template -->
+    <link href="Css/signin.css" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/WebJS.js"></script>
+
+    <script>
+        $(function () {
+            $("#usertype :button").click(function () {
+                $('#usertype .btn-primary').removeClass('btn-primary');
+                $(this).addClass("btn-primary");
+
+            });
+
+            $('#login').click(function () {
+                var url = "/Service.ashx?actionname=03-01";
+                // $.toString($('#inputUserCode').val())//"090001"   a1s1d1
+                var usercode = $.toString($('#inputUserCode').val());
+
+                var userType = $.toString($("#usertype").find('.btn-primary').eq(0).val());
+
+                var password = $.toString($('#inputPassword').val());
+
+                var par = { "userCode": usercode, "userType": userType, "password": password }
+                //  var par = { "pageSize": "100", "currentPage": "1" }
+                EDUCAjax(par, function () { }, function (re) {
+                    alert(2);
+                    if ($.toString(re.ret[0]).indexOf("用户登录成功") > 0) {
+                        var user = re.data.result[0];
+                        setCookie("loginUser", JSON.stringify(user));
+                        gotourl("/index.html");
+                    }
+
+
+                }, url);
+            });
+
+        });
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="form-signin">
+            <h2 class="form-signin-heading"></h2>
+            <div id="usertype">
+                <button type="button" class="btn btn-primary btn-sm active" value="1">教师</button>
+                <button type="button" class="btn btn-default btn-sm active" value="2">学生</button>
+                <button type="button" class="btn btn-default btn-sm active" value="3">家长</button>
+            </div>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="inputUserCode" class="form-control" placeholder="user code" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" id="login" type="submit">Sign in</button>
+        </div>
+
+    </div> <!-- /container -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+
+
+
+</body>
+</html>

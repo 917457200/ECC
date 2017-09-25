@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Msgs>
+  <!--接口参数-->
+  <Msg Code="Err_001">未知错误，请联系管理员！</Msg>
+ 
+  <Msg Code="Err_002">该服务未提供此方法，请联系管理员！</Msg>
+  <Msg Code="Err_003">操作数据库,请联系推送接口组！</Msg>
+  <Msg Code="Err_004">未提供该服务，请联系管理员！</Msg>
+</Msgs>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+   <style>
+       a {
+           display: inline-block;
+           width: 100px;
+           height: 40px;
+           background: red;
+           position: relative;
+           overflow: hidden;
+       }
+
+           a:hover {
+               background: green;
+           }
+
+       input {
+           position: absolute;
+           right: 0;
+           top: 0;
+           font-size: 100px;
+           opacity: 0;
+           filter: alpha(opacity=0);
+       }
+
+   </style>
+</head>
+<body>
+    <a href="#">
+        <input type="file" value="浏览" />
+    </a>
+</body>
+</html>

@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <!--<link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.min.css" rel="stylesheet" />-->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+    <script src="js/UploadJS.js"></script>
+    <script src="js/PushJS.js"></script>
+    <style>
+        .padder {
+            padding: 4px 0;
+        }
+
+        .pager {
+            background: #e0e0e0;
+        }
+
+        select {
+            width: 135px;
+        }
+
+        table {
+            width: 100%;
+            border: 1px;
+        }
+
+            table .td1 {
+                width: 15%;
+                text-align: center;
+                border: 1px solid #ccc;
+                background: #e0e0e0;
+            }
+
+            table .td2 {
+                width: 35%;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+
+        .uploadify {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            background-color: #F6F7FB;
+        }
+    </style>
+
+    <script>
+
+        $(function () {
+            if (!loadHead('taskmanage', 'examtionimport')) {
+                return;
+            }
+            $('#campus').empty();
+
+            //加载校区
+            if ($(loginUser.campus).length > 0) {
+                $(loginUser.campus).each(function (i, o) {
+                    $('#campus').append('<option value="' + o.code + '">' + o.name + '</option>');
+                });
+
+            }
+            $.Upload("file_excel", "uploadExcelQueue", UploadTypeEnum.office, true, function (data) {
+                $('#uploadexcel').val(data.url);
+                $('#uploadexcel').attr("data-url", data.url1);
+
+            });
+
+
+            $('#import').click(function () {
+
+                var url = "/Service.ashx?actionname=05-01";
+                var par = {
+                    pageSize: 10,
+                    currentPage: 1,
+                    url: $.toString($('#uploadexcel').attr("data-url")),
+                    campusCode: $.toString($('#campus option:selected').val()),
+                    campus: $.toString($('#campus option:selected').text()),
+                    isDel: ($('#isDel').is(':checked')?1:0)
+                };
+                EDUCAjax(par, function () {
+
+                }, function (rs) {
+                    if (rs.status == 0) {
+                        $('#campus').trigger("change");
+                        getDataList(1);
+                        alert("导入成功!");
+                        //var htmlstr = "";
+                        //$(rs.data).each(function (i, o) {
+                        //    htmlstr += '<tr>';
+                        //    htmlstr += '<td> <input id="' + $.toString(o.id) + '" name="check" type="checkbox"  /></td>';
+                        //    //htmlstr += '<td>' + $.toString(o.ClassCode) + '</td>';
+                        //    //htmlstr += '<td>' + $.toString(o.ClassCode) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.ClassName) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.VisibleTime) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.HideTime) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.ExamName) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.ExamRoom) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.ExamSubject) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.ExamTime) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.StudentNumberRange) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.StudentNumber) + '</td>';
+                        //    htmlstr += '<td>' + $.toString(o.Teachers) + '</td>';
+                        //    //htmlstr += '<td>' + $.toString(o.Notice) + '</td>';
+                        //    //htmlstr += '<td>' + $.toString(o.Note) + '</td>';
+                        //    htmlstr += '</tr>';
+                        //});
+
+                        //$("#id_table_list").html(htmlstr);
+
+
+                        ////数据分页
+                        //$("#id_pageList").pageList({
+                        //    cssType: "pagecss",
+                        //    totalpage: rs.totalPage,
+                        //    currentPage: rs.currentPage,
+                        //    recordCount: rs.recordCount,
+                        //    table: ".warp",
+                        //    callback: function (index) {
+                        //        getDataList(index);
+
+                        //    }
+                        //});
+                    }
+                    else {
+                        alert(rs.mes);
+                    }
+
+
+
+                }, url);
+            });
+
+            $('#down').click(function () {
+
+                gotourl(location.href.replace("examtionimport.html", "Document/ExamTemp.xls"));
+            });
+
+            $('#select').click(function () {
+                getDataList(1);
+            });
+
+            $('#empty').click(function () {
+                var url = "/Service.ashx?actionname=05-04";
+                var par = {};
+                layer.confirm("确定清空数据！", {
+                    btn: ['确定', '取消'] //按钮
+                }, function () {
+                    EDUCAjax(par, function () { }, function (res) {
+                        if (res.status == 0) {
+                            layer.msg("清空成功");
+                            var currentPage = $.toInt($("#id_pageList [data-currentPage='currentPage']").html());//获取当前第几页
+                            getDataList(currentPage);
+                        }
+                        else {
+                            layer.msg("清空失败");
+
+                        }
+                    }, url)
+
+                });
+
+            });
+
+            $('#del').click(function () {
+                var url = "/Service.ashx?actionname=05-03";
+                if ($('#id_table_list :checkbox:checked').not("#id_checkAll").length > 0) {
+
+                    var strs = "";
+                    $('#id_table_list :checkbox:checked').not("#id_checkAll").each(function (i, o) {
+
+                        strs += $.toString($(o).attr("id")) + ",";
+                    });
+                    strs = $.toTrimComma(strs);
+                    var par = { ids: strs,isValid:0 };
+                    layer.confirm("确定删除数据！", {
+                        btn: ['确定', '取消'] //按钮
+                    }, function () {
+                        EDUCAjax(par, function () { }, function (res) {
+                            if (res.status == 0) {
+                                layer.msg("删除成功");
+                                getDataList(1);
+                            }
+                            else {
+                                layer.msg("删除失败");
+
+                            }
+                        }, url)
+
+                    });
+
+                }
+                else {
+                    layer.msg("请选择数据");
+                }
+
+
+            });
+
+            $('#campus').change(function () {
+                getGrade();
+            });
+
+            $('#GradeCode').change(function () {
+                getClass();
+            });
+
+            $('#campus').trigger("change");
+
+            getDataList(1);
+        });
+
+        function getGrade() {
+            $('#GradeCode').empty();
+            var url = "/Service.ashx?actionname=05-05";
+            var par = {
+                campus: $.toString($('#campus').val())
+            };
+            EDUCAjax(par, function () { }, function (rs) {
+                if (rs.status == 0) {
+                    $('#GradeCode').append('<option value=""></option>');
+                    $(rs.data).each(function (i, o) {
+                        $('#GradeCode').append('<option value="' + o.GradeCode + '">' + o.GradeName + '</option>');
+                    });
+
+                }
+
+            }, url);
+        }
+
+        function getClass() {
+            $('#ClassCode').empty();
+            var url = "/Service.ashx?actionname=05-06";
+            var par = {
+                campus: $.toString($('#campus').val()),
+                gradecode: $.toString($('#GradeCode').val())
+            };
+            EDUCAjax(par, function () { }, function (rs) {
+                if (rs.status == 0) {
+                    $('#ClassCode').append('<option value=""></option>');
+                    $(rs.data).each(function (i, o) {
+                        $('#ClassCode').append('<option value="' + o.ClassCode + '">' + o.ClassName + '</option>');
+
+                    });
+                }
+
+            }, url);
+        }
+        function getDataList(currentPage) {
+            var url = "/Service.ashx?actionname=05-07";
+            var par = {
+                pageSize: 10,
+                currentPage: currentPage,
+                campus: $.toString($('#campus').val()),
+                gradeCode: $.toString($('#GradeCode').val()),
+                classCode: $.toString($('#ClassCode').val())
+            };
+            EDUCAjax(par, function () {
+
+            }, function (rs) {
+                if (rs.status == 0) {
+
+                    var htmlstr = "";
+                    $(rs.data).each(function (i, o) {
+                        htmlstr += '<tr>';
+                     
+                        htmlstr += '<td> <input id="' + $.toString(o.id) + '" name="check" type="checkbox"  /></td>';
+                        //htmlstr += '<td>' + $.toString(o.ClassCode) + '</td>';
+                        //htmlstr += '<td>' + $.toString(o.ClassCode) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.ClassName) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.VisibleTime).substring(0, 16) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.HideTime).substring(0, 16) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.ExamName) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.ExamRoom) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.ExamSubject) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.ExamTime) + '</td>';
+                        //htmlstr += '<td>' + $.toString(o.StudentNumberRange) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.StudentNumber) + '</td>';
+                        htmlstr += '<td>' + $.toString(o.Teachers) + '</td>';
+                        //htmlstr += '<td>' + $.toString(o.Notice) + '</td>';
+                        //htmlstr += '<td>' + $.toString(o.Note) + '</td>';
+                        htmlstr += '</tr>';
+                    });
+
+                    $("#id_table_list").html(htmlstr);
+
+
+                    //数据分页
+                    $("#id_pageList").pageList({
+                        cssType: "pagecss",
+                        totalpage: rs.totalPage,
+                        currentPage: rs.currentPage,
+                        recordCount: rs.recordCount,
+                        table: ".warp",
+                        callback: function (index) {
+                            getDataList(index);
+
+                        }
+                    });
+                }
+
+
+
+
+            }, url);
+        }
+    </script>
+
+</head>
+<!--style="overFlow-x: hidden; overflow-y:auto; word-break: break-all;"-->
+<body class=" pace-done">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList"></ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+                    <div class="padder">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="form-label control-label" style=" margin-bottom: 5px;">文&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件</label>
+                                <input type="text" style="width: 595px; height: 25px; vertical-align: middle;" id="uploadexcel" data-url="" class="form-control file">
+                                <div id="file_excel" style=""></div>
+                                <div id="uploadExcelQueue" style=""></div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="padder">
+                        <label for="">校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</label>
+                        <select id="campus"></select>
+                        <label for="" style="margin-left: 70px;" id="lbGradeCode">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级</label>
+                        <select id="GradeCode"></select>
+                        <label for="" style="margin-left: 70px;">班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级</label>
+                        <select id="ClassCode"></select>
+
+                    </div>
+                    <div class="padder">
+
+                        <div style="text-align:center;">
+                            <span style="margin-right:10px;"><input id="isDel" type="checkbox" checked="checked">是否删除历史数据 </span>
+                            <button class="btn btn-primary btn-sm" type="submit" id="down" style="width:68px;margin-right:15px;"><span>模板下载</span></button>
+                            <button class="btn btn-primary btn-sm" type="submit" id="import" style="width: 68px; margin-right: 15px; "><span>导入</span></button>
+                            <button class="btn btn-primary btn-sm" type="submit" id="select" style="width: 68px; margin-right: 15px; "><span>查询</span></button>
+                            <button class="btn btn-primary btn-sm" type="submit" id="del" style="width: 68px; margin-right: 15px; "><span>删除</span></button>
+                            <button class="btn btn-primary btn-sm" type="submit" id="empty" style="width: 68px; margin-right: 15px; "><span>清空</span></button>
+                          
+                        </div>
+                    </div>
+
+                    <div class="padder">
+                        <div class="tab-content" id="tab_1">
+                            <div style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                                <table>
+                                    <tr>
+                                        <th class="th1">
+                                            <input id="checkAll" type="checkbox" />
+                                        </th>
+
+                                        <th class="">班级</th>
+                                        <th class="">显示时间</th>
+                                        <th class="">关闭时间</th>
+                                        <th class="">考场名称</th>
+                                        <th class="">考场地址</th>
+                                        <th class="">考试科目</th>
+                                        <th class="">考试时间</th>
+                                        <!--<th class="">学号区间范围</th>-->
+                                        <th class="">人数</th>
+                                        <th class="">监考教师</th>
+
+                                    </tr>
+                                    <tbody id="id_table_list"></tbody>
+                                </table>
+                                <div class="fenye">
+                                    <ul id="id_pageList"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container">
+                <footer class="text-center">
+                    <script src="js/footer.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

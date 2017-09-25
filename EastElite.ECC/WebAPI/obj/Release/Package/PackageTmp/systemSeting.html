@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+
+    <script src="js/PushJS.js"></script>
+    <style>
+        select, .inputText {
+            width: 135px;
+        }
+
+        #classlist .padder label {
+            margin-left: 0px;
+        }
+
+        .padder {
+            padding: 4px 0;
+        }
+
+        .pager {
+            background: #e0e0e0;
+        }
+
+        .resourselist {
+            padding: 0 15px;
+        }
+
+            .resourselist table th, .resourselist table td {
+                width: 80px;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+
+            .resourselist table {
+                float: left;
+            }
+
+                .resourselist table th {
+                    background: #e0e0e0;
+                }
+
+        /*#classlist label {
+            width: 70px;
+        }*/
+    </style>
+    <script>
+        var isheadteacher = 0;
+        $(function () {
+            if (!loadHead('backmanage', 'systemSeting')) {
+                return;
+            }
+            if (loginUser.roleCode == "1072") {
+                //加载校区
+                if ($(loginUser.campus).length > 0) {
+                    $(loginUser.campus).each(function (i, o) {
+                        $('#campus').append('<option value="' + o.code + '">' + o.name + '</option>');
+                    });
+                }
+            }
+            //加载所有年级
+            getUserClassList(loginUser.userCode, $.toString($('#campus').val()));
+            $('#device').click(function () {
+                var url = "/Service.ashx?actionname=03-03";
+                var par = {
+                    schoolCode:loginUser.schoolCode,
+                    rootCode: $('#campus').val(),
+                    userCode: loginUser.userCode,
+                    userName:loginUser.userName,
+                    roleCode: loginUser.roleCode,
+                    gradeName: $('#GradeCode').find("option:selected").text(),
+                    SynchMode: $('#SynchMode').val()
+
+                };
+                EDUCAjax(par, function () {
+
+                }, function (rs) {
+
+                    if (rs.status == 0) {
+                        layer.msg("设备班级同步成功！");
+                    }
+                    else if (rs.status == -1) {
+                        layer.msg("设备班级同步失败，没有获取到信息！");
+                    }
+                    else {
+                        layer.msg("设备班级同步失败！");
+                    }
+                }, url);
+            });
+            $('#class').click(function () {
+                var url = "/Service.ashx?actionname=03-04";
+                var par = {
+                    schoolCode: loginUser.schoolCode,
+                    rootCode: $('#campus').val(),
+                    userCode: loginUser.userCode,
+                    userName: loginUser.userName,
+                    roleCode: loginUser.roleCode,
+                    gradeName: $('#GradeCode').find("option:selected").text(),
+                    SynchMode: $('#SynchMode').val()
+                };
+                EDUCAjax(par, function () {
+                }, function (rs) {
+                    if (rs.status == 0) {
+                        layer.msg("用户班级同步成功！");
+                    }
+                    else if (rs.status == -1) {
+                        layer.msg("用户班级同步失败，没有获取到信息！");
+                    }
+                    else {
+                        layer.msg("用户班级同步失败！");
+                    }
+                }, url);
+            });
+            $('#dict').click(function () {
+                var url = "/Service.ashx?actionname=03-05";
+                var par = {
+                    rootCode: $('#campus').val(),
+                    itemName: "ClassTypeID"
+                };
+                EDUCAjax(par, function () {
+                }, function (rs) {
+                    if (rs.status == 0) {
+                        layer.msg("数据词典同步成功！");
+                    }
+                    else if (rs.status == -1)
+                    {
+                        layer.msg("数据词典同步失败，没有获取到信息！");
+                    }
+                    else {
+                        layer.msg("数据词典同步失败！");
+                    }
+                }, url);
+            });
+
+            $('#campus').change(function () {
+                getUserClassList(loginUser.userCode, $.toString($('#campus').val()));
+            })
+        });
+        
+     
+
+
+        //管理员获取用户年级
+        function getUserClassList(userCode, rootCode) {
+            var url = "/Service.ashx?actionname=01-05";
+            var par = { "userCode": userCode, "rootCode": rootCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+                    $('#GradeCode').empty();
+                    if (res.data.length > 0) {
+                        $('#GradeCode').append('<option value=""></option>');
+                        $(res.data).each(function (i, o) {
+
+                            $('#GradeCode').append('<option value="' + $.toString(o.gradeCode) + '">' + $.toString(o.gradeName) + '</option>');
+                        });
+
+                    }
+
+
+                }
+            }, url);
+
+        }
+
+
+
+    </script>
+
+
+
+</head>
+<body class=" pace-done" style="overFlow-x: hidden; word-break: break-all">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+                        <!--<li>
+            <a href="backManage.html">
+                <i class="glyphicon glyphicon-th-list"></i>
+                <span>任务管理</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="userClassManage.html">
+                <i class="glyphicon glyphicon-play"></i>
+                <span>班级授权</span>
+            </a>
+        </li>
+        <li class="active">
+            <a href="#">
+                <i class="glyphicon glyphicon-cog"></i>
+                <span>系统设置</span>
+            </a>
+        </li>-->
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+                        <div id="classlist" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <label for="">校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</label>
+                                <select id="campus" ></select>
+                                <label for="" style="margin-left: 70px;" id="lbGradeCode">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级</label>
+                                <select id="GradeCode"></select>
+                                <label for="" style="margin-left: 70px;" id="lbSynchMode">模&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式</label>
+                                <select id="SynchMode">
+                                    <option value="2">追加</option>
+                                    <option value="1">更新</option>
+
+                                </select>
+
+                                <!--<button style="margin-left: 5px; background-color: RGB(12,163,210)" type="button" id="device" class="btn btn-primary btn-xs active">设备班级同步</button>
+                                <button style="margin-left: 5px; background-color: RGB(12,163,210); " type="button" id="class" class="btn btn-primary btn-xs active">用户班级同步</button>
+                                <button style="margin-left: 5px; background-color: RGB(12,163,210)" type="button" id="dict" class="btn btn-primary btn-xs active">数据词典同步</button>-->
+                            </div>
+                            <div class="padder">
+                                <div style="color:blue;">备注：
+                                </div>
+                                <div style="color:blue;">
+                                    1、设备班级同步为更新模式时，只更新电子班牌DeviceClassInfo表中已有的班级，不插入新班级；为追加模式时，支持插入新班级；
+                                </div>
+                                <div style="color:blue;">
+                                    2、用户班级同步为更新模式时，不会在UserClassInfo表中对经过班级授权的教师信息清空，为追加模式时，会清空班级授权的教师信息，适用于整个年级班级全部发生调整的情况。
+                                </div>
+                                </div><div class="padder"></div>
+    <div class="padder">
+        <button class="btn btn-primary btn-sm" type="submit" id="device" style="margin-left: 5px;"><span>设备班级同步</span></button>
+        <button class="btn btn-primary btn-sm" type="submit" id="class" style="margin-left: 5px;"><span>用户班级同步</span></button>
+        <button class="btn btn-primary btn-sm" type="submit" id="dict" style="margin-left: 5px;"><span>数据词典同步</span></button>
+
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <footer class="text-center">
+                <p>东方博冠（北京）科技有限公司 版权所有 &copy;2016-2020</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

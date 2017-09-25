@@ -1,0 +1,88 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>河北正定中学视频直播系统</title>
+ 
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+</head>
+
+<body>
+
+    <div class="cont">
+        <div class="demo">
+            <div class="login">
+                <div class="login__check"></div>
+                <div class="login__form">
+                    <div class="login__row">
+                        <svg class="login__icon name svg-icon" viewbox="0 0 20 20">
+                            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+
+                        </svg>
+                        <select class="login__input name" id="usertype" style="color:black;"><option value="1">教师</option><option value="2">学生</option><option value="3">家长</option></select>
+                      
+                    </div>
+                    <div class="login__row">
+                        <svg class="login__icon name svg-icon" viewbox="0 0 20 20">
+                            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+
+                        </svg>
+                        <input type="text" class="login__input name" id="usercode" placeholder="Username" />
+                    </div>
+                    <div class="login__row">
+                        <svg class="login__icon pass svg-icon" viewbox="0 0 20 20">
+                            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+                        </svg>
+                        <input type="password" class="login__input pass" id="password" placeholder="Password" />
+                    </div>
+                    <button type="button" class="login__submit">Sign in</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src='js/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+    <script type="text/javascript">
+
+        //平台、设备和操作系统
+        var system = {
+            win: false,
+            mac: false,
+            xll: false
+        };
+        //检测平台
+        var p = navigator.platform;
+        system.win = p.indexOf("Win") == 0;
+        system.mac = p.indexOf("Mac") == 0;
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面
+        if (system.win || system.mac || system.xll) {
+            if (navigator.appName == "Microsoft Internet Explorer") {
+                if (navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE6.0" || navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE7.0" || navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE8.0" || navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE9.0") {
+
+                    $('.svg-icon').hide();
+                    $('.login__check').hide();
+                    $('.login__input').css({ "background-color": "#FAFFBD", "color": "#36648B" });
+
+                }
+            }
+
+        } 
+  
+    </script>
+
+</body>
+</html>

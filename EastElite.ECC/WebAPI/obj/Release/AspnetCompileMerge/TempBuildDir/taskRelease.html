@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <!--<link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.min.css" rel="stylesheet" />-->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+    <script src="js/UploadJS.js"></script>
+    <script src="js/PushJS.js"></script>
+    <link href="Css/MpTab.css" rel="stylesheet" />
+    <script src="js/TaskReless.js"></script>
+    <script src="js/TaskRelessForMp.js"></script>
+</head>
+<!--style="overFlow-x: hidden; overflow-y:auto; word-break: break-all;"-->
+<body class=" pace-done">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+
+                        <!--<li>
+                            <a href="taskmanage.html" data-value="1">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span>任务查询</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="taskrelease.html" data-value="2">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                <span>任务发布</span>
+                            </a>
+                        </li>-->
+
+
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+
+                        <div id="classlist" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                            <!--<div class="clearfix bg-white"></div>-->
+                            <div class="padder" id="classHeadList">
+                                <label for="">校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</label>
+                                <select id="campus">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+                                <label for="" id="lbClassType" style="margin-left: 70px;">班级类型</label>
+                                <select id="ClassType">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+                                <label for="" id="lbSubjectType" style="margin-left: 70px;">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科</label>
+                                <select id="SubjectType">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+
+
+                            </div>
+
+
+                            <!--<div>
+                                <div class="m-t-n pager clearfix">
+                                </div>
+                            </div>-->
+                        </div>
+                        <div id="taskoper" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237); margin-top: 10px;">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <label for="" id="lbTaskTypeID">任务类型</label>
+                                <select id="TaskTypeID">
+
+                                    <!--<option value="1">普通任务</option>
+                                    <option value="2">定时任务</option>-->
+                                </select><span id="taskdatetime" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">开始时间</label>
+                                    <input id="stime" class="inputText" type="text" placeholder="请选择开始时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '%y-%M-#{%d}', maxDate: '#F{$dp.$D(\'etime\')||\'3000-10-01\'}' })" data-model="stime" />
+
+                                    <label for="" style="margin-left: 70px;">结束时间</label>
+                                    <input id="etime" class="inputText" type="text" placeholder="请选择结束时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'stime\')}', maxDate: '3000-10-01' })" data-model="etime" />
+                                </span>
+
+                            </div>
+                            <div class="padder">
+                                <label for="" id="lbOperateTypeID">操作类型</label>
+                                <select id="OperateTypeID"></select>
+                                <span id="Timingtime" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">开机时间</label>
+                                    <input id="Timingstime" class="inputText" type="text" placeholder="请选择开始时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'HH:mm:ss' })" data-model="Timingstime" value="06:30:00" />
+
+                                    <label for="" style="margin-left: 70px;">关机时间</label>
+                                    <input id="Timingetime" class="inputText" type="text" placeholder="请选择结束时间" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'HH:mm:ss' })" data-model="Timingetime" value="21:30:00" />
+                                </span>
+                                <span id="NavigationSet" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">显示状态</label>
+                                    <select id="Navigationshow">
+
+                                        <option value="1">显示</option>
+                                        <option value="2">隐藏</option>
+                                    </select>
+                                </span>
+                                <span id="StartProgramSwitchSet" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">开关状态</label>
+                                    <select id="StartProgramSwitchShow">
+                                        <option value="1">开启</option>
+                                        <option value="0">关闭</option>
+                                    </select>
+                                </span>
+                                <!--<span id="SelectClassName" style="display:none;">
+                                    <label for="" style="margin-left: 70px;">班级</label>
+                                    <select id="SelectClassCode">
+
+                                    </select>
+                                </span>-->
+                                <span id="CheckReBindClass"><input id="IsCheckReBindClass" style="margin-left: 70px;" type="checkbox">检查绑定班级 </span>
+                            </div>
+                            <div class="padder" id="">
+                                <label for="" id="lbDisplayModelID">布局类型</label>
+                                <select id="DisplayModelID"></select>
+                                <span id="CheckVersion"><input id="IsCheckVersion" style="margin-left: 70px;" type="checkbox">检查终端版本号 </span>
+
+                                <label for="" id="lbMessageTitle" style="margin-left: 70px;display:none;">消息标题</label>
+                                <input type="text" id="MessageTitle" style="width: 400px; display: none;" maxlength="50" placeholder="请输入消息标题" />
+
+                            </div>
+                            <div class="padder MessageContentText">
+                                <label for="" style="float: left;">消息内容</label>
+                                <textarea id="msgContentText" maxlength="500" style=" margin-left: 4px; width: 89.6%; height: 50px;" placeholder="请输入消息文本内容"></textarea>
+                            </div>
+                            <div>
+                                <!--<div class="m-t-n pager clearfix">
+                                </div>-->
+                            </div>
+                        </div>
+                        <div id="resourse" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237); margin-top: 10px;">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder" id="divimageectf">
+
+                                <label for="">图片显示</label>
+                                <input type="text" id="ImageSpanSecond" class="inputText" maxlength="4" onkeyup='this.value=this.value.replace(/\D/gi,"")' value="5" placeholder="请输入时间" />
+                                <span>秒</span>
+                                <label for="" style="margin-left: 50px;">图片效果</label>
+                                <select id="ImageEffectID">
+
+                                    <!--<option value="1">图片显示效果类型</option>
+                                    <option value="2">图片显示效果类型</option>
+                                    <option value="3">图片显示效果类型</option>-->
+                                </select>
+
+                                <span style="color: red; margin-left: 70px;">建议尺寸</span>
+                                <span style="color:red">（1280*960）</span>
+                            </div>
+
+                            <div class="padder"></div>
+                            <div class="resourselist clearfix">
+                                <div id="divimage" style="float: left; width: 350px;">
+                                    <div id="file_uploadImage" style="margin-top: 20px;float:left;"></div>
+                                    <div id="uploadImageQueue" style="margin-top: 0;float:right;width:250px;"></div>
+
+                                    <table id="table_image" style="width: 350px; table-layout: fixed; word-wrap: break-word; ">
+                                        <tr>
+                                            <th class="th3">名称</th>
+                                            <th class="th3">缩略图</th>
+                                            <th class="th3">尺寸大小</th>
+                                            <th class="th5">删除</th>
+                                        </tr>
+                                        <tbody id="id_table_list_image">
+                                            <!--<tr>
+                                                <td class="th3">名称</td>
+                                                <td class="th3">缩略图</td>
+                                                <td class="th3">原图尺寸</td>
+                                                <td class="th5">删除</td>
+                                            </tr>-->
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div id="idvideo" style="float: right; width: 350px;">
+                                    <div id="file_uploadVideo" style="margin-top: 20px;float:left;"></div>
+                                    <div id="uploadVideoQueue" style="margin-top: 0;float:right;width:250px;"></div>
+
+                                    <table id="table_video" style="width: 350px; table-layout: fixed; word-wrap: break-word; ">
+                                        <tr>
+                                            <th class="th3">名称</th>
+                                            <th class="th3">视频大小</th>
+                                            <th class="th5">删除</th>
+                                        </tr>
+                                        <tbody id="id_table_list_video"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div>
+
+                            </div>
+
+                            <!--<div class="m-t-n pager clearfix">
+                            </div>-->
+                        </div>
+                        <!--模版模块开始-->
+                        <div class="template dn">
+                            <div class="mt20">
+                                <div class=" btn btn-info btn-sm btn-primary"></div>
+                                <div class=" btn btn-info btn-sm "></div>
+                                <div class=" btn btn-info btn-sm "></div>
+                                <div class=" btn btn-info btn-sm "></div>
+                                <div class=" btn btn-info btn-sm "></div>
+                                <div class=" btn btn-info btn-sm "></div>
+                            </div>
+                            <div class="Area" style="border: 1px solid #ccc">
+                                <!--班级荣誉-->
+                                <div class="MpTab db MpTab1">
+                                </div>
+                                <div class="MpTab MpTab2">
+                                   
+                                </div>
+                                <div class="MpTab MpTab3">
+                                    <table width="100%" class="HomeWk" style="margin-top:5px;" align="center" border="0" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th align="center" width="50">布置时间</th>
+                                                <th align="center" width="50">作业类别</th>
+                                                <th align="center" width="50">作业学科</th>
+                                                <th align="center">作业内容</th>
+                                                <th align="center" width="80">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div style="margin-top: 10px; height:20px; ">
+                                        <div class=" btn btn-info btn-sm " onclick="AddHomeWk()" style="padding: 0px 5px; float: right; ">添加作业</div>
+                                    </div>
+                                </div>
+                                <div class="MpTab MpTab4">
+                                    <table width="100%" class="CheckItem" style="margin-top:5px;" align="center" border="0" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th align="center" width="50">检查日期</th>
+                                                <th align="center">检查项目</th>
+                                                <th align="center" width="100">分数</th>
+                                                <th align="center" width="120">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div style="margin-top: 10px; height:20px; ">
+                                        <div class=" btn btn-info btn-sm " onclick="AddCheckItem()" style="padding: 0px 5px; float: right; ">添加检查考勤</div>
+                                    </div>
+                                </div>
+                                <div class="MpTab MpTab5">
+                                </div>
+                                <div class="MpTab MpTab6">
+                                    <div class="MpTabOh">
+
+                                    </div>
+                                    <div style="margin-top: 10px; height:20px; ">
+                                        <div class=" btn btn-info btn-sm " onclick="AddNotice()" style="padding: 0px 5px; float: right; ">添加公告</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--模版模块结束-->
+
+                        <div id="" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237); margin-top: 10px;">
+                            <div class="clearfix bg-white"></div>
+                            <div class="padder">
+                                <button class="btn btn-primary btn-sm" type="submit" id="push" style="width:120px;"><span>发布</span></button>
+                                <!-- <button style="background-color:RGB(12,163,210);width:80px;" type="button" id="push" class="btn btn-primary btn-xs active">发布</button>-->
+                                <!--<input type="button" class="inputText" id="push" value="发布" />-->
+                            </div>
+                            <div>
+                                <!--<div class="m-t-n pager clearfix">
+                                </div>-->
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container">
+                <footer class="text-center">
+                    <script src="js/footer.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

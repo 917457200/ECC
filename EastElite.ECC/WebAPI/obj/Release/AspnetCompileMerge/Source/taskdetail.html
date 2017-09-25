@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <!--<link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.min.css" rel="stylesheet" />-->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+    <script src="js/UploadJS.js"></script>
+    <script src="js/PushJS.js"></script>
+    <style>
+        table { width: 100%; border: 1px; }
+
+            table .td1 { width: 15%; text-align: center; border: 1px solid #ccc; background: #e0e0e0; }
+
+            table .td2 { width: 35%; text-align: center; border: 1px solid #ccc; }
+    </style>
+
+    <script>
+        $(function () {
+            if (!loadHead('taskmanage', 'taskdetail')) {
+                return;
+            }
+            var id = $.toInt($.getUrlParam("id"));
+            if (id > 0) {
+                var par = { id: id };
+                var url = "/Service.ashx?actionname=01-15";
+                EDUCAjax(par, function () { }, function (rs) {
+                    if (rs.status == 0) {
+                        $(rs.data).each(function (i, o) {
+                            $("#id").html($.toString(o.ID));
+                            $("#code").html($.toString(o.Code));
+                            $("#displaymodelid").html($.toString(o.DisplayModelIDName));
+                            $("#operatetypeid").html($.toString(o.OperateTypeIDName));
+                            $("#messagetitle").html($.toString(o.MessageTitle));
+                            $("#messagetypeid").html($.toString(o.MessageTypeIDName));
+                            $("#messagesourceid").html($.toString(o.MessageSourceIDName));
+                            $("#tasktypeid").html($.toString(o.TaskTypeIDName));
+                            $("#rargetalias").html($.toString(o.RargetAlias));
+                            var messagecontent = $.parseJSON('{' + $.toString(o.MessageContent) + '}');
+                            var messagecontentalias = $.parseJSON('{' + $.toString(o.MessageContentAlias) + '}');
+                            $("#messagecontent_text").html($.toString(messagecontent.text));
+
+                            if (messagecontent.image != null && messagecontentalias.image != null && messagecontent.image.length == messagecontentalias.image.length && messagecontent.image.length > 0) {
+                                var strhtml = "";
+                                for (var i = 0; i < messagecontent.image.length; i++) {
+                                    var str = $.toString(messagecontent.image[i]);
+                                    var imageurl = str.substr(str.indexOf("/uploads/") + 18, str.length);
+                                    var thumbnailimageurl = str.replace(imageurl, "thumbnail" + imageurl);
+                                    var imagename = str.substr(str.indexOf("/uploads/") + 42, str.length);
+                                    strhtml += '<img src="' + thumbnailimageurl + '" title="' + $.toString(messagecontentalias.image[i]) + '"/>';
+                                }
+                                $("#messagecontent_image").html(strhtml);
+                            }
+                            if (messagecontent.video != null && messagecontentalias.video != null && messagecontent.video.length == messagecontentalias.video.length && messagecontent.video.length > 0) {
+                                var strhtml = "";
+                                for (var i = 0; i < messagecontent.video.length; i++) {
+                                    strhtml += '<span>' + $.toString(messagecontentalias.video[i]) + '</span>';
+                                }
+                                $("#messagecontent_video").html(strhtml);
+                            }
+
+                            $("#note").html($.toString(o.Note));
+                            $("#tasktime").html($.toString(o.TaskBeginTime) + "--" + $.toString(o.TaskEndTime));
+                            $("#taskpriorityid").html($.toString(o.TaskPriorityIDName));
+                            $("#imageeffectid").html($.toString(o.ImageEffectIDName));
+                            $("#imagespansecond").html($.toString(o.ImageSpanSecond) != "0" ? $.toString(o.ImageSpanSecond) + "s" : "");
+                            $("#createdname").html($.toString(o.CreatedName));
+                            $("#createddate").html($.toString(o.CreatedDate));
+                            $("#modifiedname").html($.toString(o.ModifiedName));
+
+                            $("#modifieddate").html($.toString(o.ModifiedDate));
+                            $("#taskresultid").html($.toString(o.TaskResultIDName));
+
+                        });
+                    }
+                    else {
+
+
+                    }
+                }, url)
+            }
+
+            $('#back').click(function () {
+                gotourl('taskmanage.html');
+            });
+        });
+
+
+    </script>
+
+</head>
+<!--style="overFlow-x: hidden; overflow-y:auto; word-break: break-all;"-->
+<body class=" pace-done">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+
+                        <!--<li class="active">
+                            <a href="taskmanage.html" data-value="1">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span>任务查询</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="taskrelease.html" data-value="2">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                <span>任务发布</span>
+                            </a>
+                        </li>-->
+
+
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+                        <div style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+                            <button class="btn btn-primary btn-sm" type="submit" id="back" style="float: right; margin-bottom: 10px;"><span>返回</span></button>
+                            <!--  <button style="float: right; background-color: RGB(12,163,210); margin-bottom: 10px;" type="button" id="back" class="btn btn-primary btn-xs active">返回</button>-->
+                            <table>
+                                <tr><td class="td1">序&nbsp;&nbsp;号</td><td class="td2" id="id"></td><td class="td1">任务编号</td><td id="code" class="td2"></td></tr>
+
+                                <tr><td class="td1">显示模式</td><td id="displaymodelid" class="td2"></td><td class="td1">操作类型</td><td id="operatetypeid" class="td2"></td></tr>
+
+                                <tr><td class="td1">消息标题</td><td id="messagetitle" class="td2"></td><td class="td1">消息类型</td><td id="messagetypeid" class="td2"></td></tr>
+
+                                <tr><td class="td1">消息来源</td><td id="messagesourceid" class="td2"></td><td class="td1">任务类型</td><td id="tasktypeid" class="td2"></td></tr>
+                                <tr><td class="td1">接收目标</td><td id="rargetalias" class="td2" colspan="3"></td></tr>
+                                <tr><td class="td1">消息内容</td><td id="messagecontent_text" class="td2" colspan="3"></td></tr>
+                                <tr><td class="td1">图片</td><td id="messagecontent_image" class="td2" colspan="3"></td></tr>
+                                <tr><td class="td1">视频</td><td id="messagecontent_video" class="td2" colspan="3"></td></tr>
+                                <tr><td class="td1">备注</td><td id="note" class="td2" colspan="3"></td></tr>
+                                <tr><td class="td1">有效期</td><td id="tasktime" class="td2"></td><td class="td1">优先级</td><td id="taskpriorityid" class="td2"></td></tr>
+
+                                <tr><td class="td1">图片显示效果</td><td id="imageeffectid" class="td2"></td><td class="td1">图片显示时间</td><td id="imagespansecond" class="td2"></td></tr>
+
+                                <tr><td class="td1">创建人</td><td id="createdname" class="td2"></td><td class="td1">创建时间</td><td id="createddate" class="td2"></td></tr>
+
+                                <tr><td class="td1">撤销人</td><td id="modifiedname" class="td2"></td><td class="td1">撤销时间</td><td id="modifieddate" class="td2"></td></tr>
+                                <tr><td class="td1">任务结果</td><td id="taskresultid" class="td2" colspan="3"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <footer class="text-center">
+                    <script src="js/footer.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

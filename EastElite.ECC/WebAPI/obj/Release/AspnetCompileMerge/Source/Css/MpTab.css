@@ -1,0 +1,38 @@
+﻿select, .inputText { width: 135px; }
+
+#classlist .padder label { margin-left: 0px; }
+
+.padder { padding: 4px 0; }
+
+.pager { background: #e0e0e0; }
+
+.resourselist { padding: 0 0; }
+
+    .resourselist table th, .resourselist table td { width: 80px; text-align: center; border: 1px solid #ccc; }
+
+    .resourselist table { float: left; }
+
+        .resourselist table th { background: #e0e0e0; }
+.mt20 { margin-top: 20px; }
+.Area {  padding: 10px 15px; }
+.MpTab { display: none;  }
+    .MpTab .padder{overflow:hidden}
+
+    .MpTab .padder label{ margin-right:10px; }
+    .MpTab .padder textarea { float:left; }
+.db { display: block; }
+.template { overflow:hidden;}
+.Image,.Vido { display:inline-block}
+    .Image .uploadify-queue-item {padding:0px; margin:0px; }
+    .MpTab .uploadify{ float:left;padding:0px;margin:0px;}
+    .MpTab img{ float:left;padding:0px;margin:0px; margin: 2px 3px}
+
+.MpTab .swfupload { top:0px; left:0px;}
+.fl{float:left;}
+.dn { display: none; }
+.MpTab table { border:1px solid #ccc;}
+.MpTab table th{ text-align:center; height:30px; line-height:30px; border-right:1px solid #ccc; border-bottom:1px solid #ccc;}
+.MpTab table td{ border-right:1px solid #ccc; border-bottom:1px solid #ccc; padding:0px;}
+.MpTabOh { overflow:hidden;}
+.mt20 .btn-info {display:none;
+}

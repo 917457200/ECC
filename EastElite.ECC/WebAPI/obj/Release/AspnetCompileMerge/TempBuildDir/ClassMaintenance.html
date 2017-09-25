@@ -1,0 +1,651 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <!--<link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Css/bootstrap-theme.min.css" rel="stylesheet" />-->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+    <script src="js/UploadJS.js"></script>
+    <script src="js/PushJS.js"></script>
+    <style>
+        select, .inputText { width: 135px; }
+
+        #classlist .padder label { margin-left: 0px; }
+
+        .padder { padding: 4px 0; }
+
+        .pager { background: #e0e0e0; }
+
+        .resourselist { padding: 0 15px; }
+
+        .leftlabel { width: 56px; }
+        td select { width: 150px; }
+        input[type='radio'] { cursor: pointer; }
+        .orderLabel { cursor: pointer; }
+        .RoomNum { position: relative; }
+        .dn { width: 80px; height: 34px; border: 0px; text-align: center; display: none; position: absolute; top: 0px; right: 0px; }
+
+        /*.resourselist table th, .resourselist table td {
+                width: 100%;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+                .resourselist table .th1 {
+                    width: 40%;
+                    text-align: center;
+                    border: 1px solid #ccc;
+                }
+            .resourselist table .th2 {
+                width: 10%;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+            .resourselist table {
+                float: left;
+            }
+
+                .resourselist table th {
+                    background: #e0e0e0;
+                }*/
+    </style>
+    <script>
+
+        var ocurrentpage = 1;
+        var arrayClasslist = new Array();
+        $(function () {
+            if (!loadHead('backmanage', 'classmaintenance')) {
+                return;
+            }
+            //加载头部
+            getHead(loginUser.userCode, loginUser.rootCode);
+
+
+
+            $('#search').click(function () {
+                ocurrentpage = 1;
+                getClassList();
+            });
+            $('#GradeCode').change(function (o) {
+                GetUserClassListByUserCodeAndRootCodeOrGradeCode(loginUser.userCode, $.toString($('#campus').val()), $.toString($('#GradeCode').val()));
+            })
+            $('#campus').change(function (o) {
+                GetUserClassListByUserCodeAndRootCodeOrGradeCode(loginUser.userCode, $.toString($('#campus').val()), $.toString($('#GradeCode').val()));
+            })
+            $('#id_table_list').delegate('select', 'change', function () {
+
+            })
+            ///保存提交
+            $('#id_table_list').delegate('.Preservation', 'click', function () {
+                var ojpushid = $.toString($(this).attr("data-jpushid"));
+                var ooldclassname = $.toString($(this).parent('td').prev().prev().prev('td').html());
+                var oclasscode = $.toString($(this).parent('td').prev('td').find('select').val());
+                var roomnum = $.toString($(this).parent('td').siblings('.RoomNum').find('input').val());
+                var orderSelect = $.toString($("input[type=radio][name=orderSelect]").val());
+                  
+                if (ojpushid == "") {
+                    layer.msg("JPushID为空,不能提交！");
+                    return;
+                }
+                if (oclasscode == "") {
+                    layer.msg("请选择目标班级");
+                    return;
+                }
+                var newpar = {
+                    JPushID: ojpushid,
+                    OldClassName: ooldclassname,
+                    classcode: oclasscode,
+                    ModefiedID: $.toString(loginUser.userCode),
+                    ModifiedName: $.toString(loginUser.userName),
+                    roomnum: roomnum,
+                    orderSelect: orderSelect,
+                    rootCode: $.toString($('#campus').val())
+                };
+                var Tclass = {
+                    JPushID: ojpushid,
+                    classcode: oclasscode
+                };
+                EDUCAjax(Tclass, function () { }, function (res) {
+                    if (res.status == "0") {
+                        if (confirm("已绑定该班级，确定从新绑定？原班级信息将会重置！")) {
+                            classBinding(newpar);
+                        }
+                    } else {
+                        classBinding(newpar);
+                    }
+                }, '/Service.ashx?actionname=01-48');
+            })
+            ///解绑提交
+            $('#id_table_list').delegate('.Relieve', 'click', function () {
+                var ojpushid = $.toString($(this).attr("data-jpushid"));
+                var ooldclassname = $.toString($(this).parent('td').prev().prev().prev('td').html());
+                var oclasscode = $.toString($(this).parent('td').prev('td').children('select').find("option")[0].value);
+                var roomnum = $.toString($(this).parent('td').siblings('.RoomNum').find('input').val());
+                var orderSelect = $.toString($("input[type=radio][name=orderSelect]").val());
+
+                if (ojpushid == "") {
+                    layer.msg("JPushID为空,不能提交！");
+                    return;
+                }
+                var newpar = {
+                    JPushID: ojpushid,
+                    OldClassName: ooldclassname,
+                    classcode: oclasscode,
+                    ModefiedID: $.toString(loginUser.userCode),
+                    ModifiedName: $.toString(loginUser.userName),
+                    roomnum: roomnum,
+                    orderSelect: orderSelect
+                };
+                EDUCAjax(newpar, function () { }, function (res) {
+                    if (res.status == "0") {
+                        getDataList(ocurrentpage);
+                        layer.msg("成功");
+
+                    }
+                    else {
+                        layer.msg("失败");
+                    }
+
+                }, '/Service.ashx?actionname=01-36');
+            })
+
+        });
+        function classBinding(newpar) {
+         
+
+         
+
+            EDUCAjax(newpar, function () { }, function (res) {
+                if (res.status == "0") {
+                    getDataList(ocurrentpage);
+                    layer.msg("成功");
+                }
+                else {
+                    layer.msg("失败");
+                }
+
+            }, '/Service.ashx?actionname=01-36');
+        }
+        function changeBackgroundColor() {
+            var tbl = $("#id_table_list");
+            rows = tbl.find("tr");
+            for (i = 0; i < rows.length; i++) {
+                var j = parseInt(i / 4);
+                var flag = false;
+                if (j % 2 == 0) {
+                    rows[i].style.backgroundColor = "#eff3fb";
+
+                }
+                else {
+                    rows[i].style.backgroundColor = "#FFFFFF";
+                }
+                ////if ((i-7) % 8 == 0 || (i-8) % 8 == 0)
+                ////{
+                ////     rows[i].style.backgroundColor = "green";
+                ////}
+                //if ((i - 7 > 0 && (i - 7) % 8 == 0) || (i - 6 > 0 && (i - 6) % 8 == 0) || i + 1 == 7 || i + 1 == 8) {
+                //    rows[i].style.backgroundColor = "#E4E2D7";
+                //}
+            }
+        }
+        //加载班级头部列表
+        function getHead(userCode, rootCode) {
+            var url = "/Service.ashx?actionname=01-04";
+            var par = { "userCode": userCode, "rootCode": rootCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+
+
+                    if (loginUser.roleCode == "1072") {
+                        $('#campus').empty();
+
+                        //加载校区
+                        if ($(loginUser.campus).length > 0) {
+
+                            $(loginUser.campus).each(function (i, o) {
+                                $('#campus').append('<option value="' + o.code + '">' + o.name + '</option>');
+                            });
+                        }
+                        if (res.data.length == 0) {
+                            layer.confirm('当前用户权限下没有班级，请进行在系统设置里同步设备和班级', function () {
+                                gotourl("systemSeting.html")//跳转系统设置
+                            });
+                            return;
+                        }
+                        //加载所有学科类型
+                        getUserSubjectTypeList(loginUser.userCode, $.toString($('#campus').val()));
+                        //加载所有班级类型
+                        getUserClassTypeList(loginUser.userCode, $.toString($('#campus').val()));
+                        //加载所有年级
+                        getUserClassList(loginUser.userCode, $.toString($('#campus').val()));
+                        GetUserClassListByUserCodeAndRootCodeOrGradeCode(loginUser.userCode, $.toString($('#campus').val()), "");
+
+                        getClassList();
+
+
+                    }
+                    else {
+                        gotourl("login.html")//跳转到首页
+                    }
+
+                }
+            }, url);
+
+        }
+
+        //获取用户学科类型
+        function getUserSubjectTypeList(userCode, rootCode) {
+            var url = "/Service.ashx?actionname=01-06";
+            var par = { "userCode": userCode, "rootCode": rootCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+                    $('#SubjectType').empty();
+                    if (res.data.length > 0) {
+                        $('#SubjectType').append('<option value=""></option>');
+                        $(res.data).each(function (i, o) {
+
+                            $('#SubjectType').append('<option value="' + $.toString(o.SubjectTypeID) + '">' + $.toString(o.SubjectTypeIDText) + '</option>');
+                        });
+                        //$('#SubjectType').show();
+                        //$('#lbSubjectType').show();
+                    }
+                    else {
+                        //$('#SubjectType').hide();
+                        //$('#lbSubjectType').hide();
+                        $('#SubjectType').empty();
+                    }
+                }
+            }, url);
+
+        }
+        //获取用户班级类型
+        function getUserClassTypeList(userCode, rootCode) {
+            var url = "/Service.ashx?actionname=01-07";
+            var par = { "userCode": userCode, "rootCode": rootCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+                    $('#ClassType').empty();
+                    if (res.data.length > 0) {
+                        $('#ClassType').append('<option value=""></option>');
+                        $(res.data).each(function (i, o) {
+
+                            $('#ClassType').append('<option value="' + $.toString(o.ClassTypeID) + '">' + $.toString(o.ClassTypeIDText) + '</option>');
+                        });
+                        //$('#lbClassType').show();
+                        //$('#ClassType').show();
+                    }
+                    else {
+                        //$('#lbClassType').hide();
+                        //$('#ClassType').hide();
+                        $('#ClassType').empty();
+                    }
+
+                }
+            }, url);
+
+        }
+        //管理员获取用户年级
+        function getUserClassList(userCode, rootCode) {
+            var url = "/Service.ashx?actionname=01-05";
+            var par = { "userCode": userCode, "rootCode": rootCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+                    $('#GradeCode').empty();
+                    if (res.data.length > 0) {
+                        $('#GradeCode').append('<option value=""></option>');
+                        $(res.data).each(function (i, o) {
+
+                            $('#GradeCode').append('<option value="' + $.toString(o.gradeCode) + '">' + $.toString(o.gradeName) + '</option>');
+                        });
+
+                    }
+
+
+                }
+            }, url);
+
+        }
+        //管理员获取用户班级
+        function GetUserClassListByUserCodeAndRootCodeOrGradeCode(userCode, rootCode, gradeCode) {
+            var url = "/Service.ashx?actionname=01-26";
+            var par = { "userCode": userCode, "rootCode": rootCode, "gradeCode": gradeCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+                    $('#ClassCode').empty();
+                    if (res.data.length > 0) {
+                        $('#ClassCode').append('<option value=""></option>');
+                        $(res.data).each(function (i, o) {
+
+                            $('#ClassCode').append('<option value="' + $.toString(o.ClassCode) + '">' + $.toString(o.ClassName) + '</option>');
+                        });
+
+                    }
+
+
+                }
+            }, url);
+
+        }
+
+
+
+        //管理员获取用户年级
+        function getClassList() {
+            var url = "/Service.ashx?actionname=03-07";
+            var par = { rootCode: $.toString($('#campus').val()), usercode: loginUser.userCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.ClassList != undefined && res.ClassList != null) {
+                    arrayClasslist = res.ClassList;
+                    getDataList(ocurrentpage);
+                }
+
+            }, url);
+
+        }
+        //获取设备信息
+        function getDataList(currentPage) {
+            ocurrentpage = currentPage;
+            var url = "/Service.ashx?actionname=01-02";
+            var par = {
+                pageSize: 10, currentPage: currentPage,
+                rootCode: $.toString($('#campus').val()),
+                classTypeID: $.toString($('#ClassType').val()),
+                subjectTypeID: $.toString($('#SubjectTypeID').val()),
+                gradeCode: $.toString($('#GradeCode').val()),
+                ClassCode: $.toString($('#ClassCode').val()),
+                version: $.toString($('#VersionCode').val()),
+                JPushIDStatus: $.toString($('#JPushIDStatus').val()),
+                HeartBeatStatus: $.toString($('#HeartBeatStatus').val()),
+                StartProgramSwitchStatus: $.toString($('#StartProgramSwitchStaus').val()),
+                InstallerVersion: $.toString($('#InstallerVersion').val()),
+                InstallerHeartBeatStatus: $.toString($('#InstallerHeartBeatStatus').val()),
+                order: "RoomNum asc",
+                sourceType: 1
+            };
+
+            EDUCAjax(par, function () {
+
+            }, function (rs) {
+                var htmlstr = "";
+                htmlstr += '<tr>';
+                htmlstr += '<td style="width:50px;">' + "校区" + '</td>';//校区
+                htmlstr += '<td style="width:80px;">' + "房间号" + '</td>';//房间号
+                htmlstr += '<td style="width:170px;">' + "JPushID" + '</td>';//JPushID
+                htmlstr += '<td style="width:60px;">' + "设备编号" + '</td>';//设备编号
+                htmlstr += '<td style="width:100px;">' + "现有班级" + '</td>';//现有班级
+                htmlstr += '<td style="width:70px;">' + "班主任" + '</td>';//班主任
+                htmlstr += '<td style="width:150px;">' + "新目标班级" + '</td>';//新目标班级
+                htmlstr += '<td>' + '操作' + '</td>';//ClassCode
+
+                htmlstr += '</tr>';
+                $(rs.data).each(function (i, o) {
+                    var rootname = getRootNameByRootCode($.toString(o.ClassCode).substr(0, 10));
+
+                    htmlstr += '<tr>';
+                    htmlstr += '<td>' + rootname + '</td>';//校区
+                    htmlstr += '<td class="RoomNum" >' + $.toString(o.RoomNum) + '<input class="dn" type="text" value="' + $.toString(o.RoomNum) + '"></td>';//房间号
+                    htmlstr += '<td>' + $.toString(o.JPushID) + '</td>';//JPushID
+                    htmlstr += '<td>' + $.toString(o.DeviceCode) + '</td>';//设备编号
+                    htmlstr += '<td>' + $.toString(o.ClassName) + '</td>';//现有班级
+                    htmlstr += '<td>' + $.toString(o.BanZhuRenName) + '</td>';//班主任
+                    if (arrayClasslist.length > 0) {
+                        htmlstr += '<td><select>';
+                        htmlstr += '<option  ban="" value="' + $("#campus").find("option:selected").val() + '">' + $.toString($("#campus").find("option:selected").text()) + '空班级</option>';//房间号
+                        for (var j = 0; j < arrayClasslist.length; j++) {
+                            if (arrayClasslist[j].ClassCode == $.toString(o.ClassCode)) {
+                                htmlstr += '<option selected = true ban="' + $.toString(arrayClasslist[j].BanZhuRenCode) + '" value="' + $.toString(arrayClasslist[j].ClassCode) + '">' + $.toString($("#campus").find("option:selected").text()) + $.toString(arrayClasslist[j].ClassName) + '</option>';//房间号
+                            }
+                            else {
+                                htmlstr += '<option  ban="' + $.toString(arrayClasslist[j].BanZhuRenCode) + '" value="' + $.toString(arrayClasslist[j].ClassCode) + '">' + $.toString($("#campus").find("option:selected").text()) + $.toString(arrayClasslist[j].ClassName) + '</option>';//房间号
+                            }
+                        }
+                        htmlstr += '</select></td>';
+
+                    }
+                    else {
+                        htmlstr += '<td><select> <option value="' + $.toString(o.ClassName) + '">' + $.toString(o.ClassName) + '</option></select></td>';//房间号
+
+                    }
+
+                    //htmlstr += '<td><a style="RGB(12,163,210)" href=\'javascript:save(this,"' + $.toString(o.JPushID) + '","' + $.toString(o.ClassName) + '");\'>' + '保存</a></td>';
+                    htmlstr += '<td><a class="Preservation" style="RGB(12,163,210);cursor:pointer;" data-JPushID="' + $.toString(o.JPushID) + '">' + '保存</a> <a class="Relieve" style="RGB(12,163,210);cursor:pointer;" data-JPushID="' + $.toString(o.JPushID) + '">' + '解绑</a></td>';
+                    htmlstr += '</tr>';
+
+                    //htmlstr += '<tr>';
+                    //htmlstr += '<td>' + "班级" + '</td>';//班级
+                    //htmlstr += '<td>' + "班主任" + '</td>';//班级
+                    //htmlstr += '<td>' + "目标班级" + '</td>';//ClassCode
+                    //htmlstr += '<td>' + '' + '</td>';//ClassCode
+
+                    //htmlstr += '</tr>';
+                    //htmlstr += '<tr>';
+
+
+
+
+                    //htmlstr += '<td>' + $.toString(o.ClassName) + '</td>';//班主任
+                    //htmlstr += '<td>' + $.toString(o.BanZhuRenName) + '</td>';//班主任
+                    //if (classlist.length > 0) {
+                    //    htmlstr += '<td><select>';
+                    //    for (var j = 0; j < classlist.length; j++) {
+                    //        htmlstr += '<option value="' + $.toString(classlist[j].ClassCode) + '">' + $.toString(classlist[j].ClassName) + '</option>';//房间号
+                    //    }
+                    //    htmlstr += '</select></td>';
+                    //}
+                    //else {
+                    //    htmlstr += '<td><select> <option value="' + $.toString(o.ClassName) + '">' + $.toString(o.ClassName) + '</option></select></td>';//房间号
+
+                    //}
+
+                    //htmlstr += '<td><a style="RGB(12,163,210)" href=\'javascript:Operate(16,"' + $.toString(o.JPushID) + '","' + $.toString(o.ClassName) + '","' + $.toString(rootname) + '",1);\'>' + '保存</a></td>';
+                    //htmlstr += '</tr>';
+
+                });
+
+                $("#id_table_list").html(htmlstr);
+                // changeBackgroundColor();
+
+                //数据分页
+                $("#id_pageList").pageList({
+                    cssType: "pagecss",
+                    totalpage: rs.totalPage,
+                    currentPage: rs.currentPage,
+                    recordCount: rs.recordCount,
+                    table: ".warp",
+                    callback: function (index) {
+                        getDataList(index)
+                    }
+                });
+                $(".RoomNum").click(function () {
+                    $(this).children("input").val($(this).text()).show().focus();
+                    $(this).children("input").blur(function () {
+                        $(this).hide();
+                        $(this).parent(".RoomNum").text($(this).val()).append($(this));
+                    })
+                })
+
+            }, url);
+
+        }
+
+
+
+        function RefreshList() {
+            var currentPage = $("#id_pageList [data-currentPage='currentPage']").html();//获取当前第几页
+
+            currentPage = $.toInt(currentPage) > 0 ? currentPage : 1;
+            getDataList(currentPage);
+
+        }
+
+
+
+        function getRootNameByRootCode(rootCode) {
+            var rootname = "";
+            $(loginUser.campus).each(function (i, o) {
+                if (o.code == rootCode) {
+                    rootname = o.name;
+
+                }
+            });
+            return rootname;
+        }
+
+    </script>
+</head>
+<!--style="overFlow-x: hidden; overflow-y:auto; word-break: break-all;"-->
+<body class=" pace-done">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList">
+
+
+                        <!--<li class="active">
+                            <a href="devicemanage.html" data-value="3">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span>设备管理</span>
+                            </a>
+                        </li>-->
+
+                    </ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+                    <div class="tab-content" id="tab_1">
+
+                        <div id="taskoper" style="background-color: white; padding: 8px 8px; position: relative; border: 1px solid rgb(230, 233, 237); margin-top: 10px;">
+                            <div class="padder" id="classHeadList">
+                                <label for="">校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</label>
+                                <select id="campus">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+                                <label for="" id="lbClassType" style="margin-left: 70px;">班级类型</label>
+                                <select id="ClassType">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+                                <label for="" class="leftlabel" id="lbSubjectType" style="margin-left: 70px;">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科</label>
+                                <select id="SubjectType">
+
+                                    <!--<option value="6101051006">校本部</option>
+                                    <option value="6101051007">东校区</option>-->
+                                </select>
+
+
+                            </div>
+
+
+                            <div class="padder">
+                                <label for="" id="lbGradeCode">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级</label>
+                                <select id="GradeCode"></select>
+                                <label for="" style="margin-left: 70px;">班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级</label>
+                                <select id="ClassCode" style="margin-left: -1px;"></select>
+
+                                <label for="" style="margin-left: 70px;">JPushID&nbsp;</label>
+                                <select id="JPushIDStatus">
+                                    <option value=""></option>
+                                    <option value="1">正常</option>
+                                    <option value="0">失效</option>
+
+                                </select>
+                            </div>
+
+                            <div class="padder">
+                                <label for="" id="lbGradeCode">是否发送重新绑定班级信息命令</label>
+                                <input id="Yes" name="orderSelect" type="radio" value="1" />
+                                <label for="Yes" class="orderLabel">是</label>
+                                <input id="No" checked name="orderSelect" type="radio" value="0" />
+                                <label for="No" class="orderLabel">否</label>
+                                <button class="btn btn-primary btn-sm" type="submit" id="search" style="float: right; margin-right: 3px; margin-bottom: 10px;"><span>查询</span></button>
+                            </div>
+                            <table>
+                                <!--<tr>
+                                    <th class="th1">
+                                        <input id="id_checkAll" type="checkbox" />
+                                    </th>
+                                    <th class="">校区</th>
+                                    <th class="">班级</th>
+
+                                    <th class="">设备编号</th>
+                                    <th class="">设备序列号</th>
+                                    <th class="">ClassCode</th>
+                                    <th class="">JPushID</th>
+                                    <th class="">房间号</th>
+                                    <th class="">班主任</th>
+                                    <th class="">任务时间</th>
+                                    <th class="">清空时间</th>
+                                    <th class="">开关机时间</th>
+                                    <th class="">导航栏可见</th>
+                                    <th class="">更新课程表时间</th>
+                                    <th class="">心跳检查时间</th>
+                                    <th class="">班牌系统版本</th>
+                                    <th class="">软件升级</th>
+                                    <th class="">版本检测</th>
+                                </tr>-->
+                                <tbody id="id_table_list"></tbody>
+                            </table>
+                            <div class="fenye">
+                                <ul id="id_pageList"></ul>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <footer class="text-center">
+                    <script src="js/footer.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+     <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+  
+    <script type="text/javascript">
+        $(function () {
+
+            getDataList(1);
+        
+        });
+
+        function getDataList(currentPage) {
+            var url = "/Service.ashx?actionname=01-12";
+            var par = { pageSize: 10, currentPage: currentPage };
+
+            EDUCAjax(par, function () {
+
+            }, function (rs) {
+
+                var htmlstr = '';
+                $(rs.data).each(function (i, o) {
+                    htmlstr += '<tr>';
+                    htmlstr += '<td> <input id="' + o.id + '" name="check" type="checkbox" data-par="{6}"  /></td>';
+                    htmlstr += '<td>{0}</td>';
+                    htmlstr += '<td>{1}</td>';
+                    htmlstr += '<td>{2}</td>';
+                    htmlstr += '<td>{3}</td>';
+                    htmlstr += '<td>{4}</td>';
+                    htmlstr += '<td>{5}</td>';
+                    htmlstr += '</tr>';
+                    htmlstr = htmlstr.format(sortImg(i, rs.data.Code), $.toString(o.CreatedDate), o.DisplayModelID, o.CreatedName);
+                });
+
+                $("#id_table_list").html(htmlstr);
+
+                //数据分页
+                $("#id_pageList").pageList({
+                    cssType: "pagecss",
+                    totalpage: rs.totalPage,
+                    currentPage: rs.currentPage,
+                    recordCount: rs.recordCount,
+                    table: ".warp",
+                    callback: function (index) {
+                        getDataList(index)
+                    }
+                });
+
+
+            }, url);
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="">
+        <table>
+            <tr>
+                <th class="th1">
+                    <input id="id_checkAll" type="checkbox" />
+                </th>
+                <th class="th5">序号</th>
+                <th class="th3">课时名称</th>
+                <th class="th3">授课类型</th>
+                <th class="th5">授课教师</th>
+                <th class="th5">授课时间</th>
+                <th class="th5">状态</th>
+
+            </tr>
+            <tbody id="id_table_list"></tbody>
+        </table>
+    </div>
+    <div class="fenye">
+        <ul id="id_pageList"></ul>
+    </div>
+</body>
+</html>
+
