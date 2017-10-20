@@ -61,3 +61,11 @@ E:\项目\电子班牌\EastElite.ECC\PublicLib\bin\Release\ICSharpCode.SharpZipL
 E:\项目\电子班牌\EastElite.ECC\PublicLib\obj\Release\PublicLib.csprojResolveAssemblyReference.cache
 E:\项目\电子班牌\EastElite.ECC\PublicLib\obj\Release\PublicLib.dll
 E:\项目\电子班牌\EastElite.ECC\PublicLib\obj\Release\PublicLib.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Release\PublicLib.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Release\PublicLib.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Release\Newtonsoft.Json.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Release\log4net.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\obj\Release\PublicLib.csprojResolveAssemblyReference.cache
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\obj\Release\PublicLib.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\obj\Release\PublicLib.pdb

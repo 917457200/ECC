@@ -43,6 +43,7 @@
     <Compile Include="Bll\bllBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bll\bllFingerPrintInfo.cs" />
     <Compile Include="Bll\bllDataFieldInfo.cs" />
     <Compile Include="Bll\bllDeviceClassInfo.cs" />
     <Compile Include="Bll\bllDeviceTaskInfo.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Bll\bllPaging.cs" />
     <Compile Include="Bll\bllStartupProgramTaskInfo.cs" />
     <Compile Include="Bll\bllUserClassInfo.cs" />
+    <Compile Include="Dal\dalFingerPrintInfo.cs" />
     <Compile Include="Bll\LoginUniqueness.cs" />
     <Compile Include="Dal\dalDataFieldInfo.cs" />
     <Compile Include="Dal\dalDeviceClassInfo.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Model\DeviceTaskNoticeInfo.cs" />
     <Compile Include="Model\DictEntity.cs" />
     <Compile Include="Model\ExaminationInfoEntity.cs" />
+    <Compile Include="Model\FingerPrintInfoEntity.cs" />
     <Compile Include="Model\operatelogEntity.cs" />
     <Compile Include="Model\StartupProgramTaskInfoEntity.cs" />
     <Compile Include="Model\UserClassInfoEntity.cs" />

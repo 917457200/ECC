@@ -93,3 +93,17 @@ E:\项目\电子班牌\EastElite.ECC\EDUC.Common\bin\Release\PublicLib.pdb
 E:\项目\电子班牌\EastElite.ECC\EDUC.Common\obj\Release\EDUC.Common.csprojResolveAssemblyReference.cache
 E:\项目\电子班牌\EastElite.ECC\EDUC.Common\obj\Release\EDUC.Common.dll
 E:\项目\电子班牌\EastElite.ECC\EDUC.Common\obj\Release\EDUC.Common.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\EDUC.Common.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\EDUC.Common.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\jpush-api.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\PublicLib.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\Newtonsoft.Json.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\Memcached.ClientLibrary.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\Aspose.Cells.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\log4net.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\jpush-api.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Release\PublicLib.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\obj\Release\EDUC.Common.csprojResolveAssemblyReference.cache
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\obj\Release\EDUC.Common.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\obj\Release\EDUC.Common.pdb

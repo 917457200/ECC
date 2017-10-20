@@ -107,3 +107,15 @@ E:\项目\电子班牌\EastElite.ECC\EDUC.Common\bin\Debug\PublicLib.pdb
 E:\项目\电子班牌\EastElite.ECC\EDUC.Common\obj\Debug\EDUC.Common.csprojResolveAssemblyReference.cache
 E:\项目\电子班牌\EastElite.ECC\EDUC.Common\obj\Debug\EDUC.Common.dll
 E:\项目\电子班牌\EastElite.ECC\EDUC.Common\obj\Debug\EDUC.Common.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\EDUC.Common.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\EDUC.Common.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\jpush-api.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\PublicLib.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\Newtonsoft.Json.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\Memcached.ClientLibrary.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\Aspose.Cells.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\jpush-api.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\bin\Debug\PublicLib.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\obj\Debug\EDUC.Common.csprojResolveAssemblyReference.cache
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\obj\Debug\EDUC.Common.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\EDUC.Common\obj\Debug\EDUC.Common.pdb

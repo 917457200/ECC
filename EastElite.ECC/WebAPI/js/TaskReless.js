@@ -536,6 +536,7 @@ function getUserClassList(userCode, rootCode) {
     EDUCAjax(par, function () { }, function (res) {
         if (res.status == 0) {
             $('#classlist div:not("#classHeadList")').remove();
+            var Calss = "";
             //循环添加年级
             $(res.data).each(function (i, o) {
                 var htmlstr = '';
@@ -555,11 +556,14 @@ function getUserClassList(userCode, rootCode) {
 
             //循环添加班级
             $(res.data).each(function (i, o) {
-                var htmlCalss = '<label class="checkbox-inline" style="width: 72px;"><input type="checkbox" name="class" id="class_{0}" value="{1}"  data-Grade="{2}" title="{4}"> {3}</label>';
+                if (!(Calss.indexOf($.toString(o.ClassCode))>-1)) {
+                    var htmlCalss = '<label class="checkbox-inline" style="width: 72px;"><input type="checkbox" name="class" id="class_{0}" value="{1}"  data-Grade="{2}" title="{4}"> {3}</label>';
 
-                htmlCalss = htmlCalss.format($.toString(o.ClassCode), $.toString(o.JPushID), $.toString(o.gradeCode).substr(11, 16), $.toString(o.ClassName).replace($.toString(o.gradeName), ""), $.toString(o.ClassName));
-                if ($('#classlist #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + ' #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + '_classlist').length > 0) {
-                    $('#classlist #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + ' #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + '_classlist').append(htmlCalss);
+                    htmlCalss = htmlCalss.format($.toString(o.ClassCode), $.toString(o.JPushID), $.toString(o.gradeCode).substr(11, 16), $.toString(o.ClassName).replace($.toString(o.gradeName), ""), $.toString(o.ClassName));
+                    if ($('#classlist #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + ' #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + '_classlist').length > 0) {
+                        $('#classlist #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + ' #div_grade_' + $.toString(o.gradeCode).substr(11, 16) + '_classlist').append(htmlCalss);
+                        Calss += $.toString(o.ClassCode)+",";
+                    }
                 }
             });
 

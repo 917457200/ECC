@@ -72,6 +72,12 @@ namespace EastElite.ECC
                             PushToStartupProgramAPI startupProgramAPI = new PushToStartupProgramAPI();
                             startupProgramAPI._DoProcess( context );
                             break;
+                        case "07":
+                            // logentity.module = "";
+                            //operatelog.Add(logentity);
+                            FingerPrintAPI fingerprint = new FingerPrintAPI();
+                            fingerprint._DoProcess( context );
+                            break;
                         default:
                             logentity.otype = "1";
                             logentity.logcontent = "没有找到提供的该服务";

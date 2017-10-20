@@ -120,7 +120,7 @@ function EDUCAjax() {
             callback(res);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("服务器异常，请稍后重试！");
+            //alert("服务器异常，请稍后重试！");
             //var XMLHttpRequestStr = XMLHttpRequest.readyState + "  " + XMLHttpRequest.status + "  " +
             //    XMLHttpRequest.statusText + "  " + XMLHttpRequest.responseText;
             //alert("XMLHttpRequest：" + XMLHttpRequestStr + "</br>textStatus：" + textStatus + "</br>errorThrown：" + errorThrown);

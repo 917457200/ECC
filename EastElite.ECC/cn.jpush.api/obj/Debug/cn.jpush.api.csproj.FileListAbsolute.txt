@@ -38,3 +38,9 @@ E:\项目\电子班牌\EastElite.ECC\cn.jpush.api\bin\Debug\Newtonsoft.Json.dll
 E:\项目\电子班牌\EastElite.ECC\cn.jpush.api\obj\Debug\jpush-api.dll
 E:\项目\电子班牌\EastElite.ECC\cn.jpush.api\obj\Debug\jpush-api.pdb
 E:\项目\电子班牌\EastElite.ECC\cn.jpush.api\obj\Debug\cn.jpush.api.csprojResolveAssemblyReference.cache
+E:\项目\电子班牌\ECC\EastElite.ECC\cn.jpush.api\bin\Debug\jpush-api.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\cn.jpush.api\bin\Debug\jpush-api.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\cn.jpush.api\bin\Debug\Newtonsoft.Json.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\cn.jpush.api\obj\Debug\cn.jpush.api.csprojResolveAssemblyReference.cache
+E:\项目\电子班牌\ECC\EastElite.ECC\cn.jpush.api\obj\Debug\jpush-api.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\cn.jpush.api\obj\Debug\jpush-api.pdb
