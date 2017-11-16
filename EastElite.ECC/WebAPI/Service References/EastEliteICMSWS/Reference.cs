@@ -148,6 +148,27 @@ namespace EastElite.ECC.EastEliteICMSWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetECCDeviceClassItem", ReplyAction="*")]
         System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassItemResponse> GetECCDeviceClassItemAsync(EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassItemRequest request);
         
+        // CODEGEN: 命名空间 http://eastelite.com.cn/webservices/ 的元素名称 roleCode 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetAdminCardByRoleCode", ReplyAction="*")]
+        EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse GetAdminCardByRoleCode(EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetAdminCardByRoleCode", ReplyAction="*")]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse> GetAdminCardByRoleCodeAsync(EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest request);
+        
+        // CODEGEN: 命名空间 http://eastelite.com.cn/webservices/ 的元素名称 deviceCode 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/InsertUserICCardRecordInfoItem", ReplyAction="*")]
+        EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse InsertUserICCardRecordInfoItem(EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/InsertUserICCardRecordInfoItem", ReplyAction="*")]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse> InsertUserICCardRecordInfoItemAsync(EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest request);
+        
+        // CODEGEN: 命名空间 http://eastelite.com.cn/webservices/ 的元素名称 classCode 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetECCClassInfoItem", ReplyAction="*")]
+        EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse GetECCClassInfoItem(EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetECCClassInfoItem", ReplyAction="*")]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse> GetECCClassInfoItemAsync(EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest request);
+        
         // CODEGEN: 命名空间 http://eastelite.com.cn/webservices/ 的元素名称 rootCode 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetECCDeviceClassList", ReplyAction="*")]
         EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassListResponse GetECCDeviceClassList(EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassListRequest request);
@@ -176,6 +197,13 @@ namespace EastElite.ECC.EastEliteICMSWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/CheckUserLoginBookItem", ReplyAction="*")]
         System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.CheckUserLoginBookItemResponse> CheckUserLoginBookItemAsync(EastElite.ECC.EastEliteICMSWS.CheckUserLoginBookItemRequest request);
         
+        // CODEGEN: 命名空间 http://eastelite.com.cn/webservices/ 的元素名称 cardSN 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetUserDataByCustomerCardSN", ReplyAction="*")]
+        EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse GetUserDataByCustomerCardSN(EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetUserDataByCustomerCardSN", ReplyAction="*")]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse> GetUserDataByCustomerCardSNAsync(EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest request);
+        
         // CODEGEN: 命名空间 http://eastelite.com.cn/webservices/ 的元素名称 code 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetUserDataByDiningCardCode", ReplyAction="*")]
         EastElite.ECC.EastEliteICMSWS.GetUserDataByDiningCardCodeResponse GetUserDataByDiningCardCode(EastElite.ECC.EastEliteICMSWS.GetUserDataByDiningCardCodeRequest request);
@@ -189,6 +217,13 @@ namespace EastElite.ECC.EastEliteICMSWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetUserDataByUserCode", ReplyAction="*")]
         System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetUserDataByUserCodeResponse> GetUserDataByUserCodeAsync(EastElite.ECC.EastEliteICMSWS.GetUserDataByUserCodeRequest request);
+        
+        // CODEGEN: 命名空间 http://eastelite.com.cn/webservices/ 的元素名称 userName 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetUserDiningCardDataList", ReplyAction="*")]
+        EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse GetUserDiningCardDataList(EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://eastelite.com.cn/webservices/GetUserDiningCardDataList", ReplyAction="*")]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse> GetUserDiningCardDataListAsync(EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1638,6 +1673,230 @@ namespace EastElite.ECC.EastEliteICMSWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetAdminCardByRoleCodeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAdminCardByRoleCode", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequestBody Body;
+        
+        public GetAdminCardByRoleCodeRequest() {
+        }
+        
+        public GetAdminCardByRoleCodeRequest(EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetAdminCardByRoleCodeRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string roleCode;
+        
+        public GetAdminCardByRoleCodeRequestBody() {
+        }
+        
+        public GetAdminCardByRoleCodeRequestBody(string roleCode) {
+            this.roleCode = roleCode;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetAdminCardByRoleCodeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAdminCardByRoleCodeResponse", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponseBody Body;
+        
+        public GetAdminCardByRoleCodeResponse() {
+        }
+        
+        public GetAdminCardByRoleCodeResponse(EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetAdminCardByRoleCodeResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetAdminCardByRoleCodeResult;
+        
+        public GetAdminCardByRoleCodeResponseBody() {
+        }
+        
+        public GetAdminCardByRoleCodeResponseBody(string GetAdminCardByRoleCodeResult) {
+            this.GetAdminCardByRoleCodeResult = GetAdminCardByRoleCodeResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class InsertUserICCardRecordInfoItemRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="InsertUserICCardRecordInfoItem", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequestBody Body;
+        
+        public InsertUserICCardRecordInfoItemRequest() {
+        }
+        
+        public InsertUserICCardRecordInfoItemRequest(EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class InsertUserICCardRecordInfoItemRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string deviceCode;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public long deviceRecordID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string deviceJPushID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string icCardSN;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string photoUrl;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string icCardTime;
+        
+        public InsertUserICCardRecordInfoItemRequestBody() {
+        }
+        
+        public InsertUserICCardRecordInfoItemRequestBody(string deviceCode, long deviceRecordID, string deviceJPushID, string icCardSN, string photoUrl, string icCardTime) {
+            this.deviceCode = deviceCode;
+            this.deviceRecordID = deviceRecordID;
+            this.deviceJPushID = deviceJPushID;
+            this.icCardSN = icCardSN;
+            this.photoUrl = photoUrl;
+            this.icCardTime = icCardTime;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class InsertUserICCardRecordInfoItemResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="InsertUserICCardRecordInfoItemResponse", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponseBody Body;
+        
+        public InsertUserICCardRecordInfoItemResponse() {
+        }
+        
+        public InsertUserICCardRecordInfoItemResponse(EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class InsertUserICCardRecordInfoItemResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string InsertUserICCardRecordInfoItemResult;
+        
+        public InsertUserICCardRecordInfoItemResponseBody() {
+        }
+        
+        public InsertUserICCardRecordInfoItemResponseBody(string InsertUserICCardRecordInfoItemResult) {
+            this.InsertUserICCardRecordInfoItemResult = InsertUserICCardRecordInfoItemResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetECCClassInfoItemRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetECCClassInfoItem", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequestBody Body;
+        
+        public GetECCClassInfoItemRequest() {
+        }
+        
+        public GetECCClassInfoItemRequest(EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetECCClassInfoItemRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string classCode;
+        
+        public GetECCClassInfoItemRequestBody() {
+        }
+        
+        public GetECCClassInfoItemRequestBody(string classCode) {
+            this.classCode = classCode;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetECCClassInfoItemResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetECCClassInfoItemResponse", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponseBody Body;
+        
+        public GetECCClassInfoItemResponse() {
+        }
+        
+        public GetECCClassInfoItemResponse(EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetECCClassInfoItemResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetECCClassInfoItemResult;
+        
+        public GetECCClassInfoItemResponseBody() {
+        }
+        
+        public GetECCClassInfoItemResponseBody(string GetECCClassInfoItemResult) {
+            this.GetECCClassInfoItemResult = GetECCClassInfoItemResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetECCDeviceClassListRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetECCDeviceClassList", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
@@ -1942,6 +2201,74 @@ namespace EastElite.ECC.EastEliteICMSWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserDataByCustomerCardSNRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserDataByCustomerCardSN", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequestBody Body;
+        
+        public GetUserDataByCustomerCardSNRequest() {
+        }
+        
+        public GetUserDataByCustomerCardSNRequest(EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetUserDataByCustomerCardSNRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string cardSN;
+        
+        public GetUserDataByCustomerCardSNRequestBody() {
+        }
+        
+        public GetUserDataByCustomerCardSNRequestBody(string cardSN) {
+            this.cardSN = cardSN;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserDataByCustomerCardSNResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserDataByCustomerCardSNResponse", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponseBody Body;
+        
+        public GetUserDataByCustomerCardSNResponse() {
+        }
+        
+        public GetUserDataByCustomerCardSNResponse(EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetUserDataByCustomerCardSNResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetUserDataByCustomerCardSNResult;
+        
+        public GetUserDataByCustomerCardSNResponseBody() {
+        }
+        
+        public GetUserDataByCustomerCardSNResponseBody(string GetUserDataByCustomerCardSNResult) {
+            this.GetUserDataByCustomerCardSNResult = GetUserDataByCustomerCardSNResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetUserDataByDiningCardCodeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserDataByDiningCardCode", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
@@ -2075,6 +2402,74 @@ namespace EastElite.ECC.EastEliteICMSWS {
         
         public GetUserDataByUserCodeResponseBody(string GetUserDataByUserCodeResult) {
             this.GetUserDataByUserCodeResult = GetUserDataByUserCodeResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserDiningCardDataListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserDiningCardDataList", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequestBody Body;
+        
+        public GetUserDiningCardDataListRequest() {
+        }
+        
+        public GetUserDiningCardDataListRequest(EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetUserDiningCardDataListRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string userName;
+        
+        public GetUserDiningCardDataListRequestBody() {
+        }
+        
+        public GetUserDiningCardDataListRequestBody(string userName) {
+            this.userName = userName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserDiningCardDataListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserDiningCardDataListResponse", Namespace="http://eastelite.com.cn/webservices/", Order=0)]
+        public EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponseBody Body;
+        
+        public GetUserDiningCardDataListResponse() {
+        }
+        
+        public GetUserDiningCardDataListResponse(EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://eastelite.com.cn/webservices/")]
+    public partial class GetUserDiningCardDataListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetUserDiningCardDataListResult;
+        
+        public GetUserDiningCardDataListResponseBody() {
+        }
+        
+        public GetUserDiningCardDataListResponseBody(string GetUserDiningCardDataListResult) {
+            this.GetUserDiningCardDataListResult = GetUserDiningCardDataListResult;
         }
     }
     
@@ -2674,6 +3069,91 @@ namespace EastElite.ECC.EastEliteICMSWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetAdminCardByRoleCode(EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest request) {
+            return base.Channel.GetAdminCardByRoleCode(request);
+        }
+        
+        public string GetAdminCardByRoleCode(string roleCode) {
+            EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequestBody();
+            inValue.Body.roleCode = roleCode;
+            EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse retVal = ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetAdminCardByRoleCode(inValue);
+            return retVal.Body.GetAdminCardByRoleCodeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse> EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetAdminCardByRoleCodeAsync(EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest request) {
+            return base.Channel.GetAdminCardByRoleCodeAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse> GetAdminCardByRoleCodeAsync(string roleCode) {
+            EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeRequestBody();
+            inValue.Body.roleCode = roleCode;
+            return ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetAdminCardByRoleCodeAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.InsertUserICCardRecordInfoItem(EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest request) {
+            return base.Channel.InsertUserICCardRecordInfoItem(request);
+        }
+        
+        public string InsertUserICCardRecordInfoItem(string deviceCode, long deviceRecordID, string deviceJPushID, string icCardSN, string photoUrl, string icCardTime) {
+            EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest inValue = new EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequestBody();
+            inValue.Body.deviceCode = deviceCode;
+            inValue.Body.deviceRecordID = deviceRecordID;
+            inValue.Body.deviceJPushID = deviceJPushID;
+            inValue.Body.icCardSN = icCardSN;
+            inValue.Body.photoUrl = photoUrl;
+            inValue.Body.icCardTime = icCardTime;
+            EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse retVal = ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).InsertUserICCardRecordInfoItem(inValue);
+            return retVal.Body.InsertUserICCardRecordInfoItemResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse> EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.InsertUserICCardRecordInfoItemAsync(EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest request) {
+            return base.Channel.InsertUserICCardRecordInfoItemAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse> InsertUserICCardRecordInfoItemAsync(string deviceCode, long deviceRecordID, string deviceJPushID, string icCardSN, string photoUrl, string icCardTime) {
+            EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest inValue = new EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemRequestBody();
+            inValue.Body.deviceCode = deviceCode;
+            inValue.Body.deviceRecordID = deviceRecordID;
+            inValue.Body.deviceJPushID = deviceJPushID;
+            inValue.Body.icCardSN = icCardSN;
+            inValue.Body.photoUrl = photoUrl;
+            inValue.Body.icCardTime = icCardTime;
+            return ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).InsertUserICCardRecordInfoItemAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetECCClassInfoItem(EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest request) {
+            return base.Channel.GetECCClassInfoItem(request);
+        }
+        
+        public string GetECCClassInfoItem(string classCode) {
+            EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequestBody();
+            inValue.Body.classCode = classCode;
+            EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse retVal = ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetECCClassInfoItem(inValue);
+            return retVal.Body.GetECCClassInfoItemResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse> EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetECCClassInfoItemAsync(EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest request) {
+            return base.Channel.GetECCClassInfoItemAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse> GetECCClassInfoItemAsync(string classCode) {
+            EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemRequestBody();
+            inValue.Body.classCode = classCode;
+            return ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetECCClassInfoItemAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassListResponse EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetECCDeviceClassList(EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassListRequest request) {
             return base.Channel.GetECCDeviceClassList(request);
         }
@@ -2790,6 +3270,31 @@ namespace EastElite.ECC.EastEliteICMSWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetUserDataByCustomerCardSN(EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest request) {
+            return base.Channel.GetUserDataByCustomerCardSN(request);
+        }
+        
+        public string GetUserDataByCustomerCardSN(string cardSN) {
+            EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequestBody();
+            inValue.Body.cardSN = cardSN;
+            EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse retVal = ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetUserDataByCustomerCardSN(inValue);
+            return retVal.Body.GetUserDataByCustomerCardSNResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse> EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetUserDataByCustomerCardSNAsync(EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest request) {
+            return base.Channel.GetUserDataByCustomerCardSNAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse> GetUserDataByCustomerCardSNAsync(string cardSN) {
+            EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNRequestBody();
+            inValue.Body.cardSN = cardSN;
+            return ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetUserDataByCustomerCardSNAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         EastElite.ECC.EastEliteICMSWS.GetUserDataByDiningCardCodeResponse EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetUserDataByDiningCardCode(EastElite.ECC.EastEliteICMSWS.GetUserDataByDiningCardCodeRequest request) {
             return base.Channel.GetUserDataByDiningCardCode(request);
         }
@@ -2839,6 +3344,31 @@ namespace EastElite.ECC.EastEliteICMSWS {
             inValue.Body.userCode = userCode;
             inValue.Body.userType = userType;
             return ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetUserDataByUserCodeAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetUserDiningCardDataList(EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest request) {
+            return base.Channel.GetUserDiningCardDataList(request);
+        }
+        
+        public string GetUserDiningCardDataList(string userName) {
+            EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequestBody();
+            inValue.Body.userName = userName;
+            EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse retVal = ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetUserDiningCardDataList(inValue);
+            return retVal.Body.GetUserDiningCardDataListResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse> EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap.GetUserDiningCardDataListAsync(EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest request) {
+            return base.Channel.GetUserDiningCardDataListAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse> GetUserDiningCardDataListAsync(string userName) {
+            EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest inValue = new EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequest();
+            inValue.Body = new EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListRequestBody();
+            inValue.Body.userName = userName;
+            return ((EastElite.ECC.EastEliteICMSWS.EastEliteICMSWSSoap)(this)).GetUserDiningCardDataListAsync(inValue);
         }
     }
 }

@@ -290,6 +290,53 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetAdminCardByRoleCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdminCardByRoleCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAdminCardByRoleCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertUserICCardRecordInfoItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="deviceCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="deviceRecordID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="deviceJPushID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icCardSN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="photoUrl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icCardTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertUserICCardRecordInfoItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertUserICCardRecordInfoItemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetECCClassInfoItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="classCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetECCClassInfoItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetECCClassInfoItemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetECCDeviceClassList">
         <s:complexType>
           <s:sequence>
@@ -354,6 +401,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetUserDataByCustomerCardSN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cardSN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDataByCustomerCardSNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserDataByCustomerCardSNResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetUserDataByDiningCardCode">
         <s:complexType>
           <s:sequence>
@@ -380,6 +441,20 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetUserDataByUserCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDiningCardDataList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDiningCardDataListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserDiningCardDataListResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -499,6 +574,24 @@
   <wsdl:message name="GetECCDeviceClassItemSoapOut">
     <wsdl:part name="parameters" element="tns:GetECCDeviceClassItemResponse" />
   </wsdl:message>
+  <wsdl:message name="GetAdminCardByRoleCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAdminCardByRoleCode" />
+  </wsdl:message>
+  <wsdl:message name="GetAdminCardByRoleCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAdminCardByRoleCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertUserICCardRecordInfoItemSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertUserICCardRecordInfoItem" />
+  </wsdl:message>
+  <wsdl:message name="InsertUserICCardRecordInfoItemSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertUserICCardRecordInfoItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetECCClassInfoItemSoapIn">
+    <wsdl:part name="parameters" element="tns:GetECCClassInfoItem" />
+  </wsdl:message>
+  <wsdl:message name="GetECCClassInfoItemSoapOut">
+    <wsdl:part name="parameters" element="tns:GetECCClassInfoItemResponse" />
+  </wsdl:message>
   <wsdl:message name="GetECCDeviceClassListSoapIn">
     <wsdl:part name="parameters" element="tns:GetECCDeviceClassList" />
   </wsdl:message>
@@ -523,6 +616,12 @@
   <wsdl:message name="CheckUserLoginBookItemSoapOut">
     <wsdl:part name="parameters" element="tns:CheckUserLoginBookItemResponse" />
   </wsdl:message>
+  <wsdl:message name="GetUserDataByCustomerCardSNSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserDataByCustomerCardSN" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDataByCustomerCardSNSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserDataByCustomerCardSNResponse" />
+  </wsdl:message>
   <wsdl:message name="GetUserDataByDiningCardCodeSoapIn">
     <wsdl:part name="parameters" element="tns:GetUserDataByDiningCardCode" />
   </wsdl:message>
@@ -534,6 +633,12 @@
   </wsdl:message>
   <wsdl:message name="GetUserDataByUserCodeSoapOut">
     <wsdl:part name="parameters" element="tns:GetUserDataByUserCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDiningCardDataListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserDiningCardDataList" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDiningCardDataListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserDiningCardDataListResponse" />
   </wsdl:message>
   <wsdl:portType name="EastEliteICMSWSSoap">
     <wsdl:operation name="CheckUserLoginInfoItem">
@@ -612,6 +717,18 @@
       <wsdl:input message="tns:GetECCDeviceClassItemSoapIn" />
       <wsdl:output message="tns:GetECCDeviceClassItemSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetAdminCardByRoleCode">
+      <wsdl:input message="tns:GetAdminCardByRoleCodeSoapIn" />
+      <wsdl:output message="tns:GetAdminCardByRoleCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertUserICCardRecordInfoItem">
+      <wsdl:input message="tns:InsertUserICCardRecordInfoItemSoapIn" />
+      <wsdl:output message="tns:InsertUserICCardRecordInfoItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetECCClassInfoItem">
+      <wsdl:input message="tns:GetECCClassInfoItemSoapIn" />
+      <wsdl:output message="tns:GetECCClassInfoItemSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetECCDeviceClassList">
       <wsdl:input message="tns:GetECCDeviceClassListSoapIn" />
       <wsdl:output message="tns:GetECCDeviceClassListSoapOut" />
@@ -628,6 +745,10 @@
       <wsdl:input message="tns:CheckUserLoginBookItemSoapIn" />
       <wsdl:output message="tns:CheckUserLoginBookItemSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserDataByCustomerCardSN">
+      <wsdl:input message="tns:GetUserDataByCustomerCardSNSoapIn" />
+      <wsdl:output message="tns:GetUserDataByCustomerCardSNSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetUserDataByDiningCardCode">
       <wsdl:input message="tns:GetUserDataByDiningCardCodeSoapIn" />
       <wsdl:output message="tns:GetUserDataByDiningCardCodeSoapOut" />
@@ -635,6 +756,10 @@
     <wsdl:operation name="GetUserDataByUserCode">
       <wsdl:input message="tns:GetUserDataByUserCodeSoapIn" />
       <wsdl:output message="tns:GetUserDataByUserCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDiningCardDataList">
+      <wsdl:input message="tns:GetUserDiningCardDataListSoapIn" />
+      <wsdl:output message="tns:GetUserDiningCardDataListSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EastEliteICMSWSSoap" type="tns:EastEliteICMSWSSoap">
@@ -810,6 +935,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAdminCardByRoleCode">
+      <soap:operation soapAction="http://eastelite.com.cn/webservices/GetAdminCardByRoleCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUserICCardRecordInfoItem">
+      <soap:operation soapAction="http://eastelite.com.cn/webservices/InsertUserICCardRecordInfoItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetECCClassInfoItem">
+      <soap:operation soapAction="http://eastelite.com.cn/webservices/GetECCClassInfoItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetECCDeviceClassList">
       <soap:operation soapAction="http://eastelite.com.cn/webservices/GetECCDeviceClassList" style="document" />
       <wsdl:input>
@@ -846,6 +998,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserDataByCustomerCardSN">
+      <soap:operation soapAction="http://eastelite.com.cn/webservices/GetUserDataByCustomerCardSN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserDataByDiningCardCode">
       <soap:operation soapAction="http://eastelite.com.cn/webservices/GetUserDataByDiningCardCode" style="document" />
       <wsdl:input>
@@ -857,6 +1018,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserDataByUserCode">
       <soap:operation soapAction="http://eastelite.com.cn/webservices/GetUserDataByUserCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDiningCardDataList">
+      <soap:operation soapAction="http://eastelite.com.cn/webservices/GetUserDiningCardDataList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1038,6 +1208,33 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAdminCardByRoleCode">
+      <soap12:operation soapAction="http://eastelite.com.cn/webservices/GetAdminCardByRoleCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUserICCardRecordInfoItem">
+      <soap12:operation soapAction="http://eastelite.com.cn/webservices/InsertUserICCardRecordInfoItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetECCClassInfoItem">
+      <soap12:operation soapAction="http://eastelite.com.cn/webservices/GetECCClassInfoItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetECCDeviceClassList">
       <soap12:operation soapAction="http://eastelite.com.cn/webservices/GetECCDeviceClassList" style="document" />
       <wsdl:input>
@@ -1074,6 +1271,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserDataByCustomerCardSN">
+      <soap12:operation soapAction="http://eastelite.com.cn/webservices/GetUserDataByCustomerCardSN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserDataByDiningCardCode">
       <soap12:operation soapAction="http://eastelite.com.cn/webservices/GetUserDataByDiningCardCode" style="document" />
       <wsdl:input>
@@ -1092,13 +1298,22 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserDiningCardDataList">
+      <soap12:operation soapAction="http://eastelite.com.cn/webservices/GetUserDiningCardDataList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="EastEliteICMSWS">
     <wsdl:port name="EastEliteICMSWSSoap" binding="tns:EastEliteICMSWSSoap">
-      <soap:address location="http://202.119.81.147:8001/EastEliteICMSWS.asmx" />
+      <soap:address location="http://139.129.244.126:8000/EastEliteICMSWS.asmx" />
     </wsdl:port>
     <wsdl:port name="EastEliteICMSWSSoap12" binding="tns:EastEliteICMSWSSoap12">
-      <soap12:address location="http://202.119.81.147:8001/EastEliteICMSWS.asmx" />
+      <soap12:address location="http://139.129.244.126:8000/EastEliteICMSWS.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

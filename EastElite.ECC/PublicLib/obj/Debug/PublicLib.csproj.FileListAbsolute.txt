@@ -66,6 +66,6 @@ E:\项目\电子班牌\EastElite.ECC\PublicLib\obj\Debug\PublicLib.csprojResolve
 E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Debug\PublicLib.dll
 E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Debug\PublicLib.pdb
 E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\bin\Debug\Newtonsoft.Json.dll
-E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\obj\Debug\PublicLib.csprojResolveAssemblyReference.cache
 E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\obj\Debug\PublicLib.dll
 E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\obj\Debug\PublicLib.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\PublicLib\obj\Debug\PublicLib.csprojResolveAssemblyReference.cache

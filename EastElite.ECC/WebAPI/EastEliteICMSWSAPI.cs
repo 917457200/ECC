@@ -6,6 +6,7 @@ using System.Web;
 using EDUC.Common.Bll;
 using EDUC.Common.Model;
 using PublicLib;
+using System.ServiceModel;
 
 namespace EastElite.ECC
 {
@@ -67,6 +68,12 @@ namespace EastElite.ECC
                             //operatelog.Add(logentity);
                             GetClassListByRootCode(context);
                             break;
+                        //获取1078教师
+                        case "03-08":
+                            logentity.functionName = "获取班级信息";
+                            //operatelog.Add(logentity);
+                            GetClassListInfo( context );
+                            break;
                         default:
                             logentity.otype = "1";
                             logentity.logcontent = "没有找到提供的该方法"; ;
@@ -119,6 +126,34 @@ namespace EastElite.ECC
                 logentity.logcontent = ex.Message;
                 operatelog.Add(logentity);
                 context.Response.Write(JsonHelper.ToJsonResult("1", "failure"));
+            }
+        }
+        private void GetClassListInfo( HttpContext context )
+        {
+            try
+            {
+                List<string> param = new List<string>() { "classCode"};
+
+                if( !CheckParameters( param ) )
+                {
+                    return;
+                }
+
+                string classCode = context.Request.Form["classCode"].ToString();
+
+                EastEliteICMSWS.EastEliteICMSWSSoapClient client = new EastEliteICMSWS.EastEliteICMSWSSoapClient();
+                string result = client.GetECCClassInfoItem(  classCode );
+                context.Response.Write( result );
+                //  UserRoleListEntity list = JsonHelper.JsonToObject<UserRoleListEntity>(result);
+                //string s=  JsonHelper.ObjectToJSON<UserRoleListEntity>(list);
+
+            }
+            catch( Exception ex )
+            {
+                logentity.otype = "1";
+                logentity.logcontent = ex.Message;
+                operatelog.Add( logentity );
+                context.Response.Write( JsonHelper.ToJsonResult( "1", "failure" ) );
             }
         }
         public class UserRoleListEntity
@@ -237,6 +272,8 @@ namespace EastElite.ECC
                 string gradeName = context.Request.Form["gradeName"].ToString();
                 string SynchMode = context.Request.Form["SynchMode"].ToString();
                 EastEliteICMSWS.EastEliteICMSWSSoapClient client = new EastEliteICMSWS.EastEliteICMSWSSoapClient();
+                ( client.Endpoint.Binding as BasicHttpBinding ).MaxReceivedMessageSize = int.MaxValue;
+                ( client.Endpoint.Binding as BasicHttpBinding ).MaxBufferSize = int.MaxValue;
                 string result = client.GetECCUserClassList(rootCode, userCode, roleCode, gradeName);
 
                 ClassListEntity list = JsonHelper.JsonToObject<ClassListEntity>(result);

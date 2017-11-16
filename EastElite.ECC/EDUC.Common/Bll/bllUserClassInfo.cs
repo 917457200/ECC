@@ -225,37 +225,37 @@ WHERE   isValid=1 and InstallerVersion NOT IN ( SELECT TOP 1
         /// <returns></returns>
         public int SynchronizClass( string SynchMode, string schoolCode, string rootCode, string gradeName, string userCode, string userName, string roleCode, UserClassInfoEntity[] list )
         {
-            string strgradeName = "";
-            if( !string.IsNullOrWhiteSpace( gradeName ) )
+            try
             {
-                strgradeName = " AND classname LIKE '" + gradeName + "%'";
-            }
-            string strroletype = "";
-            if( SynchMode == "1" )//更新，过滤掉roletype=2
-            {
-                strroletype = " AND Roletype<>2";
-            }
-            StringBuilder Builder = new StringBuilder();
-            Builder.AppendLine( " SET XACT_ABORT ON; " );
-            Builder.AppendLine( " BEGIN TRAN; " );
-            Builder.AppendLine( string.Format( @"UPDATE [dbo].[UserClassInfo] SET IsValid=0 WHERE SUBSTRING([ClassCode],1,10)='{0}' {1}{2}", rootCode, strgradeName, strroletype ) );
 
-            foreach( UserClassInfoEntity entity in list )
-            {
-                if( entity.UserCode == ""  )
+
+                string strgradeName = "";
+                if( !string.IsNullOrWhiteSpace( gradeName ) )
                 {
-                    return 1;
+                    strgradeName = " AND classname LIKE '" + gradeName + "%'";
                 }
-                if( entity.UserCode != "" )
+                string strroletype = "";
+                if( SynchMode == "1" )//更新，过滤掉roletype=2
                 {
-                    Builder.AppendLine( string.Format( "  IF EXISTS(SELECT id FROM [dbo].[DeviceClassInfo] WHERE [ClassCode]='{0}') ", entity.ClassCode ) );
-                    Builder.AppendLine( " BEGIN" );
-                    Builder.AppendLine( string.Format( @" IF EXISTS(SELECT ID FROM [dbo].[UserClassInfo] WHERE [UserCode]='{0}' AND [ClassCode]='{1}')", entity.UserCode, entity.ClassCode ) );
-                    Builder.AppendLine( string.Format( @" BEGIN
+                    strroletype = " AND Roletype<>2";
+                }
+                StringBuilder Builder = new StringBuilder();
+                Builder.AppendLine( " SET XACT_ABORT ON; " );
+                Builder.AppendLine( " BEGIN TRAN; " );
+                Builder.AppendLine( string.Format( @"UPDATE [dbo].[UserClassInfo] SET IsValid=0 WHERE SUBSTRING([ClassCode],1,10)='{0}' {1}{2}", rootCode, strgradeName, strroletype ) );
+
+                foreach( UserClassInfoEntity entity in list )
+                {
+                    if( entity.UserCode != "" )
+                    {
+                        Builder.AppendLine( string.Format( "  IF EXISTS(SELECT id FROM [dbo].[DeviceClassInfo] WHERE [ClassCode]='{0}') ", entity.ClassCode ) );
+                        Builder.AppendLine( " BEGIN" );
+                        Builder.AppendLine( string.Format( @" IF EXISTS(SELECT ID FROM [dbo].[UserClassInfo] WHERE [UserCode]='{0}' AND [ClassCode]='{1}')", entity.UserCode, entity.ClassCode ) );
+                        Builder.AppendLine( string.Format( @" BEGIN
 UPDATE [dbo].[UserClassInfo] SET UserType={0},[ClassFullCode]='{1}',ClassName='{2}',[RoleType]={3},[IsValid]=1 WHERE [UserCode]='{4}' AND [ClassCode]='{5}';
 END", entity.UserType, entity.ClassFullCode, entity.ClassName, entity.RoleType, entity.UserCode, entity.ClassCode ) );
-                    Builder.AppendLine( "ELSE " );
-                    Builder.AppendLine( string.Format( @"BEGIN
+                        Builder.AppendLine( "ELSE " );
+                        Builder.AppendLine( string.Format( @"BEGIN
         INSERT INTO [dbo].[UserClassInfo]
         ( [UserCode],
           [UserType],
@@ -282,11 +282,11 @@ VALUES  ( N'{0}' , -- UserCode - nvarchar(20)
            GETDATE()  -- HandledDate - smalldatetime
         )
     END", entity.UserCode, entity.UserType, entity.ClassCode, entity.ClassFullCode, entity.ClassName, entity.RoleType, userCode, userName ) );
-                    Builder.AppendLine( " END" );
+                        Builder.AppendLine( " END" );
+                    }
                 }
-            }
-            Builder.AppendLine( string.Format( "DELETE FROM [UserClassInfo] WHERE IsValid=0 {0}{1};", strgradeName, strroletype ) );
-            Builder.AppendLine( @"IF @@ERROR = 0 
+                Builder.AppendLine( string.Format( "DELETE FROM [UserClassInfo] WHERE IsValid=0 {0}{1};", strgradeName, strroletype ) );
+                Builder.AppendLine( @"IF @@ERROR = 0 
     BEGIN
         COMMIT TRAN;
         select 0;
@@ -297,9 +297,15 @@ ELSE
         
         select 1;
     END" );
-            Builder.AppendLine( "  set nocount OFF; " );
-            string a = Builder.ToString();
-            return new bllPaging().ExecuteNonQueryBySQL( Builder.ToString() );
+                Builder.AppendLine( "  set nocount OFF; " );
+                string a = Builder.ToString();
+                return new bllPaging().ExecuteNonQueryBySQL( Builder.ToString() );
+            }
+            catch( System.Exception )
+            {
+
+                throw;
+            }
 
         }
 

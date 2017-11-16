@@ -781,6 +781,11 @@
     <Content Include="js\TaskRelessForMp.js" />
     <Content Include="js\Uploadify\SelectUpload.png" />
     <Content Include="loginfolist.html" />
+    <Content Include="attachment\control\EEECCUpdate-1.apk" />
+    <Content Include="Document\ExamTemp.xls" />
+    <Content Include="attachment\control\EEECCInstaller-1.apk" />
+    <Content Include="ewebeditor\web.config" />
+    <Content Include="packages.config" />
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.CheckUserLoginBookItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -799,6 +804,9 @@
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.DeleteDIPCISRecordInfoItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetDictListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -806,6 +814,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetDIPCISRecordListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassItemResponse.datasource">
@@ -835,16 +846,25 @@
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetStudentDataByDiningCardCodeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetUserDataByDiningCardCodeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetUserDataByUserCodeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.InsertDIPCISClientInfoItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.InsertDIPCISRecordInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.SubmitLeaveApplyItemResponse.datasource">
@@ -856,11 +876,6 @@
     <Content Include="Service References\EastEliteICMSWS\EastElite.ECC.EastEliteICMSWS.UpdateDIPCISClientInfoItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="attachment\control\EEECCUpdate-1.apk" />
-    <Content Include="Document\ExamTemp.xls" />
-    <Content Include="attachment\control\EEECCInstaller-1.apk" />
-    <Content Include="ewebeditor\web.config" />
-    <Content Include="packages.config" />
     <None Include="Service References\EastEliteICMSWS\EastEliteICMSWS.disco">
       <SubType>Designer</SubType>
     </None>
@@ -942,7 +957,9 @@
     <Content Include="Service.ashx" />
     <Content Include="AjaxUpload.ashx" />
     <None Include="Properties\PublishProfiles\EastElite.ECC.pubxml" />
-    <None Include="Service References\EastEliteICMSWS\EastEliteICMSWS.wsdl" />
+    <None Include="Service References\EastEliteICMSWS\EastEliteICMSWS.wsdl">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

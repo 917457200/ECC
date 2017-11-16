@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://202.119.81.147:8001/EastEliteICMSWS.asmx?wsdl" docRef="http://202.119.81.147:8001/EastEliteICMSWS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://202.119.81.147:8001/EastEliteICMSWS.asmx" xmlns:q1="http://eastelite.com.cn/webservices/" binding="q1:EastEliteICMSWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://202.119.81.147:8001/EastEliteICMSWS.asmx" xmlns:q2="http://eastelite.com.cn/webservices/" binding="q2:EastEliteICMSWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <contractRef ref="http://139.129.244.126:8000/EastEliteICMSWS.asmx?wsdl" docRef="http://139.129.244.126:8000/EastEliteICMSWS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://139.129.244.126:8000/EastEliteICMSWS.asmx" xmlns:q1="http://eastelite.com.cn/webservices/" binding="q1:EastEliteICMSWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://139.129.244.126:8000/EastEliteICMSWS.asmx" xmlns:q2="http://eastelite.com.cn/webservices/" binding="q2:EastEliteICMSWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
 </discovery>

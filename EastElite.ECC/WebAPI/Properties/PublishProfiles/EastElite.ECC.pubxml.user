@@ -25,10 +25,10 @@
       <publishTime>05/31/2016 10:54:31</publishTime>
     </File>
     <File Include="bin/EastElite.ECC.dll">
-      <publishTime>10/20/2017 15:03:16</publishTime>
+      <publishTime>11/15/2017 11:03:56</publishTime>
     </File>
     <File Include="bin/EDUC.Common.dll">
-      <publishTime>10/20/2017 15:03:15</publishTime>
+      <publishTime>11/15/2017 11:03:55</publishTime>
     </File>
     <File Include="bin/eWebEditorAdmin.dll">
       <publishTime>06/06/2017 02:53:36</publishTime>
@@ -43,7 +43,7 @@
       <publishTime>05/31/2016 10:54:31</publishTime>
     </File>
     <File Include="bin/jpush-api.dll">
-      <publishTime>10/20/2017 15:03:14</publishTime>
+      <publishTime>11/15/2017 11:03:54</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>05/31/2016 10:54:31</publishTime>
@@ -55,7 +55,7 @@
       <publishTime>10/11/2017 16:00:09</publishTime>
     </File>
     <File Include="bin/PublicLib.dll">
-      <publishTime>10/20/2017 15:03:15</publishTime>
+      <publishTime>11/15/2017 11:03:54</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>10/11/2017 16:00:10</publishTime>
@@ -2599,82 +2599,97 @@
       <publishTime>10/13/2017 14:44:24</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/20/2017 15:03:18</publishTime>
+      <publishTime>11/15/2017 11:04:00</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.CheckUserLoginBookItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:10</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.CheckUserLoginDeviceItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.CheckUserLoginInfoItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:07</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.CheckUserLoginTokenItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.DeleteDIPCISClientInfoItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.DeleteDIPCISRecordInfoItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
+    </File>
+    <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetAdminCardByRoleCodeResponse.datasource">
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetDictListResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:07</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetDIPCISClientListResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetDIPCISRecordListResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
+    </File>
+    <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetECCClassInfoItemResponse.datasource">
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetECCDeviceClassListResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetECCUserClassListResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetECCUserRoleInfoListResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetLessonWeekInfoListResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetStudentDataByCustomerCardSN2Response.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetStudentDataByCustomerCardSNResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetStudentDataByDiningCardCode2Response.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetStudentDataByDiningCardCodeResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
+    </File>
+    <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse.datasource">
+      <publishTime>11/15/2017 10:07:10</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetUserDataByDiningCardCodeResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:10</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetUserDataByUserCodeResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:10</publishTime>
+    </File>
+    <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.GetUserDiningCardDataListResponse.datasource">
+      <publishTime>11/15/2017 10:07:10</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.InsertDIPCISClientInfoItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.InsertDIPCISRecordInfoItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
+    </File>
+    <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse.datasource">
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.SubmitLeaveApplyItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.UpdateClassPushIDResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.UpdateDIPCISClientInfoItemResponse.datasource">
-      <publishTime>10/13/2017 14:44:28</publishTime>
+      <publishTime>11/15/2017 10:07:08</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/EastElite.ECC.ServiceReference1.AddReadRecordInfoItemResponse.datasource">
       <publishTime>07/14/2017 18:27:58</publishTime>
@@ -3094,7 +3109,7 @@
       <publishTime>04/27/2017 22:55:00</publishTime>
     </File>
     <File Include="taskRelease.html">
-      <publishTime>07/20/2017 10:32:41</publishTime>
+      <publishTime>07/20/2017 10:38:41</publishTime>
     </File>
     <File Include="taskReleaseForMP.html">
       <publishTime>07/17/2017 10:50:42</publishTime>
@@ -3124,7 +3139,7 @@
       <publishTime>03/10/2017 00:15:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/20/2017 15:03:17</publishTime>
+      <publishTime>11/15/2017 11:03:56</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>08/05/2016 16:58:07</publishTime>

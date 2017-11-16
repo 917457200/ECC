@@ -135,3 +135,5 @@ E:\项目\电子班牌\ECC\EastElite.ECC\WebAPI\bin\zh-Hans\System.Web.Http.WebH
 E:\项目\电子班牌\ECC\EastElite.ECC\WebAPI\obj\Debug\EastElite.ECC.csprojResolveAssemblyReference.cache
 E:\项目\电子班牌\ECC\EastElite.ECC\WebAPI\obj\Debug\EastElite.ECC.dll
 E:\项目\电子班牌\ECC\EastElite.ECC\WebAPI\obj\Debug\EastElite.ECC.pdb
+E:\项目\电子班牌\ECC\EastElite.ECC\WebAPI\bin\log4net.dll
+E:\项目\电子班牌\ECC\EastElite.ECC\WebAPI\bin\ICSharpCode.SharpZipLib.dll

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="wez6AGSArABNvnl4ugEXHOi5mvk=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="q3HiGlEqfj6iPnqvSS0P/ArgZ/I=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="EastEliteICMSWSSoap">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EastEliteICMSWSSoap" contract="EastEliteICMSWS.EastEliteICMSWSSoap" bindingType="basicHttpBinding" address="http://202.119.81.147:8001/EastEliteICMSWS.asmx" bindingConfiguration="EastEliteICMSWSSoap">
+    <endpoint name="EastEliteICMSWSSoap" contract="EastEliteICMSWS.EastEliteICMSWSSoap" bindingType="basicHttpBinding" address="http://139.129.244.126:8000/EastEliteICMSWS.asmx" bindingConfiguration="EastEliteICMSWSSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://202.119.81.147:8001/EastEliteICMSWS.asmx</serializedValue>
+          <serializedValue>http://139.129.244.126:8000/EastEliteICMSWS.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
