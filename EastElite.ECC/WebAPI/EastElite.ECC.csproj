@@ -103,6 +103,7 @@
     <Content Include="Css\pageList.css" />
     <Content Include="deviceManage.html" />
     <Content Include="deviceterminalscreenshotlist.html" />
+    <Content Include="deviceterminalscreenshotlist2.html" />
     <Content Include="ewebeditor\aspx\browse.aspx" />
     <Content Include="ewebeditor\aspx\config.aspx" />
     <Content Include="ewebeditor\aspx\i.aspx" />

@@ -11,7 +11,7 @@ $(function () {
         else if (OperateTypeID == 4) {
             DisplayModelID = $.toInt($('#DisplayModelID').val());//布局
         }
-       
+
         if (OperateTypeID == 2) {
             if (!layerState) {
                 //信息框-例2
@@ -44,7 +44,7 @@ $(function () {
 
         var Messagecontent_image, Messagecontent_video, Messagecontent_imagealias, Messagecontent_videoalias;
         var Messagecontent_textalias = '';//内容
-        var ClsActive, ClsCheckStu;///zhc 改
+        var ClsActive, ClsCheckStu, ClsXiao, ClsWelcome;///zhc 改
         var ClsHonorList = new Array(), ClsHomeWkList = new Array(), ClsCheckItemList = new Array(), ClsNoticeList = new Array();
         Messagecontent_image = null;
         Messagecontent_video = null;
@@ -69,14 +69,17 @@ $(function () {
                 ClsActive = getClsActive(ClsActive);
                 ClsNoticeList = getClsNoticeList(ClsNoticeList);
                 break;
-            case 9: case 10: case 11: case 12:
+            case 9: case 10: case 11: case 12: case 18:
                 ClsActive = getClsActive(ClsActive);
                 ClsCheckStu = getClsCheckStu(ClsCheckStu);
                 ClsHonorList = getClsHonorList(ClsHonorList);
                 ClsHomeWkList = getClsHomeWkList(ClsHomeWkList);
                 ClsCheckItemList = getClsCheckItemList(ClsCheckItemList);
                 ClsNoticeList = getClsNoticeList(ClsNoticeList);
+                ClsXiao = getClsXiao(ClsXiao);
                 break;
+            case 13:
+                ClsWelcome = getClsWolcome(ClsWelcome);
             default:
                 Messagecontent_image = null;
                 Messagecontent_video = null;
@@ -283,7 +286,9 @@ $(function () {
             "ClsHonor": JSON.stringify(ClsHonorList),
             "ClsHomeWk": JSON.stringify(ClsHomeWkList),
             "ClsCheckItem": JSON.stringify(ClsCheckItemList),
-            "ClsNotice": JSON.stringify(ClsNoticeList)
+            "ClsNotice": JSON.stringify(ClsNoticeList),
+            "ClsXiao": JSON.stringify(ClsXiao),
+            "ClsWelcome": JSON.stringify(ClsWelcome)
         }
         EDUCAjax(par, function () { }, function (res) {
             if (res.status == "0") {
@@ -304,11 +309,11 @@ $(function () {
 
     $('#DisplayModelID').change(function () {
         switch ($.toInt($(this).val())) {
-            case 1: case 3: case 9: case 10: case 11: case 12: case 4: case 5:
+            case 1: case 3: case 9: case 10: case 11: case 12: case 4: case 5: case 13: case 18:
                 $('#resourse').hide(); $('#idvideo').hide(); $('#divimage').hide(); $('#divimageectf').hide();
                 $('.template').show(); $(".MessageContentText").hide();
                 break;
-            case 2: case 6: case 7: case 8:
+            case 2: case 6: case 7: case 8: case 14:
             default:
                 $('#resourse').hide(); $('#idvideo').hide(); $('#divimage').hide(); $('#divimageectf').hide(); $('.template').hide(); $(".MessageContentText").show();
                 break;
@@ -355,6 +360,12 @@ function MpTab(templateId) {
                             break;
                         case "ClsNotice":
                             MpTab6Onload();
+                            break;
+                        case "ClsWolcome":
+                            MpTab7Onload(MpTab);
+                            break;
+                        case "ClsXiao":
+                            MpTab8Onload(MpTab);
                             break;
                         default:
                             break;
@@ -510,6 +521,47 @@ function MpTab5Onload() {
 function MpTab6Onload() {
     $(".MpTabOh").html("");
     AddNotice();
+}
+function MpTab7Onload(obj) {
+    var Html = "";
+    Html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" style=\"margin-top:5px;\" class=\"ClsNotice\">";
+    Html += "<tbody>";
+    Html += "<tr>";
+    Html += "<td width=\"80\" align=\"center\">欢迎语</td><td align=\"left\">";
+    Html += "<textarea class=\"ClsWelcomeContext\" style=\"width:550px;height:200px\" placeholder=\"请输入欢迎语内容\" id=\"d_content6\"> </textarea></td></tr></tbody></table>";
+    obj.html(Html);
+}
+function MpTab8Onload(obj) {
+    var Html = "";
+    Html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" style=\"margin-top:5px;\" class=\"ClsNotice\">";
+    Html += "<tbody>";
+    Html += "<tr>";
+    Html += "<td align=\"center\" width=\"80\">校园信息标题</td>";
+    Html += "<td align=\"left\"><input type=\"text\" placeholder=\"请输入校园信息标题\" style=\"width: 550px;\" class=\"inputText ClsXiaoTitle\"></td>";
+    Html += "</tr>";
+    Html += "<tr>";
+    Html += "<td align=\"center\" width=\"80\">学校LOGO</td>";
+    Html += "<td align=\"left\">";
+    Html += " <label id=\"ClsLOGOUrl\" class=\"dn\" clsactiveurl=\"\"></label>";
+    Html += "<div class=\"LOGO\" style=\"width:590px\">";
+    Html += "<div id=\"file_ClsLOGOUrlImageUrl\" style=\"margin:0px;display:inline-block\"></div>";
+    Html += "<div id=\"uploadClsLOGOUrlImageUrl\" style=\"margin-top: 0;float:left;width:250px;\"></div>";
+    Html += "</div></td>";
+    Html += "<tr>";
+    Html += "<td width=\"80\" align=\"center\">校园信息</td><td align=\"left\">";
+    Html += "<textarea class=\"ClsXiaoContext\" style=\"width:550px;height:200px\" placeholder=\"请输入校园信息内容\" id=\"d_content6\"> </textarea></td></tr></tbody></table>";
+    obj.html(Html);
+    $.Upload("file_ClsLOGOUrlImageUrl", "uploadClsLOGOUrlImageUrl", UploadTypeEnum.image, true, function (data) {
+        $('#file_ClsLOGOUrlImageUrl').before("<img  data-url=\"" + data.url + "\" src=\"" + data.thumnailUrl + "\"/>");
+        var clsactiveurl = $('#ClsLOGOUrl').attr("clsactiveurl");
+        if (clsactiveurl == "") {
+            var clsactiveurl = data.url;
+        } else {
+            var clsactiveurl = clsactiveurl + "@&&@" + data.url;
+        }
+        $('#ClsLOGOUrl').attr("clsactiveurl", clsactiveurl);
+    });
+
 }
 //验证数字 num
 function isInteger(objid) {
@@ -779,4 +831,34 @@ function getClsNoticeList(ClsNoticeList) {
         }
     }
     return ClsNoticeList;
+}
+
+
+//欢迎语加载
+function getClsWolcome(ClsWelcome) {
+    var Context = $.toString($(".ClsWelcomeContext").val());
+    if (Context != "" ) {
+        ClsWelcome = {
+            context: Context,
+        }
+    }
+    return ClsWelcome;
+}
+
+//学校信息加载
+function getClsXiao(ClsXiao) {
+    var Context = $.toString($(".ClsXiaoContext").val());
+    var LOGOUrl = $("#ClsLOGOUrl").attr("clsactiveurl");
+    var Title = $.toString($(".ClsXiaoTitle").val());
+    
+    if (Context != "" && Title != "") {
+        ClsXiao = {
+            schoolname: loginUser.rootName,
+            logourl: LOGOUrl,
+            context: Context,
+            title: Title
+        }
+    }
+    return ClsXiao;
+
 }

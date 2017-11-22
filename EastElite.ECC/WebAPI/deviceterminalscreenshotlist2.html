@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/Site.css" rel="stylesheet" />
+    <title>壹键通电子班牌管理系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/SiteIndex.css" rel="stylesheet" />
+    <link href="js/Uploadify/uploadify.css" rel="stylesheet" />
+    <link href="Css/pageList.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/Uploadify/jquery.uploadify.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/MY97DATE/WdatePicker.js"></script>
+    <script src="js/pageList.js"></script>
+    <script src="js/WebJS.js"></script>
+
+    <script src="js/PushJS.js"></script>
+    <style>
+        select, .inputText { width: 135px; }
+
+        #classlist .padder label { margin-left: 0px; }
+
+        .padder { padding: 4px 0; }
+
+        .pager { background: #e0e0e0; }
+
+        .resourselist { padding: 0 15px; }
+
+            .resourselist table th, .resourselist table td { width: 80px; text-align: center; border: 1px solid #ccc; }
+
+            .resourselist table { float: left; }
+
+                .resourselist table th { background: #e0e0e0; }
+    </style>
+    <script>
+        var ocurrentpage = 1;
+
+        $(function () {
+            if (!loadHead('classmanage', 'deviceterminalscreenshotlist2')) {
+                return;
+            }
+            //加载头部
+            getHead(loginUser.userCode, loginUser.rootCode);
+            $('#GradeCode').change(function (o) {
+                GetUserClassListByUserCodeAndRootCodeOrGradeCode(loginUser.userCode, $.toString($('#campus').val()), $.toString($('#GradeCode').val()));
+            })
+            $('#campus').change(function (o) {
+                GetUserClassListByUserCodeAndRootCodeOrGradeCode(loginUser.userCode, $.toString($('#campus').val()), $.toString($('#GradeCode').val()));
+            })
+           
+            $("#id_table_list").delegate("tr td img", "click", function () {
+                layer.closeAll();
+                var height = $(window).height();
+                var width = $(window).width();
+                var showimgWidth = "auto";
+                var showimgHeight = "auto";
+                var showwidth = "auto";
+                var showheight = "auto";
+                var img = new Image();
+                img.src = $(this).attr("src") + "?" + Date.parse(new Date());
+
+
+                img.onload = function () {
+
+                    if (img.width >= 800) {
+                        showwidth = 800 + "px";
+                        showimgWidth = 788 + "px";
+                    }
+                    if (img.height >= 600) {
+                        showheight = 600 + "px";
+                        showimgHeight = 588 + "px";
+                    }
+
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        area: [showwidth, showheight], //宽高
+                        shade: false,
+                        //shadeClose: true,
+                        closeBtn: false,
+                        skin: 'layui-layer-rim', //加上边框
+                        content: ' <img src="' + img.src + '" style="width:' + showimgWidth + ';height:' + showimgHeight + ';"  alt=""/>'
+                    });
+                };
+            });
+            $('body').click(function () { layer.closeAll(); })
+        });
+
+        //获取发送记录
+        function getDataList(currentPage, rootCode,gradeCode, ClassCode) {
+            var userCode = "";
+            var url = "/Service.ashx?actionname=01-41";
+            var par = {
+                pageSize: 10,
+                currentPage: currentPage,
+                rootCode: rootCode, 
+                gradeCode: gradeCode,
+                ClassCode: ClassCode,
+                version: $.toString($('#VersionCode').val())
+            };
+
+            EDUCAjax(par, function () {
+
+            }, function (rs) {
+
+                var htmlstr = '';
+
+                $(rs.data).each(function (i, o) {
+                    var rootname = getRootNameByRootCode($.toString(o.ClassCode).substr(0, 10));
+                    htmlstr += '<tr>';
+                    //htmlstr += '<td> <input id="' + $.toString(o.ID) + '" name="check" type="checkbox"  /></td>';
+                    htmlstr += '<td>' + rootname + '</td>';
+                    htmlstr += '<td>{0}</td>';
+                    htmlstr += '<td>{1}</td>';
+                    htmlstr += '<td>{2}</td>';
+                    htmlstr += '<td>{3}</td>';
+                    htmlstr += '</tr>';
+                    htmlstr = htmlstr.format($.toString(o.ClassName), ($.toString(o.TerminalScreenshot) != "" ? '<img style="width:100px;height:60px;" src="' + $.toString(o.TerminalScreenshot) + '"/>' : ""), $.toString(o.Version), $.toString(o.CreatedDate));
+                });
+
+                $("#id_table_list").html(htmlstr);
+
+                //数据分页
+                $("#id_pageList").pageList({
+                    cssType: "pagecss",
+                    totalpage: rs.totalPage,
+                    currentPage: rs.currentPage,
+                    recordCount: rs.recordCount,
+                    table: ".warp",
+                    callback: function (index) {
+                        getDataList(index,rootCode,gradeCode, ClassCode)
+                    }
+                });
+
+
+            }, url);
+
+
+        }
+        //加载班级头部列表
+        function getHead(userCode, rootCode) {
+            var url = "/Service.ashx?actionname=01-04";
+            var par = { "userCode": userCode, "rootCode": rootCode };
+            EDUCAjax(par, function () { }, function (res) {
+                if (res.status == 0) {
+                    if (loginUser.roleCode == "1078") {
+
+                        if (res.data.length == 0) {
+                            layer.confirm('当前用户权限下没有班级，请进行在系统设置里同步设备和班级', function () {
+                                gotourl("systemSeting.html")//跳转系统设置
+                            });
+                            return;
+                        }
+                        getDataList(ocurrentpage, loginUser.rootCode, res.data[0].gradeCode.replace(loginUser.rootCode,""), res.data[0].ClassCode);
+
+
+                    } else {
+                        gotourl("login.html")//跳转到首页
+                    }
+
+
+                }
+            }, url);
+
+        }
+
+
+        function getRootNameByRootCode(rootCode) {
+            var rootname = "";
+            $(loginUser.campus).each(function (i, o) {
+                if (o.code == rootCode) {
+                    rootname = o.name;
+
+                }
+            });
+            return rootname;
+        }
+
+
+
+    </script>
+
+
+
+</head>
+<body class=" pace-done" style="overFlow-x: hidden; word-break: break-all">
+    <div id="head" class="navbar navbar-primary b-b">
+
+    </div>
+
+    <div class="body-content" id="bodyContent">
+        <div class="container">
+            <div class="sub-layout clearfix">
+                <div class="nav-wrapper pull-left">
+                    <ul class="reset" id="subMenuList"></ul>
+                </div>
+                <div class="sub-layout-body pull-left">
+
+                    <div class="tab-content" id="tab_1">
+                        <div id="classlist" style="background-color: white; padding: 10px 15px; position: relative; border: 1px solid rgb(230, 233, 237)">
+
+                            <table>
+                                <tr>
+                                    <!--<th class="th1">
+                                        <input id="id_checkAll" type="checkbox" />
+                                    </th>-->
+                                    <th class="snth">校区</th>
+
+                                    <th class="td2">班级</th>
+                                    <th class="td2">设备终端截图</th>
+                                    <th class="dateth">版本号</th>
+                                    <th class="dateth">截图日期</th>
+
+                                </tr>
+                                <tbody id="id_table_list"></tbody>
+                            </table>
+                            <div class="fenye">
+                                <ul id="id_pageList"></ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <footer class="text-center">
+                <p>东方博冠（北京）科技有限公司 版权所有 &copy;2016-2020</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

@@ -801,9 +801,8 @@ namespace EastElite.ECC
                     {
                         filter += " AND version='" + context.Request.Form["version"] + "'";
                     }
-
-
                 }
+               
                 string order = "TerminalScreenshot desc";
                 //20170808 正定改
                 //string order = "SUBSTRING(classcode,1,10) asc,SUBSTRING([ClassCode],11,2) DESC,SUBSTRING([ClassCode],13,4) DESC,SUBSTRING([ClassCode],17,2) asc";
@@ -4430,8 +4429,10 @@ namespace EastElite.ECC
                     object ClsCheckItemStr = context.Request.Form["ClsCheckItem"];
                     object ClsCheckStuStr = context.Request.Form["ClsCheckStu"];
                     object ClsNoticeStr = context.Request.Form["ClsNotice"];
+                    object ClsXiaoStr = context.Request.Form["ClsXiao"];
+                    object ClsWelcomeStr = context.Request.Form["ClsWelcome"];
 
-                    if( ClsActiveStr != null || ClsHonorStr.ToString() != "[]" || ClsHomeWkStr.ToString() != "[]" || ClsCheckItemStr.ToString() != "[]" || ClsCheckStuStr != null || ClsNoticeStr.ToString() != "[]" )
+                    if( ClsActiveStr != null || ClsHonorStr.ToString() != "[]" || ClsHomeWkStr.ToString() != "[]" || ClsCheckItemStr.ToString() != "[]" || ClsCheckStuStr != null || ClsNoticeStr.ToString() != "[]" || ClsXiaoStr != null || ClsWelcomeStr != null )
                     {
                         deviceTaskInfo.MessageContent.AreaModule = new MessageContent.AreaModuleClass();
                         //班级活动
@@ -4463,6 +4464,18 @@ namespace EastElite.ECC
                         {
                             deviceTaskInfo.MessageContent.AreaModule.ClsCheckStu = new MessageContent.ClsCheckStu();
                             deviceTaskInfo.MessageContent.AreaModule.ClsCheckStu = JsonHelper.JsonToObject<MessageContent.ClsCheckStu>( ClsCheckStuStr.ToString() );
+                        }
+                        //校园信息
+                        if( ClsXiaoStr != null )
+                        {
+                            deviceTaskInfo.MessageContent.AreaModule.ClsXiao = new MessageContent.ClsXiao();
+                            deviceTaskInfo.MessageContent.AreaModule.ClsXiao = JsonHelper.JsonToObject<MessageContent.ClsXiao>( ClsXiaoStr.ToString() );
+                        }
+                        //欢迎语
+                        if( ClsWelcomeStr != null )
+                        {
+                            deviceTaskInfo.MessageContent.AreaModule.ClsWelcome = new MessageContent.ClsWelcome();
+                            deviceTaskInfo.MessageContent.AreaModule.ClsWelcome = JsonHelper.JsonToObject<MessageContent.ClsWelcome>( ClsWelcomeStr.ToString() );
                         }
                     }
 
@@ -4521,6 +4534,15 @@ namespace EastElite.ECC
                                 {
                                     deviceTaskInfo.MessageContent.AreaModule.ClsActive.code = deviceTaskInfo.Code;//撤销Code
                                 }
+
+                                if( ClsXiaoStr != null )
+                                {
+                                    deviceTaskInfo.MessageContent.AreaModule.ClsXiao.code = deviceTaskInfo.Code;//撤销Code
+                                }
+                                if( ClsWelcomeStr != null )
+                                {
+                                    deviceTaskInfo.MessageContent.AreaModule.ClsWelcome.code = deviceTaskInfo.Code;//撤销Code
+                                }
                                 if( ClsCheckStuStr != null )
                                 {
                                     deviceTaskInfo.MessageContent.AreaModule.ClsCheckStu.code = deviceTaskInfo.Code;//撤销Code
@@ -4548,7 +4570,7 @@ namespace EastElite.ECC
                                         deviceTaskInfo.MessageContent.AreaModule.ClsHomeWk[i].code = deviceTaskInfo.Code;//撤销Code
                                     }
                                 }
-
+                              
                                 if( deviceTaskInfo.OperateTypeID == 13 || deviceTaskInfo.OperateTypeID == 15 )
                                 {
                                     string clearHeartBeatCheckDateFilter = "";

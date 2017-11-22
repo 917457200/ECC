@@ -14,7 +14,7 @@ $(function () {
     }
     else {
         //操作类型
-        GetDictsByType("OperateTypeID", "OperateTypeID", false, "1", "itemkey in(1,2)");
+        GetDictsByType("OperateTypeID", "OperateTypeID", false, "1", "itemkey in(1,2,10,18)");
     }
     //任务类型
     GetDictsByType("TaskTypeID", "TaskTypeID");
@@ -434,7 +434,7 @@ function getClassHead(userCode, rootCode) {
                 }
                 $('#TaskTypeID').attr("disabled", "disabled");
                 //$('#OperateTypeID').attr("disabled", "disabled");
-                $('#DisplayModelID').attr("disabled", "enabled");
+                $('#DisplayModelID').removeAttr("disabled");
                 $('#lbTaskTypeID').hide();
                 $('#TaskTypeID').hide();
                 $('#CheckVersion').hide();

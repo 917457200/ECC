@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-    [Description("")]
+    [Description( "" )]
     [Serializable]
     public class MessageContent : BaseMessageContent
     {
@@ -17,7 +17,7 @@ namespace cn.jpush.api.push.mode
 
         public AreaModuleClass AreaModule { get; set; }
 
-        [Description("")]
+        [Description( "" )]
         [Serializable]
         public class AreaModuleClass
         {
@@ -27,16 +27,17 @@ namespace cn.jpush.api.push.mode
             public List<ClsCheckItem> ClsCheckItem { get; set; }
             public ClsCheckStu ClsCheckStu { get; set; }
             public List<ClsNotice> ClsNotice { get; set; }
-
+            public ClsXiao ClsXiao { get; set; }
+            public ClsWelcome ClsWelcome { get; set; }
         }
         /// <summary>
         /// 班级活动
         /// </summary>
-        [Description("")]
+        [Description( "" )]
         [Serializable]
         public class ClsActive
         {
-            private string _date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            private string _date = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
             public string date
             {
                 get { return _date; }
@@ -55,11 +56,11 @@ namespace cn.jpush.api.push.mode
         /// <summary>
         /// 班级荣誉
         /// </summary>
-        [Description("")]
+        [Description( "" )]
         [Serializable]
         public class ClsHonor
         {
-            private string _date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            private string _date = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
             public string date
             {
                 get { return _date; }
@@ -81,11 +82,11 @@ namespace cn.jpush.api.push.mode
         /// <summary>
         /// 作业布置
         /// </summary>
-        [Description("")]
+        [Description( "" )]
         [Serializable]
         public class ClsHomeWk
         {
-            private string _date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            private string _date = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
             public string date
             {
                 get { return _date; }
@@ -104,11 +105,11 @@ namespace cn.jpush.api.push.mode
         /// <summary>
         /// 指标检查考勤
         /// </summary>
-        [Description("")]
+        [Description( "" )]
         [Serializable]
         public class ClsCheckItem
         {
-            private string _date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            private string _date = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
             public string date
             {
                 get { return _date; }
@@ -125,11 +126,11 @@ namespace cn.jpush.api.push.mode
         /// <summary>
         /// 学生出勤考勤
         /// </summary>
-        [Description("")]
+        [Description( "" )]
         [Serializable]
         public class ClsCheckStu
         {
-            private string _date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            private string _date = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
             public string date
             {
                 get { return _date; }
@@ -147,26 +148,50 @@ namespace cn.jpush.api.push.mode
         /// <summary>
         /// 通知公告
         /// </summary>
-        [Description("")]
+        [Description( "" )]
         [Serializable]
         public class ClsNotice
         {
-            private string _date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            private string _date = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
             public string date
             {
                 get { return _date; }
                 set { _date = value; }
             }
             public string context { get; set; }
-            public string code  { get; set; }
+            public string code { get; set; }
             public string title { get; set; }
             public string url { get; set; }
 
 
         }
-      
+        /// <summary>
+        /// 校园信息
+        /// </summary>
+        [Description( "" )]
+        [Serializable]
+        public class ClsXiao
+        {
+            public string code { get; set; }
+            public string schoolname { get; set; }
+            public string logourl { get; set; }
+            public string context { get; set; }
+            public string title { get; set; }
+
+        }
+        /// <summary>
+        /// 欢迎语
+        /// </summary>
+        [Description( "" )]
+        [Serializable]
+        public class ClsWelcome
+        {
+            public string code { get; set; }
+            public string context { get; set; }
+        }
     }
-    [Description("")]
+
+    [Description( "" )]
     [Serializable]
     public class CustomMsgContent : BaseCustomMsgContent
     {
@@ -180,8 +205,8 @@ namespace cn.jpush.api.push.mode
         private MessageContent _MessageContent = null;
         private string _TargetRange = string.Empty;
         private string _RargetAlias = string.Empty;
-        private string _TaskBeginTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-        private string _TaskEndTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+        private string _TaskBeginTime = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
+        private string _TaskEndTime = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
         private int _TaskPriorityID = 0;
         private int _ImageSpanSecond = 0;
         private int _ImageEffectID = 0;
@@ -191,10 +216,10 @@ namespace cn.jpush.api.push.mode
         private string _Note = string.Empty;
         private string _CreatedID = string.Empty;
         private string _CreatedName = string.Empty;
-        private string _CreatedDate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+        private string _CreatedDate = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
         private string _ModifiedID = string.Empty;
         private string _ModifiedName = string.Empty;
-        private string _ModifiedDate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+        private string _ModifiedDate = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
 
 
         public string Code
@@ -344,12 +369,12 @@ namespace cn.jpush.api.push.mode
     /// <summary>
     /// 通知公告
     /// </summary>
-    [Description("")]
+    [Description( "" )]
     [Serializable]
     public class NoticeInfo
     {
-        private string _noticecreatetime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-        private string _noticetime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+        private string _noticecreatetime = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
+        private string _noticetime = DateTime.Now.ToString( "yyyy-MM-dd hh:mm:ss" );
 
         public string NoticeCreateTime
         {
