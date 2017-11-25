@@ -721,7 +721,7 @@ function getClsActive(ClsActive) {
             kind: Kind,
             //date: date,
             context: context,
-            url: url,
+            url: url
         }
     }
     return ClsActive;
@@ -806,7 +806,7 @@ function getClsCheckStu(ClsCheckStu) {
             lateNum: lateNum,
             actualNum: actualNum,
             monAbsentNum: monAbsentNum,
-            aftAbsentNum: aftAbsentNum,
+            aftAbsentNum: aftAbsentNum
         }
     }
     return ClsCheckStu;
@@ -839,7 +839,7 @@ function getClsWolcome(ClsWelcome) {
     var Context = $.toString($(".ClsWelcomeContext").val());
     if (Context != "" ) {
         ClsWelcome = {
-            context: Context,
+            context: Context
         }
     }
     return ClsWelcome;

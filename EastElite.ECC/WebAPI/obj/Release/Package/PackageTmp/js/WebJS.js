@@ -1,7 +1,7 @@
 ﻿$(function () {
-       String.prototype.trim = function () {
-            return this.replace(/(^\s*)|(\s*$)/g, "");
-        }
+    String.prototype.trim = function () {
+        return this.replace(/(^\s*)|(\s*$)/g, "");
+    }
     //loading 提示
     $("body").append('<div id="id_loding" style="display: none;"><div class="background"></div><div id="id_lodingMsg" class="progressBar" style="font-size: 12px; font-family: 微软雅黑;">2222</div></div>');
 
@@ -17,7 +17,7 @@
     }
     //转换字符串，错误数据显示空白
     $.toString = function (str) {
-        
+
         if (typeof str == "undefined" || (str + "") == "" || str == null || str == "") {
             return "";
         } else {
@@ -331,7 +331,7 @@ var adminmenumlist = [
             { value: "taskrelease", desc: "任务发布", cssClass: "glyphicon glyphicon-edit" },
              { value: "examtionimport", desc: "考试数据导入", cssClass: "glyphicon glyphicon-import" },
              { value: "startupcontrol", desc: "启动程序控制", cssClass: "glyphicon glyphicon-cog" }
-           
+
         ]
     },
     {
@@ -344,7 +344,7 @@ var adminmenumlist = [
                { value: "loginfolist", desc: "日志管理", cssClass: "glyphicon glyphicon-th-list" },
              { value: "deviceterminalscreenshotlist", desc: "设备监控", cssClass: "glyphicon glyphicon-th-list" },
             { value: "systemseting", desc: "系统设置", cssClass: "glyphicon glyphicon-cog" }
-           
+
         ]
     }];
 //当前用户拥有的菜单
@@ -360,9 +360,12 @@ var usermenumlist = [
     {
         value: "classmanage", desc: "班级管理",
         submenu: [
-            { value: "classmanage", desc: "班级管理", cssClass: "glyphicon glyphicon-wrench" }
+            { value: "classmanage", desc: "班级管理", cssClass: "glyphicon glyphicon-wrench" },
+             { value: "deviceterminalscreenshotlist2", desc: "设备监控", cssClass: "glyphicon glyphicon-th-list" }
+
         ]
-    }];
+    }
+];
 var loginUser = {};//登陆用户
 
 ///当前主菜单，子菜单
@@ -418,7 +421,7 @@ function loadHead(mainMenu, subMenu) {
 
             strhtml = strhtml.format(loginUser.userName, "display")
             $('#head').append(strhtml);
-            loadSubmenu(mainMenu,subMenu);
+            loadSubmenu(mainMenu, subMenu);
             return true;
         }
         else {//没有权限进入该页面
@@ -435,15 +438,14 @@ function checkaccess(currentMainMenumValue, currentSubMenumValue) {
         if (undefined != adminmenumlist && null != adminmenumlist && adminmenumlist.length > 0) {
             for (var i = 0; i < adminmenumlist.length; i++) {
                 if (adminmenumlist[i].value.toLowerCase() == currentMainMenumValue.toLowerCase()) {
-                    if (null != adminmenumlist[i].submenu)
-                    {
+                    if (null != adminmenumlist[i].submenu) {
                         for (var j = 0; j < adminmenumlist[i].submenu.length; j++) {
                             if (adminmenumlist[i].submenu[j].value.toLowerCase() == currentSubMenumValue.toLowerCase()) {
                                 return true;
                             }
                         }
                     }
-                   
+
                 }
             }
         }
@@ -452,8 +454,7 @@ function checkaccess(currentMainMenumValue, currentSubMenumValue) {
         if (undefined != usermenumlist && null != usermenumlist && usermenumlist.length > 0) {
             for (var i = 0; i < usermenumlist.length; i++) {
                 if (usermenumlist[i].value.toLowerCase() == currentMainMenumValue.toLowerCase()) {
-                    if (null != usermenumlist[i].submenu)
-                    {
+                    if (null != usermenumlist[i].submenu) {
                         for (var j = 0; j < usermenumlist[i].submenu.length; j++) {
                             if (usermenumlist[i].submenu[j].value.toLowerCase() == currentSubMenumValue.toLowerCase()) {
                                 return true;
@@ -497,7 +498,7 @@ function loadMainmenu(currentMainMenumValue) {
     return strhtml;
 }
 //加载菜单
-function loadSubmenu(currentMainMenumValue,currentSubMenumValue) {
+function loadSubmenu(currentMainMenumValue, currentSubMenumValue) {
 
     var strhtml = "";
     if (loginUser.roleCode == '1072') {
@@ -575,7 +576,7 @@ function login(usercode, userType, password) {
                                 currentCalss[i] = o.ClassName;
                             });
                             var user = $.extend({}, re.data.result[0], { "campus": re.data.campus }, { "currentCalss": currentCalss });
-                            setCookie("loginUser", JSON.stringify(user),'d1');
+                            setCookie("loginUser", JSON.stringify(user), 'd1');
 
                             gotourl("/taskRelease.html");
                         }
@@ -588,7 +589,7 @@ function login(usercode, userType, password) {
                 }
                 else {
                     var user = $.extend({}, re.data.result[0], { "campus": re.data.campus }, { "currentCalss": currentCalss });
-                    setCookie("loginUser", JSON.stringify(user),'d1');
+                    setCookie("loginUser", JSON.stringify(user), 'd1');
 
                     gotourl("/taskRelease.html");
                 }

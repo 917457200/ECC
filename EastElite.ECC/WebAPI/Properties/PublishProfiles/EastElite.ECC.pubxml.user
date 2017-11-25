@@ -25,7 +25,7 @@
       <publishTime>05/31/2016 10:54:31</publishTime>
     </File>
     <File Include="bin/EastElite.ECC.dll">
-      <publishTime>11/21/2017 11:18:47</publishTime>
+      <publishTime>11/22/2017 10:16:07</publishTime>
     </File>
     <File Include="bin/EDUC.Common.dll">
       <publishTime>11/21/2017 11:17:45</publishTime>
@@ -139,7 +139,10 @@
       <publishTime>08/08/2017 17:29:43</publishTime>
     </File>
     <File Include="deviceterminalscreenshotlist.html">
-      <publishTime>05/08/2017 17:14:44</publishTime>
+      <publishTime>11/22/2017 09:26:11</publishTime>
+    </File>
+    <File Include="deviceterminalscreenshotlist2.html">
+      <publishTime>11/22/2017 10:13:03</publishTime>
     </File>
     <File Include="Document/ErrMessage.xml">
       <publishTime>08/23/2016 10:52:39</publishTime>
@@ -2506,7 +2509,7 @@
       <publishTime>07/16/2017 14:05:04</publishTime>
     </File>
     <File Include="js/WebJS.js">
-      <publishTime>10/16/2017 09:02:51</publishTime>
+      <publishTime>11/22/2017 09:26:16</publishTime>
     </File>
     <File Include="LiveVideo/animated-login-form/css/normalize.css">
       <publishTime>04/05/2017 14:47:40</publishTime>
@@ -2599,7 +2602,7 @@
       <publishTime>10/13/2017 14:44:24</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/21/2017 11:18:51</publishTime>
+      <publishTime>11/22/2017 10:16:09</publishTime>
     </File>
     <File Include="Service References/EastEliteICMSWS/EastElite.ECC.EastEliteICMSWS.CheckUserLoginBookItemResponse.datasource">
       <publishTime>11/15/2017 10:07:10</publishTime>
